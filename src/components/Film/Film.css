@@ -1,0 +1,168 @@
+/* CARD FILM */
+.film {
+  padding: 0 66px;
+  margin-top: 650px;
+  font-family: "Saira Semi Condensed", sans-serif;
+}
+
+.card-film {
+  height: 370px;
+}
+
+.card-film img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center bottom;
+  transition: all 0.5s ease;
+}
+
+.showcase__overlay--film {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(30, 28, 28);
+  width: 100%;
+  height: 100%;
+  padding: 25px;
+  opacity: 0;
+  transition: all 0.4s linear;
+}
+
+.MuiGrid-root .MuiPaper-root:hover .showcase__overlay--film {
+  opacity: 0.9;
+}
+
+.showcase__icon--film {
+  position: absolute;
+  top: 30%;
+  right: 60px;
+  transform: scale(1.1);
+  transition: all 0.4s linear;
+}
+
+.MuiGrid-root .MuiPaper-root:hover .showcase__text--film {
+  transform: translateY(0);
+}
+
+.MuiGrid-root .MuiPaper-root:hover .showcase__icon--film {
+  transform: translateX(0);
+}
+
+.showcase__icon--film a {
+  display: block;
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  padding: 0 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 16px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+}
+
+.showcase__icon--film a:hover {
+  background-color: var(--color-primary1);
+  border: none;
+  color: #000;
+}
+
+.showcase__text--film {
+  position: absolute;
+  left: 25px;
+  bottom: 25px;
+  color: #fff;
+  transform: translateY(20px);
+  transition: all 0.4s linear;
+}
+
+/* Hover card film */
+
+.film .card-film img:hover {
+  transform: scale(1.5);
+}
+
+.latest__overlay {
+  position: absolute;
+  color: #ffffff;
+  height: 100%;
+  width: 100%;
+  bottom: 25px;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: all 0.6s;
+  transform-origin: top;
+  z-index: 9;
+  display: flex;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 5px inset rgb(0 0 0 / 90%);
+  transition: all 0.8s ease;
+  transition-property: transform;
+  will-change: transform;
+  transform: scaleY(0);
+  transform-origin: bottom;
+}
+
+.MuiGrid-root .MuiPaper-root:hover .latest__overlay {
+  transform: none;
+  opacity: 1;
+}
+
+.latest__icon {
+  position: absolute;
+  top: 60%;
+  transform: translateY(-20px);
+  transition: all 0.8s linear;
+}
+
+.MuiPaper-root .latest__text {
+  position: absolute;
+  top: 30%;
+  color: #fff;
+  transition: all 0.4s linear;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-50px);
+}
+.MuiGrid-root .MuiPaper-root:hover .latest__text {
+  transform: translate(0, 0);
+}
+
+.MuiGrid-root .MuiPaper-root:hover .latest__icon {
+  transform: translate(0, 0);
+}
+
+.latest__icon a {
+  display: block;
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 40px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 16px;
+  background-color: var(--color-primary1);
+  border-radius: 30px;
+  transition: all 0.5s ease;
+}
+
+.latest__icon a:hover {
+  transform: scale(1.2);
+  color: #fff;
+}
+
+.latest__text p {
+  padding: 20px;
+  text-align: center;
+  font-weight: 600;
+  margin: 0;
+  font-size: 18px;
+  height: 100%;
+}

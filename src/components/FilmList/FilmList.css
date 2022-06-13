@@ -1,0 +1,34 @@
+.div-btn-film {
+    margin: 20px 0;
+    text-align: center;
+    font-family: "Saira Semi Condensed", sans-serif;
+
+}
+
+.btn-film {
+    padding: 15px;
+    border-radius: 10px;
+    border: #666 solid 2px;
+    margin-right: 20px;
+    outline: none;
+    box-shadow: none;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.btn-film:hover {
+    background-color: var(--color-primary1);
+    border:var(--color-primary1) solid 2px;
+    color: #fff;
+}
+
+.active_Film {
+    background-color: var(--color-primary1);
+    color: #fff;
+    border:var(--color-primary1) solid 2px;
+}
+
+.none_active_Film {
+    background-color: #fff;
+    color: #000;
+}

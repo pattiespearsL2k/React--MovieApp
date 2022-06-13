@@ -1,0 +1,495 @@
+/*---- Navbar-------*/
+body {
+    font-family: "Saira Semi Condensed", sans-serif;
+}
+
+:root {
+    --color-primary1: #e9ad28;
+}
+.fullsize {
+    height: 100vh;
+}
+
+.MuiToolbar-root {
+    z-index: 999;
+}
+
+.header-top {
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+
+.header-bottom {
+    margin-top: 10px;
+}
+
+.header-top .MuiInputBase-root {
+    font-family: "Saira Semi Condensed", sans-serif;
+}
+
+.header-main {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.header-bottom nav li {
+    display: inline-block;
+    position: relative;
+}
+.header-bottom nav a {
+    color: #fff;
+    display: inline-block;
+    padding: 8px 0;
+    margin: 0 40px;
+    font-size: 18px;
+    font-family: "Saira Semi Condensed", sans-serif;
+}
+
+.header-bottom nav li .none-pad {
+    margin-left: 10px;
+}
+.MuiTab-textColorInherit {
+    color: #fff !important;
+    opacity: 2 !important;
+}
+
+.color-header.header {
+    background: red;
+}
+
+.MuiButtonBase-root {
+    font-weight: 500;
+}
+
+.MuiTab-wrapper {
+    font-family: "Raleway", sans-serif;
+    font-size: 13px;
+}
+
+/********** Hover *********/
+.header-bottom nav a:before {
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--color-primary1);
+    transform: translateX(-50%) translateY(-50%) scale(0.8);
+    border-radius: 50%;
+    background: var(--color-primary1);
+    content: "";
+    opacity: 0;
+    transition: all 0.4s;
+}
+
+.header-bottom nav a:hover:before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-50%) scale(0.8);
+}
+
+.header-bottom nav a:hover {
+    transform: scale(1.15);
+    transition: all linear 0.4s;
+    color: var(--color-primary1);
+    animation: upToDown 0.2s;
+    font-weight: bold;
+}
+
+/********* Active *********/
+
+nav a.active:before {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--color-primary1);
+    transform: translateX(-50%) translateY(-50%) scale(0.8);
+    border-radius: 50%;
+    background: var(--color-primary1);
+    content: "";
+    transition: all 0.4s;
+}
+
+nav a.active {
+    transform: scale(1.15);
+    transition: all linear 0.4s;
+    color: var(--color-primary1);
+    animation: upToDown 0.2s;
+    font-weight: bold;
+}
+
+.header-bottom .MuiTab-root {
+    padding: 0;
+}
+
+.MuiTabs-root .PrivateTabIndicator-colorSecondary-6 {
+    background-color: var(--color-primary1) !important;
+}
+
+.logoWeb {
+    height: 100px;
+    width: 100%;
+    object-fit: contain;
+}
+
+img.logoWeb {
+    width: 130px;
+}
+
+.navbar--right {
+    flex: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.account {
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 13px !important;
+    font-weight: 200;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    font-family: "Saira Semi Condensed", sans-serif;
+}
+
+.account i {
+    margin-right: 6px;
+}
+
+.account h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.account .MuiSvgIcon-root {
+    height: 100% !important;
+    margin-right: 8px;
+    margin-left: 30px;
+}
+
+.MuiPaper-root.MuiMenu-paper.MuiPopover-paper.MuiPaper-elevation8.MuiPaper-rounded {
+    top: 75px !important;
+    width: 200px !important;
+}
+
+button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-colorInherit {
+    border-radius: 0 !important;
+}
+
+.MuiTabs-scroller .PrivateTabIndicator-colorSecondary-10 {
+    background-color: var(--color-primary1);
+}
+
+.MuiTabs-flexContainer .MuiTab-root {
+    padding: 0 40px;
+}
+
+.MuiTabs-flexContainer.tab1 {
+    padding-left: 0 !important;
+}
+
+.btn-search {
+    height: 2.6em !important;
+    /* margin-right: 16em !important; */
+}
+
+.input-search:focus {
+    width: 4ch !important;
+}
+
+.MuiPaper-root {
+    padding: 6px 0;
+}
+
+.MuiPaper-root.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    color: #333;
+    transform: translateY(0);
+    transition: transform 0.6s ease;
+}
+
+.MuiPaper-root.header2 {
+    position: fixed;
+    background-color: rgb(255, 255, 255);
+    color: #000;
+    transform: translateY(20);
+    transition: all 1s ease;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.header2 .hide-nav {
+    display: none;
+}
+
+.header2 .header-main-scroll {
+    width: 100%;
+}
+
+.header2 .nav-scroll {
+    color: #000;
+}
+.MuiPaper-root.header-click {
+    position: fixed;
+    background-color: rgb(158, 52, 52);
+    transform: translateY(20);
+    transition: transform 6s ease;
+}
+
+.header.shadow {
+    box-shadow: 0 9px 9px -9px rgba(0, 0, 0, 0.13);
+}
+
+.header.hidden {
+    transform: translateY(-110%);
+}
+
+.header__navbar-user {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.header__navbar-user:hover .header__navbar-user-menu {
+    display: block;
+}
+
+.header__navbar-user .anticon {
+    font-size: 16px;
+}
+.header__navbar-user-name {
+    margin-left: 6px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.header__navbar-user-img {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.header__navbar-user-menu {
+    position: absolute;
+    top: 150%;
+    right: 0;
+    padding: 0;
+    background-color: #fff;
+    border-radius: 2px;
+    text-decoration: none;
+    width: 160px;
+    z-index: 1;
+    box-shadow: 1px 1px 3px #ccc;
+    display: none;
+}
+.header__navbar-user-menu::before {
+    content: "";
+    border: 11px solid;
+    position: absolute;
+    right: 22px;
+    top: -22px;
+    border-color: transparent transparent #fff transparent;
+}
+.header__navbar-user-menu:after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 160px;
+    height: 30px;
+    top: -20px;
+    right: 0;
+}
+
+.header__navbar-user-item {
+    list-style: none;
+}
+
+.header__navbar-user-item--separate {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.header__navbar-user-item-link {
+    text-decoration: none;
+    color: #000;
+    padding: 6px 10px;
+    display: block;
+    font-family: "Saira Semi Condensed", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.header__navbar-user-item a:hover {
+    background-color: #f8f4f4;
+    color: #fff;
+    background-color: var(--color-primary1);
+}
+
+.MuiListItemText-root a:hover {
+    color: var(--color-primary1);
+    transform: translateX(20px);
+}
+
+/* Btn Login */
+
+.account .login {
+    color: #000 !important;
+    border-radius: 0.3em !important;
+    width: 10em;
+    height: 2.35em;
+    text-transform: uppercase;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: 0.5s;
+    background-color: #fff !important;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: "Saira Semi Condensed", sans-serif;
+    line-height: 1em;
+}
+
+.arrow {
+    color: var(--color-primary1);
+    margin-left: 8px;
+    font-size: 22px;
+}
+
+.login-effect {
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    background-color: var(--color-primary1);
+    transform: translateY(150%);
+    border-radius: 50%;
+    left: calc((var(--n) - 1) * 25%);
+    transition: 0.5s;
+    transition-delay: calc((var(--n) - 1) * 0.1s);
+    z-index: -1;
+}
+
+.login:hover {
+    color: #fff !important;
+}
+
+.login:hover .arrow {
+    color: #000;
+}
+
+.login:hover .login-effect {
+    transform: translateY(0) scale(2);
+}
+
+.login .login-effect:nth-child(1) {
+    --n: 1;
+}
+
+.login .login-effect:nth-child(2) {
+    --n: 2;
+}
+
+.login .login-effect:nth-child(3) {
+    --n: 3;
+}
+
+.login .login-effect:nth-child(4) {
+    --n: 4;
+}
+
+/* Select languague */
+.select select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background: #fff;
+    background-image: none;
+    font-family: "Saira Semi Condensed", sans-serif;
+    font-weight: 500;
+    flex: 1;
+    padding: 0 0.5em;
+    color: #000;
+    cursor: pointer;
+}
+
+option {
+    font-family: "Saira Semi Condensed", sans-serif;
+}
+
+.select {
+    position: relative;
+    display: flex;
+    width: 5em;
+    height: 2.7em;
+    line-height: 3;
+    background: #fff;
+    overflow: hidden;
+    border-radius: 0.25em;
+    margin-left: 2em;
+    margin-right: 20px;
+}
+
+.select::after {
+    content: "\25BC";
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 1em;
+    cursor: pointer;
+    pointer-events: none;
+    -webkit-transition: 0.25s all ease;
+    -o-transition: 0.25s all ease;
+    transition: 0.25s all ease;
+    color: #000;
+}
+
+.select:hover::after {
+    color: #000;
+}
+
+@media (min-width: 600px) {
+    .MuiTab-root {
+        min-width: 40px !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .login {
+        width: 12em;
+    }
+    .arrow {
+        margin-left: 0;
+    }
+
+    .MuiButton-label {
+        line-height: 18px;
+        font-size: 14px;
+    }
+
+    .account .MuiSvgIcon-root {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 600px) {
+    header .MuiToolbar-gutters {
+        padding: 0 50px;
+    }
+}

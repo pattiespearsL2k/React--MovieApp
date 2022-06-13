@@ -1,0 +1,57 @@
+
+
+.cinema .name-film {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.ant-tabs.cinema {
+    margin-top: 200px;
+    padding: 50px 45px;
+}
+
+.cinema .film-info {
+    margin-left: 40px;
+}
+
+.cinema .film-img-schedule {
+  margin-left:20px
+}
+
+
+
+.cinema .ant-tabs-tab {
+    display: flex;
+    align-items: center;
+    color: #000;
+    font-weight: 500;
+    /* width: 400px; */
+}
+
+.cinema .cinema-cum .ant-tabs-tab-btn {
+    width: 100%;
+    padding: 20px 0;
+}
+
+.cinema .cinema-tab {
+    width: 100%;
+    padding: 0 6px !important;
+}
+
+.cinema .cinema-cum .cinema-name-cum {
+    margin: 0;
+    display: block;
+}
+
+.ant-tabs-left > .ant-tabs-content-holder > .ant-tabs-content > .ant-tabs-tabpane{
+    padding-left: 0 !important;
+}
+
+.cinema .film-main{
+    display: flex;
+}
+
+.ant-tabs-left > .ant-tabs-nav .ant-tabs-ink-bar{
+    width:4px !important;
+}

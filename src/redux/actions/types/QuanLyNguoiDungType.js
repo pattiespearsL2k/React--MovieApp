@@ -1,0 +1,7 @@
+export const DANG_NHAP_ACTION = 'DANG_NHAP_ACTION';
+export const DANG_KY_ACTION = 'DANG_KY_ACTION';
+export const DANG_XUAT_ACTION = 'DANG_XUAT_ACTION';
+export const SET_THONG_TIN_NGUOI_DUNG = 'SET_THONG_TIN_NGUOI_DUNG';
+export const LAY_DS_ND = "LAY_DS_PHIM";
+export const LAY_DS_LoaiND = "LAY_DS_LoaiND";
+export const LAY_THONGTIN_TAIKHOAN = 'LAY_THONGTIN_TAIKHOAN';

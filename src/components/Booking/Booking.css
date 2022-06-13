@@ -1,0 +1,268 @@
+.tab-checkout {
+  padding: 200px 66px 200px;
+  font-family: "Saira Semi Condensed", sans-serif;
+  background-color: rgb(41, 41, 41);
+  color: rgb(218, 214, 214);
+  /* margin-top: 100px; */
+}
+
+.ghe {
+  /* ghế thường */
+  width: 32px;
+  height: 30px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  cursor: pointer;
+  margin: 10px;
+  border: rgb(126, 126, 126) solid 2px;
+  background-color: rgb(52, 51, 51);
+  color: rgb(163, 161, 161);
+  text-align: center;
+}
+
+.ghe-label {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  width: 32px;
+  height: 30px;
+  margin: 10px;
+  border: rgb(126, 126, 126) solid 2px;
+  background-color: rgb(52, 51, 51);
+  color: rgb(138, 135, 135);
+  cursor: none;
+}
+
+.ghe:hover {
+  background-color: #72ba14;
+  border: #72ba14 solid 2px;
+  color:rgb(232, 231, 231);
+}
+
+.gheDaDat {
+  background-color: rgb(232, 76, 76);
+  cursor: no-drop;
+  border: rgb(232, 76, 76) solid 2px !important;
+}
+
+.gheDaDat:hover {
+  background-color: rgb(232, 76, 76);
+  border: rgb(232, 76, 76) solid 2px !important;
+}
+
+.gheDangDat {
+  background-color: #72ba14 !important;
+  border: #72ba14 solid 2px !important;
+  color:rgb(232, 231, 231);
+}
+
+.gheVip {
+  border: rgb(255, 140, 0) 2px solid;
+}
+
+.gheDaDuocDat {
+  /*ghế được chính mình đặt */
+  /* background-color: rgb(246, 246, 246);
+  -webkit-box-shadow: -1px 2px 18px -6px rgb(26, 40, 201);
+  box-shadow: -1px 2px 18px -6px orange;
+  color: orange !important; */
+  border: 2px solid rgb(26, 40, 201);
+}
+
+.gheKhachDat {
+  background-color: #fff;
+  border: rgb(242, 25, 191) 2px solid;
+  cursor: no-drop;
+}
+
+.bg-grey {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.tab-checkout .screen-name {
+  line-height: 50px;
+  color: rgb(218, 214, 214);
+  position: absolute;
+  top: 70px;
+}
+
+.screen-info {
+  display: flex;
+  margin-bottom: 25px;
+  margin-top: 40px;
+}
+
+.screen-info-1 {
+  display: flex;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.screen-info-1 p {
+  margin-bottom: 0 !important;
+  margin-right: 10px;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.screen-info p {
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 0 !important;
+  width: 120px;
+}
+
+.scd p {
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 15px !important;
+  width: 120px;
+}
+
+.screen-info span {
+  font-size: 17px;
+}
+
+.screen-info-1 .screen-total {
+  font-weight: 600;
+  font-size: 26px;
+  color: orange;
+}
+
+.scd .screen-seat {
+  background-color: #727272;
+  width: 60px;
+  height: 30px;
+  border: #dedede 1px solid;
+  margin-bottom: 15px;
+  margin-right: 15px;
+  display: inline-block;
+  color: orange;
+  text-align: center;
+  line-height: 28px;
+}
+
+.render-seat {
+  border-radius: 10px;
+  width: 90%;
+  margin: auto;
+  box-shadow: rgba(246, 184, 51, 0.25) 0px -80px 55px, rgba(249, 212, 66, 0.25) 0px -12px 30px,
+    rgba(96, 199, 6, 0.12) 0px -4px 6px, rgba(251, 213, 59, 0.25) 0px -12px 13px, rgba(239, 191, 0, 0.25) 0px -3px 5px;
+}
+
+.tab-checkout li {
+  width: 50%;
+  line-height: 2;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.tab-checkout .ant-tabs {
+  color: rgb(214, 208, 208);
+}
+
+.tab-checkout h3 {
+  color: rgb(235, 233, 233);
+  margin-bottom: 40px;
+}
+
+.screen-type {
+  margin-bottom: 40px;
+  margin-left: 40px;
+}
+
+.type-flex {
+  display: flex;
+}
+
+.type-flex li {
+  width: 25%;
+}
+
+.tab-checkout .ant-tabs-tab-btn {
+  font-size: 20px;
+}
+
+.tab-checkout .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: orange;
+}
+
+.tab-checkout .ant-tabs-ink-bar {
+  background-color: orange;
+}
+
+.tab-checkout .ant-tabs-tab:hover {
+  color: orange;
+}
+
+.tab-checkout .history-ticket {
+  margin-top: 40px;
+}
+
+.history-ticket .css-og52vs-MuiTableCell-root,
+.history-ticket .css-1wvnaxz-MuiTableCell-root,
+.history-ticket .css-11sjzaf-MuiTableCell-root,
+.history-ticket .css-1dydcym-MuiTableCell-root,
+.history-ticket .css-132a6sb-MuiTableCell-root,
+.history-ticket .css-12zk7gw-MuiTableCell-root {
+  font-family: "Saira Semi Condensed", sans-serif;
+  font-size: 18px;
+}
+
+.tab-checkout .history-ticket .MuiTableCell-body {
+  font-size: 16px;
+}
+
+.tab-checkout .history-ticket thead {
+  background-color: orange !important;
+  font-family: "Saira Semi Condensed", sans-serif !important;
+  font-size: 18px;
+}
+
+.tab-checkout .MuiPaper-root {
+  padding: 0;
+}
+
+.btn-book {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.btn-book button {
+  display: block;
+  line-height: 40px;
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 80px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 25px;
+  background-color: #f7b130;
+  border-radius: 30px;
+  transition: all 0.5s ease;
+}
+
+.btn-book button:hover {
+  transform: scale(1.2);
+}
+
+.img-checkout {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 40px;
+  height: 250px;
+}
+
+.img-checkout img {
+  height: 100%;
+  object-fit: contain;
+}

@@ -1,0 +1,232 @@
+/* FOOTER */
+.footer {
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.footer__main {
+    background-color: #222;
+    background-image: url(../../assets/images/pattern2.png);
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: contain;
+    width: 100%;
+}
+
+.footer__main h3 {
+    font-size: 20px;
+    line-height: 25px;
+    color: #fff;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+ul {
+    padding: 0;
+}
+.footer__pd {
+    padding-top: 170px;
+}
+.footer__list li {
+    display: block;
+    list-style: none;
+    margin: 10px 0;
+}
+
+.footer__list li a {
+    color: #fff;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 25px;
+    padding: 0;
+    text-decoration: none;
+    transition: all linear 0.2s;
+    display: inline-block;
+}
+
+.footer__list li a:hover {
+    color: var(--color-primary1);
+    transform: scale(1.15);
+}
+
+
+.letter__content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 1px 5px 7.5px rgba(196, 196, 196, 0.2);
+    margin-top: 100px;
+}
+
+.letter__content h4 {
+    font-size: 18px;
+    line-height: 25px;
+    color: #2c3038;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.footer__main form {
+    display: flex;
+    margin-bottom: 15px;
+    justify-content: space-between;
+}
+
+.footer__main input {
+    background: #f7f9fc;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    outline: none;
+    width: 78%;
+    color: #2c3038;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+.footer__main button {
+    text-align: center;
+    background: var(--color-primary1);
+    border: none;
+    outline: none;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 20px;
+    cursor: pointer;
+    width: 20%;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.footer__main p {
+    line-height: 22px;
+    color: #6e6d6d;
+    font-size: 16px;
+}
+
+.footer__main p a {
+    color: #6e6d6d;
+    text-decoration: none;
+}
+
+.footer__main p a:hover {
+    color: var(--color-primary1);
+}
+
+.footer__icon {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    margin-top: 40px;
+    border-top: 1px solid #eeeff0;
+}
+
+.footer__social li {
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.footer__social li a {
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    display: inline-block;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.footer__social li a:hover {
+    color: var(--color-primary1);
+}
+
+.footer__social li a i {
+    font-size: 15px;
+}
+
+.footer__before {
+    position: relative;
+}
+.footer__before::before {
+    content: "";
+    position: absolute;
+    top: 40px;
+    border-radius: 10px;
+    width: 20px;
+    height: 4px;
+    background-image: linear-gradient(to right, #f0d189 0, #ff8800 50%, #f0d189 100%);
+    background-size: 200%;
+}
+
+.footer__before::after {
+    content: "";
+    position: absolute;
+    border-radius: 10px;
+    top: 40px;
+    left: 40px;
+    width: 46px;
+    height: 4px;
+    background-image: linear-gradient(to right, #f0d189 0, #ff8800 50%, #f0d189 100%);
+    background-size: 200%;
+}
+
+.footer__top {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    width: 96%;
+    height: 160px;
+    background-image: url(../../assets/images/pattern3.png);
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0px 30px 0 rgb(0 0 0 / 10%);
+    color: black;
+    padding: 0 60px;
+    
+}
+
+.footer__top input {
+    width: 425px;
+    padding: 20px;
+    outline: none;
+    border: none;
+    box-shadow: 0 0px 60px 0 rgb(0 0 0 / 10%);
+    font-size: 20px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.footer__top button {
+    width: 90px;
+    padding: 10px;
+    margin-left: -4px;
+    background-image: linear-gradient(to right, #f0d189 0, #ff8800 50%, #f0d189 100%);
+    background-size: 200%;
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    transition: all 0.5s ease-in-out;
+}
+.footer__top button a {
+    color: white;
+    font-size: 20px;
+}
+
+.footer__top button:hover {
+    background-position: right center;
+}
+.footer__top button:hover i {
+    display: inline-block;
+    animation: toLeftFromRight 0.5s forwards;
+}
+
+.footer__top input:hover {
+    border: #f0d189 solid 1px;
+}

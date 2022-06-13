@@ -1,0 +1,172 @@
+.film-detail {
+    margin-top: 200px;
+    padding: 0 80px;
+    background-image: radial-gradient(circle 590px at 8.2% 13.8%, rgb(19, 19, 19) 0%, rgb(42, 42, 42) 90%);
+    background-position: left center;
+    color: #fff;
+    font-family: "Saira Semi Condensed", sans-serif;
+
+}
+
+.film-detail .img-film {
+    object-fit: contain;
+    height: 400px;
+}
+
+.film-detail h4 {
+    font-weight: 800;
+    color: var(--color-primary1);
+}
+
+.film-content {
+    position: relative;
+    margin-top: 40px;
+}
+
+.film-content::before {
+    content: "";
+    position: absolute;
+    top: 30px;
+    border-radius: 10px;
+    width: 40px;
+    height: 6px;
+    background-image: linear-gradient(to right, #f0d189 0, #ff8800 50%, #f0d189 100%);
+    background-size: 200%;
+}
+
+.film-content::after {
+    content: "";
+    position: absolute;
+    border-radius: 10px;
+    top: 30px;
+    left: 50px;
+    width: 60px;
+    height: 6px;
+    background-image: linear-gradient(to right, #f0d189 0, #ff8800 50%, #f0d189 100%);
+    background-size: 200%;
+}
+
+.movie-info {
+    display: flex;
+    font-size: 16px;
+    padding: 4px 0;
+}
+
+.movie-info label {
+    width: 120px !important;
+    font-weight: 600;
+}
+
+.film-detail .film-margin {
+    font-size: 16px;
+    margin: 40px 0;
+}
+
+.film-detail .tab-film {
+    margin-top: 0 !important;
+}
+
+.film-detail .ant-tabs {
+    color: #fff;
+}
+
+.film-detail .ant-tabs-tab {
+    transition: all 0.8s linear;
+}
+
+.film-detail .cinema-address {
+    padding: 15px 0;
+    font-size: 15px;
+    margin: 0;
+}
+
+.film-detail .ant-tabs-tab-btn {
+    width: 150px;
+    border-radius: 6px;
+    padding: 6px 0;
+    border: 2px solid rgb(232, 226, 226);
+    background-color: rgb(232, 226, 226);
+}
+
+.film-detail .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #fff;
+    background-color: var(--color-primary1);
+    border: none;
+}
+
+.film-detail .ant-tabs-tab:hover .ant-tabs-tab-btn {
+    color: #fff;
+    background-color: var(--color-primary1);
+    border: none;
+}
+
+.film-detail .ant-tabs-ink-bar {
+    background-color: var(--color-primary1);
+}
+
+.film-detail .ant-tabs-tab {
+    margin: 0;
+}
+
+.schedule-info {
+    margin-right: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+    color: rgb(196, 193, 193);
+    font-weight: 500;
+    border: 2px solid rgb(196, 193, 193);
+    border-radius: 6px;
+    transition: all 0.2s linear;
+    display: inline-block;
+}
+
+.schedule-info:hover {
+    color: #fff;
+    background-color: var(--color-primary1);
+    border: 2px solid var(--color-primary1);
+    transform: scale(1.1);
+}
+
+.film-detail .tab-film {
+    margin-top: 40px !important;
+}
+
+.film-detail .ant-tabs-content {
+    padding-bottom: 20px;
+}
+
+.cinema-p {
+    margin: 0;
+    padding: 10px;
+    padding-left: 20px;
+    display: inline-block;
+    background-color: #f9a742;
+    position: relative;
+    color: #000;
+    top: 25px;
+    left: -10px;
+    box-shadow: #f8951d 0px 1.5px 3px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.cinema-p::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 100%;
+    background-color: #fff;
+    content: "";
+}
+
+.cinema-child {
+    border: 1px solid rgb(196, 193, 193);
+    padding: 20px 0 40px 20px;
+    border-radius: 6px;
+}
+
+.film-detail .schedule-padding {
+    padding-top:0 !important;
+}
