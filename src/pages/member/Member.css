@@ -1,0 +1,30 @@
+.member {
+    margin-top: 200px;
+    font-family: "Saira Semi Condensed", sans-serif;
+}
+
+.member h1 {
+    text-align: center;
+}
+.member-img {
+    display: flex;
+    justify-content: center;
+}
+
+.member-img1,
+.member-img2 {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 20px;
+    font-weight: 800;
+}
+
+.member h5{
+    margin-top:10px;
+}
+
+.member-img img {
+    width: 300px;
+    height: 300px;
+}

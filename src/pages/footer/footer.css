@@ -230,3 +230,28 @@ ul {
 .footer__top input:hover {
     border: #f0d189 solid 1px;
 }
+
+.footer_top-partner.visa {
+    background: url(../../assets/images/partner.png) no-repeat center;
+    background-position: 75.1% 0.076142%;
+}
+.footer_top-partner.jcb {
+    background: url(../../assets/images/partner.png) no-repeat center;
+    background-position:44.9% 1.37634%
+}
+.footer_top-partner.ghn {
+    background: url(../../assets/images/partner.png) no-repeat center;
+    background-position: 37.583099% 29.691667%;
+}
+.footer_top-partner.ninja {
+    background: url(../../assets/images/partner.png) no-repeat center;
+    background-position: 10.9% -3.818653%;
+}
+.footer_top-partner.airPay {
+    background: url(../../assets/images/partner.png) no-repeat center;
+    background-position: 80.300699% 20.806452%
+}
+.footer_top-partner.shoppePay {
+    background: url(../../assets/images/partner.png) no-repeat center;
+    background-position: 80.859155% 49.150538%
+}

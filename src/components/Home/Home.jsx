@@ -7,18 +7,20 @@ import SlideHome from '../../pages/slideHome/slideHome';
 
 
 export default function Home(props) {
-    const { arrFilm } = useSelector(state => state.QuanLyPhimReducer);
     const dispatch = useDispatch();
     useEffect(() => {
         const action = layDanhSachPhimAction();
         dispatch(action);
     }, [])
+    const { arf } = useSelector(state => state.QuanLyPhimReducer);
+
+    // console.log(arf, 'arf');
 
     return (
         <div>
-            <SlideHome/>
+            <SlideHome />
             <div className='film'>
-                <FilmList arrFilm={arrFilm} />
+                <FilmList arf={arf} />
             </div>
             <Promotion />
         </div>

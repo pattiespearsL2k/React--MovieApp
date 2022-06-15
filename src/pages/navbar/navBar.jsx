@@ -126,18 +126,17 @@ function Navbar(props) {
 
     // Change when scroll
     const [header, setHeader] = useState("header");
-    
+
 
     // clicked ? setHeader("header-click) : '';
     const [bgcolor, setBgColor] = useState(false)
 
     const handleClick = (e) => {
-        console.log("ok");
+        // console.log("ok");
         setBgColor(prev => !prev)
         // setHeader("header color-header");
     }
 
-    console.log(bgcolor);
 
     const listenScrollEvent = (event) => {
         if (window.scrollY < 10) {
@@ -223,35 +222,29 @@ function Navbar(props) {
                         {isMobile ? (
                             <DrawerComponent />
                         ) : (
-                            <Tabs
-                                sx={{ marginLeft: "auto" }}
-                                indicatorColor="secondary"
-                                textColor="inherit"
-                                value={value}
-                                onChange={(e, value) => setValue(value)}
-                            >
-                                <nav >
-                             
-                                    <li>
-                                        <NavLink className="nav-scroll none-pad" to="/schedule" onClick={handleClick}>LỊCH CHIẾU</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink className="nav-scroll" to="/price" >GIÁ VÉ</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink className="nav-scroll"  to="/event" >KHUYẾN MÃI</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink className="nav-scroll" to="/contact" >LIÊN HỆ</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink className="nav-scroll" to="/news" >TIN TỨC</NavLink>
-                                    </li>
-                                    <li>
-                                        <NavLink className="nav-scroll" to="/member" >THÀNH VIÊN</NavLink>
-                                    </li>
-                                </nav>
-                            </Tabs>
+
+                            <nav >
+
+                                <li>
+                                    <NavLink className="nav-scroll none-pad" to="/schedule" onClick={handleClick}>LỊCH CHIẾU</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="nav-scroll" to="/price" >GIÁ VÉ</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="nav-scroll" to="/event" >KHUYẾN MÃI</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="nav-scroll" to="/contact" >LIÊN HỆ</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="nav-scroll" to="/blog" >BLOG PHIM </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink className="nav-scroll" to="/member" >THÀNH VIÊN</NavLink>
+                                </li>
+                            </nav>
+
                         )}
                     </div>
                 </div>

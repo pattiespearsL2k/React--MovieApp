@@ -1,0 +1,11 @@
+.header__admin-style{
+  display:  flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn__dangXuat{
+  background-color:darkgrey;
+}
+.hello__tk{
+  color:rgba(128, 255, 0, 0.767);
+}

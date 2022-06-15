@@ -1,0 +1,12 @@
+.alert-danger {
+  color: #ff4d4f;
+  background-color: transparent;
+  border-color: transparent;
+}
+.alert {
+  position: relative;
+  padding: 0;
+  margin-bottom: 0;
+  border: 0 solid transparent;
+  border-radius: 0;
+}

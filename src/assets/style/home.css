@@ -1,0 +1,93 @@
+.filmDetail__container {
+
+}
+.filmDetail__content {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    z-index: 10;
+    margin: 12px 12px;
+}
+.filmDetail__content:hover .overlay {
+    opacity: 1;
+
+}
+.filmDetail__content:hover .filmDetail__descrip {
+    visibility: visible;
+    bottom: 52px;
+    opacity: 1;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 94%;
+    background-color: rgba(29, 42, 55, 0.7);
+    top: 0;
+    bottom: 0;
+    transition: all 0.3s;
+    border-radius: 5px;
+    opacity: 0;
+}
+.filmDetail__descrip {
+    position: absolute;
+    opacity: 0;
+    transition: all 0.5s;
+    z-index: 2;
+    cursor: pointer;
+    padding: 20px 44px;
+    bottom: -100%;
+    left: 0;
+    visibility: hidden;
+}
+
+.filmDetail__content__img {
+    background-position: center !important; 
+    background-size: 100%, 100% !important;
+}
+
+.filmDetail__content__name {
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: 600;
+    margin: 0;
+}
+
+.filmDetail__descrip__content {
+    display: block;
+    display: -webkit-box;
+    height: 16px*1.3*3;
+    font-size: 16px;
+    line-height: 1.3;
+    -webkit-line-clamp: 3;  /* số dòng hiển thị */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top:10px;
+}
+.filmDetail__descrip__heading {
+    display: flex;
+    justify-content: space-between;
+}
+.filmDetail__descrip__heading__name {
+    color: #fff;
+}
+.filmDetail__descrip__heading__rate {
+    color: yellow;
+}
+.filmDetail__descrip__content {
+    color: #fff;
+    margin-bottom: 44px;
+}
+.filmDetail__descrip__button {
+    color: #fff;
+    background: green;
+    padding: 8px 25px;
+    width: 64%;
+    z-index: 11;
+    transition: all .3s;
+
+}
+.filmDetail__descrip__button:hover {
+    background: rgb(0, 255, 179);
+}

@@ -1,5 +1,5 @@
 import { baseService } from "./baseService";
-import { GROUPID } from '../util/settings/config'
+// import { GROUPID } from '../util/settings/config'
 export class QuanLyNguoiDungService extends baseService {
 
     constructor() {
@@ -15,9 +15,9 @@ export class QuanLyNguoiDungService extends baseService {
 
     layDanhSachNguoiDung = (tuKhoa) => {
         if (tuKhoa) {
-            return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?maNhom=${GROUPID}&tuKhoa=${tuKhoa}`)
+            return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung&tuKhoa=${tuKhoa}`)
         }
-        return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?maNhom=${GROUPID}`)
+        return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung}`)
     };
 
     layThongTinNguoiDung = () => {

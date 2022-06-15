@@ -8,16 +8,19 @@ import "./FilmList.css"
 
 
 const FilmList = (props) => {
-  const dispatch = useDispatch();
-  const { dangChieu, sapChieu } = useSelector(state => state.QuanLyPhimReducer);
-  const renderFilms = () => {
-    return props.arrFilm.map((item, index) => {
-      return <Film item={item} />
-    })
-  }
-  let activeClassDC = dangChieu === true ? 'active_Film' : 'none_active_Film';
 
-  let activeClassSC = sapChieu === true ? 'active_Film' : 'none_active_Film';
+  const dispatch = useDispatch();
+  const { nowShowing, comingSoon } = useSelector(state => state.QuanLyPhimReducer);
+  // const renderFilms = () => {
+  //   return props.arf?.map((item, index) => {
+  //     return <Film item={item} key={index}/>
+  //   })
+  // }
+  let activeClassDC = nowShowing === true ? 'active_Film' : 'none_active_Film';
+
+  let activeClassSC = comingSoon === true ? 'active_Film' : 'none_active_Film';
+
+ 
 
   console.log('activeSC', activeClassSC)
 
@@ -34,7 +37,10 @@ const FilmList = (props) => {
         }}>PHIM SẮP CHIẾU</button>
       </div>
       <Grid container spacing={5}>
-        {renderFilms()}
+        {props.arf?.map((film, index) => (
+          <Film item={film} key={index} />
+        ))
+        }
       </Grid>
     </React.Fragment>
   );

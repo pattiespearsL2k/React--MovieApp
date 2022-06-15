@@ -4,18 +4,18 @@ import { history } from '../../App'
 
 
 
-export const layDanhSachPhimAction = (tenPhim = '') => {
-
+export const layDanhSachPhimAction = (title = '') => {
 
     return async (dispatch) => {
         try {
             //Sử dụng tham số thamSo
-            const result = await quanLyPhimService.layDanhSachPhim(tenPhim);
+            const result = await quanLyPhimService.layDanhSachPhim(title);
+            // console.log(result.data, 'content');
 
             //Sau khi lấy dữ liệu từ api về => redux (reducer)
             dispatch({
                 type: SET_DANH_SACH_PHIM,
-                arrFilm: result.data.content
+                arf: result.data
             })
         } catch (errors) {
             console.log('errors', errors)
@@ -26,14 +26,9 @@ export const layDanhSachPhimAction = (tenPhim = '') => {
 export const themPhimUploadHinhAction = (formData) => {
     return async (dispatch) => {
         try {
-
-
             let result = await quanLyPhimService.themPhimUploadHinh(formData);
             alert('Thêm phim thành công!')
             console.log('result', result.data.content);
-
-
-
         } catch (errors) {
             console.log(errors.response?.data)
         }

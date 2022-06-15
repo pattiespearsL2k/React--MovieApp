@@ -12,14 +12,14 @@ export default function Film(props) {
             <Card className='card-film'>
                 <CardMedia
                     component="img"
-                    image={item.hinhAnh}
+                    image={item.image}
                 />
                 <div class="latest__overlay">
                     <div class="latest__icon">
-                        <NavLink to={`/detail/${item.maPhim}`} href="#">Đặt vé</NavLink>
+                        <NavLink to={`/detail/${item.movieId}`} href="#">Đặt vé</NavLink>
                     </div>
                     <div class="latest__text">
-                        <p> {item.tenPhim}</p>
+                        <p> {item.title}</p>
                     </div>
                     <div class="latest__shine">
                     </div>

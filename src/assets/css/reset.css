@@ -1,0 +1,177 @@
+.container {
+  width: 90%;
+}
+
+/* ------------------- margin  ------------------- */
+.m-t-5 {
+  margin-top: 5px;
+}
+
+.m-t-10 {
+  margin-top: 10px;
+}
+
+.m-t-20 {
+  margin-top: 20px;
+}
+
+.m-t-30 {
+  margin-top: 30px;
+}
+
+.m-t-40 {
+  margin-top: 40px;
+}
+
+.m-r-5 {
+  margin-right: 5px;
+}
+
+.m-l-5 {
+  margin-left: 5px;
+}
+
+.m-y-20 {
+  margin: 20px 0;
+}
+
+/* ------------------- padding  ------------------- */
+.p-t-120 {
+  padding-top: 120px;
+}
+
+.p-b-80 {
+  padding-bottom: 80px;
+}
+
+.p-10-20 {
+  padding: 10px 20px;
+}
+
+.p-x-10 {
+  padding: 0 10px;
+}
+
+.p-x-15 {
+  padding: 0 15px;
+}
+
+.p-y-6 {
+  padding: 6px 0;
+}
+
+.p-y-12 {
+  padding: 12px 0;
+}
+
+.p-y-100 {
+  padding: 100px 0;
+}
+
+/* ------------------- text  ------------------- */
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* ------------------- width  ------------------- */
+.w-full {
+  width: 100%;
+}
+
+/* ------------------- height  ------------------- */
+.min-height-100vh {
+  min-height: 100vh;
+}
+
+/* ------------------- font-size  ------------------- */
+.fs-16 {
+  font-size: 16px;
+}
+
+.fs-18 {
+  font-size: 18px;
+}
+
+.fs-32 {
+  font-size: 32px;
+}
+
+/* ------------------- font-weight  ------------------- */
+.fw-400 {
+  font-weight: 400;
+}
+
+.fw-500 {
+  font-weight: 500;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+.fw-700 {
+  font-weight: 700;
+}
+
+/* ------------------- button  ------------------- */
+.ant-btn {
+  border-radius: 5px;
+  min-width: 100px;
+  height: auto;
+  border: none;
+}
+
+/* ------------------- flex  ------------------- */
+.flex-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.align-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.justify-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.justify-end {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+/* ------------------- radius ------------------- */
+.radius-5 {
+  border-radius: 5px;
+}
+
+/* ------------------- cursor ------------------- */
+.pointer {
+  cursor: pointer;
+}
+/*# sourceMappingURL=reset.css.map */
