@@ -241,7 +241,7 @@ function Navbar(props) {
                                     <NavLink className="nav-scroll" to="/blog" >BLOG PHIM </NavLink>
                                 </li>
                                 <li>
-                                    <NavLink className="nav-scroll" to="/member" >THÀNH VIÊN</NavLink>
+                                    <NavLink className="nav-scroll none" to="/member" >THÀNH VIÊN</NavLink>
                                 </li>
                             </nav>
 

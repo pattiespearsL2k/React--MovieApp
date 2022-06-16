@@ -1,7 +1,8 @@
 
-import React, { Component } from "react";
+import React, {useState} from "react";
 import Film from "../Film/Film"
 import Grid from '@mui/material/Grid';
+import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_FILM_DANG_CHIEU, SET_FILM_SAP_CHIEU } from '../../redux/actions/types/QuanLyPhimType'
 import "./FilmList.css"
@@ -11,30 +12,58 @@ const FilmList = (props) => {
 
   const dispatch = useDispatch();
   const { nowShowing, comingSoon } = useSelector(state => state.QuanLyPhimReducer);
-  // const renderFilms = () => {
-  //   return props.arf?.map((item, index) => {
-  //     return <Film item={item} key={index}/>
-  //   })
-  // }
-  let activeClassDC = nowShowing === true ? 'active_Film' : 'none_active_Film';
+  const [styleDang, setStyleDang] = useState(true);
+  const [styleSap, setStyleSap] = useState(false);
 
-  let activeClassSC = comingSoon === true ? 'active_Film' : 'none_active_Film';
-
- 
-
-  console.log('activeSC', activeClassSC)
 
   return (
-    <React.Fragment>
+    <div className="film-list">
       <div className="div-btn-film">
-        <button className={`${activeClassDC} btn-film`} onClick={() => {
-          const action = { type: SET_FILM_DANG_CHIEU }
-          dispatch(action);
-        }}>PHIM ĐANG CHIẾU</button>
-        <button className={`${activeClassSC} btn-film `} onClick={() => {
-          const action = { type: SET_FILM_SAP_CHIEU }
-          dispatch(action);
-        }}>PHIM SẮP CHIẾU</button>
+        <Button className="btn-film"
+          style={
+            styleDang === nowShowing
+              ? {
+                color: "#fc9a07",
+                borderBottom: "#fc9a07 solid 2px",
+                background: "rgb(20, 20, 20)"
+              }
+              : {}
+          }
+          onClick={() => {
+            const action = {
+              type: SET_FILM_DANG_CHIEU,
+            };
+            dispatch(action);
+            setStyleDang(true);
+            setStyleSap(false);
+            console.log(props.arrPhim)
+          }}
+        >
+          PHIM ĐANG CHIẾU
+        </Button>
+        <Button
+          style={
+            styleSap === comingSoon
+              ? {
+              }
+              : {
+                color: "#fc9a07",
+                borderBottom: "#fc9a07 solid 2px",
+                background: "rgb(20, 20, 20)"
+              }
+          }
+          onClick={() => {
+            const action = {
+              type: SET_FILM_SAP_CHIEU,
+            };
+            dispatch(action);
+            setStyleSap(true);
+            setStyleDang(false);
+            console.log(props.arrPhim)
+          }}
+        >
+          PHIM SẮP CHIẾU
+        </Button>
       </div>
       <Grid container spacing={5}>
         {props.arf?.map((film, index) => (
@@ -42,7 +71,9 @@ const FilmList = (props) => {
         ))
         }
       </Grid>
-    </React.Fragment>
+    </div>
+
+
   );
 }
 

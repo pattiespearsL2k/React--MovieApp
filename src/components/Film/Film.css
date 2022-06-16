@@ -1,8 +1,9 @@
 /* CARD FILM */
 .film {
-  padding: 0 66px;
-  margin-top: 650px;
+  /* padding: 0 66px; */
+  padding: 650px 66px 80px;
   font-family: "Saira Semi Condensed", sans-serif;
+  background-color: var(--bg1)
 }
 
 .card-film {

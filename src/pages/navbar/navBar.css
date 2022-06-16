@@ -38,11 +38,12 @@ body {
     display: inline-block;
     position: relative;
 }
+
 .header-bottom nav a {
     color: #fff;
     display: inline-block;
     padding: 8px 0;
-    margin: 0 40px;
+    margin: 0 39.5px;
     font-size: 18px;
     font-family: "Saira Semi Condensed", sans-serif;
 }
@@ -50,6 +51,12 @@ body {
 .header-bottom nav li .none-pad {
     margin-left: 10px;
 }
+
+.header-bottom nav li .none{
+    margin-right:0;
+}
+
+
 .MuiTab-textColorInherit {
     color: #fff !important;
     opacity: 2 !important;

@@ -1,5 +1,5 @@
 import { quanLyPhimService } from "../../services/QuanLyPhimService";
-import { SET_DANH_SACH_PHIM, SET_THONG_TIN_PHIM } from "./types/QuanLyPhimType";
+import { SET_DANH_SACH_PHIM, SET_FILM_DANG_CHIEU, SET_FILM_SAP_CHIEU, SET_THONG_TIN_PHIM } from "./types/QuanLyPhimType";
 import { history } from '../../App'
 
 
@@ -10,13 +10,28 @@ export const layDanhSachPhimAction = (title = '') => {
         try {
             //Sử dụng tham số thamSo
             const result = await quanLyPhimService.layDanhSachPhim(title);
-            // console.log(result.data, 'content');
-
             //Sau khi lấy dữ liệu từ api về => redux (reducer)
             dispatch({
                 type: SET_DANH_SACH_PHIM,
                 arf: result.data
             })
+            // console.log(result.data, 'content');
+        } catch (errors) {
+            console.log('errors', errors)
+        }
+    };
+}
+
+export const layThongTinPhimAction = (movieId) => {
+    return async (dispatch) => {
+        try {
+            //Sử dụng tham số thamSo
+            const result = await quanLyPhimService.layThongTinPhim(movieId);
+            dispatch({
+                type: SET_THONG_TIN_PHIM,
+                thongTinPhim: result.data
+            })
+            console.log(result.data, 'hi');
         } catch (errors) {
             console.log('errors', errors)
         }
@@ -34,6 +49,8 @@ export const themPhimUploadHinhAction = (formData) => {
         }
     }
 }
+
+
 
 
 export const capNhatPhimUploadAction = (formData) => {
@@ -56,23 +73,6 @@ export const capNhatPhimUploadAction = (formData) => {
 }
 
 
-
-export const layThongTinPhimAction = (maPhim) => {
-    return async (dispatch) => {
-        try {
-            //Sử dụng tham số thamSo
-            const result = await quanLyPhimService.layThongTinPhim(maPhim);
-            dispatch({
-                type: SET_THONG_TIN_PHIM,
-                thongTinPhim: result.data.content
-
-            })
-
-        } catch (errors) {
-            console.log('errors', errors)
-        }
-    };
-}
 
 
 

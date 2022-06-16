@@ -22,13 +22,12 @@ const stateDefault = {
         }
     ],
     nowShowing: true,
-    comingSoon: true,
+    comingSoon: false,
     arfDefault: [],
     filmDetail: {},
     thongTinPhim: {}
 
 }
-console.log(stateDefault.arf, 'arf reducer');
 
 export const QuanLyPhimReducer = (state = stateDefault, action) => {
     switch (action.type) {
@@ -39,14 +38,17 @@ export const QuanLyPhimReducer = (state = stateDefault, action) => {
             return { ...state }
         }
         case SET_FILM_DANG_CHIEU: {
-            state.nowShowing = !state.nowShowing;
-            state.arf = state.arfDefault.filter(film => film.nowShowing === state.nowShowing);
-            return { ...state }
+
+            state.arf = state.arfDefault.filter((item) => {
+                return item.nowShowing === true;
+            });
+            return { ...state };
         }
         case SET_FILM_SAP_CHIEU: {
-            state.comingSoon = !state.comingSoon;
-            state.arf = state.arfDefault.filter(film => film.comingSoon === state.comingSoon);
-            return { ...state }
+            state.arf = state.arfDefault.filter((item) => {
+                return item.comingSoon === true;
+            });
+            return { ...state };
         }
 
         case SET_CHI_TIET_PHIM: {

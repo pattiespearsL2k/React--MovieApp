@@ -1,34 +1,37 @@
+
 .div-btn-film {
-    margin: 20px 0;
+    margin-bottom: 80px;
     text-align: center;
     font-family: "Saira Semi Condensed", sans-serif;
-
 }
 
-.btn-film {
-    padding: 15px;
-    border-radius: 10px;
-    border: #666 solid 2px;
-    margin-right: 20px;
+.div-btn-film .ant-btn {
+    padding: 0 20px;
     outline: none;
     box-shadow: none;
     font-weight: 600;
-    font-size: 20px;
-}
-
-.btn-film:hover {
-    background-color: var(--color-primary1);
-    border:var(--color-primary1) solid 2px;
+    font-size: 30px;
+    height: 50px;
+    border: 0;
+    background-color: var(--bg1);
+    transition: all 0.5s linear;
     color: #fff;
+    
+
 }
 
-.active_Film {
-    background-color: var(--color-primary1);
-    color: #fff;
-    border:var(--color-primary1) solid 2px;
+.div-btn-film .ant-btn:active {
+    border-color: #fafafa !important;
+    background-color: var(--bg1);
+    box-shadow: none;
 }
 
-.none_active_Film {
-    background-color: #fff;
-    color: #000;
+.ant-click-animating-node {
+    display: none;
+}
+
+.div-btn-film .ant-btn:hover {
+    border-bottom: var(--color-primary2) solid 2px;
+    color: var(--color-primary2);
+    background-color: var(--bg1);
 }

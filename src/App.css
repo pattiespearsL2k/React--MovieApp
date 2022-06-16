@@ -9,6 +9,8 @@
 :root {
     --color-primary1: #e9ad28;
     --color-primary2: #fc9a07;
+    --bg1: rgb(20, 20, 20);
+    --bg2: rgb(39, 37, 37);
 }
 
 button.styles_scroll-to-top__2A70v{

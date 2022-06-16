@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { Tabs, Radio, Space, Rate } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { SET_CHI_TIET_PHIM } from '../../redux/actions/types/QuanLyRapType';
-import { layThongTinChiTietPhim } from '../../redux/actions/QuanLyRapActions';
+import { layThongTinPhimAction } from '../../redux/actions/QuanLyPhimActions';
 import moment from 'moment'; //npm i moment
 import { StarFilled, StarOutlined } from '@ant-design/icons';
 import { NavLink } from 'react-router-dom';
@@ -13,23 +12,23 @@ const { TabPane } = Tabs;
 
 export default function FilmDetail(props) {
 
-    const filmDetail = useSelector(state => state.QuanLyPhimReducer.filmDetail);
-    console.log({ filmDetail })
+    const thongTinPhim = useSelector(state => state.QuanLyPhimReducer.thongTinPhim);
+    console.log({ thongTinPhim })
     const dispatch = useDispatch();
     useEffect(() => {
         //Lấy thông tin param từ url
         let { id } = props.match.params;
-        dispatch(layThongTinChiTietPhim(id))
+        dispatch(layThongTinPhimAction(id))
     }, [])
 
     return (
         <div className="film-detail">
             <Grid container spacing={6}>
                 <Grid item xs={12} md={5} lg={5}>
-                    <img className='img-film' src={filmDetail.hinhAnh} alt={filmDetail.tenPhim} />
+                    <img className='img-film' src={thongTinPhim.image} alt={thongTinPhim.title} />
                 </Grid>
                 <Grid item xs={12} md={7} lg={7}>
-                    <h4>{filmDetail.tenPhim}</h4>
+                    <h4>{thongTinPhim.title}</h4>
                     <div className="movie-info">
                         <label>Đạo diễn: </label>
                         <div className='std'>Yamaguchi Susumu</div>
@@ -40,33 +39,33 @@ export default function FilmDetail(props) {
                     </div>
                     <div className="movie-info">
                         <label>Thể loại: </label>
-                        <div className='std'>Hoạt hình,Gia đình</div>
+                        <div className='std'>{thongTinPhim.genre}</div>
                     </div>
                     <div className="movie-info">
                         <label>Khởi chiếu: </label>
-                        <div className='std'>{moment(filmDetail.ngayKhoiChieu).format('DD.MM.YYYY')}</div>
+                        <div className='std'>{moment(thongTinPhim.releaseDate).format('DD.MM.YYYY')}</div>
                     </div>
                     <div className="movie-info">
                         <label>Thời lượng: </label>
-                        <div className='std'>110 phút</div>
+                        <div className='std'>{thongTinPhim.duration}phút</div>
                     </div>
                     <div className="movie-info">
                         <label>Ngôn ngữ: </label>
-                        <div className='std'>Tiếng Nhật - Phụ đề Tiếng Việt; Lồng tiếng</div>
+                        <div className='std'>{thongTinPhim.country}</div>
                     </div>
                     <div className="movie-info">
                         <label>Rated: </label>
-                        <div className='std'>PHIM ĐƯỢC PHÉP PHỔ BIẾN RỘNG RÃI ĐẾN MỌI ĐỐI TƯỢNG</div>
+                        <div className='std'>{thongTinPhim.rating}</div>
                     </div>
                 </Grid>
                 <Grid item xs={12}>
                     <h4 className='film-content'>NỘI DUNG PHIM</h4>
-                    <p className='film-margin'>{filmDetail.moTa} </p>
+                    <p className='film-margin'>{thongTinPhim.description} </p>
                 </Grid>
-                <Grid item xs={12} className="schedule-padding" >
+                {/* <Grid item xs={12} className="schedule-padding" >
                     <h4 className='film-content'>LỊCH CHIẾU</h4>
                     <Tabs className='tab-film' tabPosition={'left'} >
-                        {filmDetail.heThongRapChieu?.map((htr, index) => {
+                        {thongTinPhim.heThongRapChieu?.map((htr, index) => {
                             return <TabPane
                                 tab={<div className="flex flex-row items-center justify-center">
                                     <img src={htr.logo} className="rounded-full w-full" style={{ width: 50 }} alt="..." />
@@ -94,7 +93,7 @@ export default function FilmDetail(props) {
                             </TabPane>
                         })}
                     </Tabs>
-                </Grid>
+                </Grid> */}
             </Grid>
         </div>
 
