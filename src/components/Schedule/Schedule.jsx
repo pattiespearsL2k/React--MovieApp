@@ -36,31 +36,32 @@ console.log(window.location)
             <TabPane tab={<img src={heThongRap.logo} style={{ width: '50px' }} />} key={index}>
               <Tabs className="cinema-cum" tabPosition={tabPosition}>
                 {
-                  heThongRap.lstCumRap?.map((cumRap, index) => (
+                  heThongRap.lstCinemaChild?.map((cumRap, index) => (
                     <TabPane className='cinema-tab' tab={
                       <div >
                         <img className='cinema-img' src={heThongRap.logo} style={{ width: '30px', height: '30px' }} /> <br />
                         <p className='cinema-name-cum'>
-                          {cumRap.tenCumRap}
+                          {cumRap.cinemaChildName}
                         </p>
                       </div>}
                       key={index}>
 
                       {/* load fim tương ứng */}
 
-                      {cumRap.danhSachPhim.reverse().map((phim, index) => (
+                      {cumRap.listMovie.reverse().map((phim, index) => (
                         <Fragment key={index}>
                           <div className='my-5 film-main'>
                             <div style={{ border: '4px' }} className='film-img-schedule'>
-                              <img className='' src={phim.hinhAnh} alt={phim.tenPhim} style={{ width: '150px', height: '150px' }} />
+                              <img className='' src={phim.image} alt={phim.title} style={{ width: '150px', height: '150px' }} />
                             </div>
                             <div className='film-info'>
-                              <h3 className='name-film'>{phim.tenPhim}</h3>
-                              <p>{cumRap.diaChi}</p>
+                              <h3 className='name-film'>{phim.title}</h3>
+                              <p>{cumRap.address}</p>
                               <div className="grid grid-cols-6 gap-6">
-                                {phim.lstLichChieuTheoPhim?.slice(0, 12).map((lichChieu, index) => (
-                                  <NavLink to={`/booking/${lichChieu.maLichChieu}`} className='schedule-info mr-2' key={index}>
-                                    {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}
+                                {phim.lstShowFlowMovie?.slice(0, 12).map((lichChieu, index) => (
+                                  <NavLink to={`/booking/${lichChieu.showID}`} className='schedule-info mr-2' key={index}>
+                                     {(lichChieu.showday)}
+                                    {(lichChieu.showtime)}
                                   </NavLink>
                                 ))}
                               </div>

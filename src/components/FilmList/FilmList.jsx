@@ -59,7 +59,7 @@ const FilmList = (props) => {
             dispatch(action);
             setStyleSap(true);
             setStyleDang(false);
-            console.log(props.arrPhim)
+            console.log(props.arf)
           }}
         >
           PHIM SẮP CHIẾU

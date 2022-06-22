@@ -5,7 +5,9 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    font-family: "Saira Semi Condensed", sans-serif;
 }
+
 .footer__main {
     background-color: #222;
     background-image: url(../../assets/images/pattern2.png);
@@ -22,12 +24,15 @@
     margin-bottom: 30px;
     font-weight: 700;
 }
+
 ul {
     padding: 0;
 }
+
 .footer__pd {
     padding-top: 170px;
 }
+
 .footer__list li {
     display: block;
     list-style: none;
@@ -49,7 +54,6 @@ ul {
     color: var(--color-primary1);
     transform: scale(1.15);
 }
-
 
 .letter__content {
     background-color: #fff;
@@ -189,11 +193,14 @@ ul {
     box-shadow: 0 0px 30px 0 rgb(0 0 0 / 10%);
     color: black;
     padding: 0 60px;
-    
+}
+
+.footer__form {
+    display: flex;
 }
 
 .footer__top input {
-    width: 425px;
+    width: 400px;
     padding: 20px;
     outline: none;
     border: none;
@@ -237,7 +244,7 @@ ul {
 }
 .footer_top-partner.jcb {
     background: url(../../assets/images/partner.png) no-repeat center;
-    background-position:44.9% 1.37634%
+    background-position: 44.9% 1.37634%;
 }
 .footer_top-partner.ghn {
     background: url(../../assets/images/partner.png) no-repeat center;
@@ -249,9 +256,9 @@ ul {
 }
 .footer_top-partner.airPay {
     background: url(../../assets/images/partner.png) no-repeat center;
-    background-position: 80.300699% 20.806452%
+    background-position: 80.300699% 20.806452%;
 }
 .footer_top-partner.shoppePay {
     background: url(../../assets/images/partner.png) no-repeat center;
-    background-position: 80.859155% 49.150538%
+    background-position: 80.859155% 49.150538%;
 }

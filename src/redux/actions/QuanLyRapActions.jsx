@@ -12,7 +12,7 @@ export const layDanhSachHeThongRapAction = () => {
             if (result.status === 200) {
                 dispatch({
                     type: SET_HE_THONG_RAP_CHIEU,
-                    heThongRapChieu: result.data.content
+                    heThongRapChieu: result.data
                 })
             }
         } catch (errors) {
@@ -32,7 +32,7 @@ export const layThongTinChiTietPhim = (id) => {
 
             dispatch({
                 type: SET_CHI_TIET_PHIM,
-                filmDetail: result.data.content
+                filmDetail: result.data
             })
 
 

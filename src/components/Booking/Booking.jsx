@@ -11,8 +11,8 @@ import { datVeAction } from '../../redux/actions/QuanLyDatVeActions';
 import { Tabs } from 'antd';
 import { layThongTinNguoiDungAction } from '../../redux/actions/QuanLyNguoiDungAction';
 import moment from 'moment';
-import { connection } from '../../index';
-import { NavLink } from 'react-router-dom';
+// import { connection } from '../../index';
+import { NavLink, Redirect } from 'react-router-dom';
 import { Grid } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -23,6 +23,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { createTheme } from '@mui/material/styles';
+import { USER_LOGIN } from '../../util/settings/config';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -51,7 +52,7 @@ function Checkout(props) {
     const { chiTietPhongVe, danhSachGheDangDat, danhSachGheKhachDat } = useSelector(state => state.QuanLyDatVeReducer);
 
     const dispatch = useDispatch();
-    console.log('danhSachGheDangDat', danhSachGheDangDat);
+    // console.log('danhSachGheDangDat', danhSachGheDangDat);
     useEffect(() => {
         //Gọi hàm tạo ra 1 async function 
         const action = layChiTietPhongVeAction(props.match.params.id);
@@ -59,77 +60,80 @@ function Checkout(props) {
         dispatch(action);
 
         //Có 1 client nào thực hiện việc đặt vé thành công mình sẽ load lại danh sách phòng vé của lịch chiếu đó
-        connection.on('datVeThanhCong', () => {
-            dispatch(action);
-        })
+        // connection.on('datVeThanhCong', () => {
+        //     dispatch(action);
+        // })
 
 
 
         //Vừa vào trang load tất cả ghế của các người khác đang đặt
-        connection.invoke('loadDanhSachGhe', props.match.params.id);
+        // connection.invoke('loadDanhSachGhe', props.match.params.id);
 
 
         //Load danh sách ghế đang đặt từ server về (lắng nghe tín hiệu từ server trả về)
-        connection.on("loadDanhSachGheDaDat", (dsGheKhachDat) => {
-            console.log('danhSachGheKhachDat', dsGheKhachDat);
-            //Bước 1: Loại mình ra khỏi danh sách 
-            dsGheKhachDat = dsGheKhachDat.filter(item => item.taiKhoan !== userLogin.taiKhoan);
-            //Bước 2 gộp danh sách ghế khách đặt ở tất cả user thành 1 mảng chung 
+        // connection.on("loadDanhSachGheDaDat", (dsGheKhachDat) => {
+        //     // console.log('danhSachGheKhachDat', dsGheKhachDat);
+        //     //Bước 1: Loại mình ra khỏi danh sách 
+        //     dsGheKhachDat = dsGheKhachDat.filter(item => item.username !== userLogin.username);
+        //     //Bước 2 gộp danh sách ghế khách đặt ở tất cả user thành 1 mảng chung 
 
-            let arrGheKhachDat = dsGheKhachDat.reduce((result, item, index) => {
-                let arrGhe = JSON.parse(item.danhSachGhe);
+        //     let arrGheKhachDat = dsGheKhachDat.reduce((result, item, index) => {
+        //         let arrGhe = JSON.parse(item.danhSachGhe);
 
-                return [...result, ...arrGhe];
-            }, []);
+        //         return [...result, ...arrGhe];
+        //     }, []);
 
-            //Đưa dữ liệu ghế khách đặt cập nhật redux
-            arrGheKhachDat = _.uniqBy(arrGheKhachDat, 'maGhe');
+        //     //Đưa dữ liệu ghế khách đặt cập nhật redux
+        //     arrGheKhachDat = _.uniqBy(arrGheKhachDat, 'chairID');
 
-            //Đưa dữ liệu ghế khách đặt về redux
-            dispatch({
-                type: 'DAT_GHE',
-                arrGheKhachDat
-            })
+        //     //Đưa dữ liệu ghế khách đặt về redux
+        //     dispatch({
+        //         type: 'DAT_GHE',
+        //         arrGheKhachDat
+        //     })
 
-        })
+        // })
 
         //Cài đặt sự kiện khi reload trang
-        window.addEventListener("beforeunload", clearGhe);
+        // window.addEventListener("beforeunload", clearGhe);
 
         return () => {
-            clearGhe();
-            window.removeEventListener('beforeunload', clearGhe);
+            // clearGhe();
+            // window.removeEventListener('beforeunload', clearGhe);
         }
     }, [])
-    const clearGhe = function (event) {
-        connection.invoke('huyDat', userLogin.taiKhoan, props.match.params.id);
-    }
+    // const clearGhe = function (event) {
+    //     connection.invoke('huyDat', userLogin.username, props.match.params.id);
+    // }
 
 
-    console.log({ chiTietPhongVe });
-    const { thongTinPhim, danhSachGhe } = chiTietPhongVe;
 
+    const { informationMovie, listChair } = chiTietPhongVe;
+    // console.log({ chiTietPhongVe });
+    // console.log("ds", listChair)
 
     const renderSeats = () => {
-        return danhSachGhe.map((ghe, index) => {
+        return listChair?.map((ghe, index) => {
+            // nếu typeChair =vip => classGheVip ="gheVip"
+            let classGheVip = ghe.typeChair === 'Vip' ? 'gheVip' : '';
 
-            let classGheVip = ghe.loaiGhe === 'Vip' ? 'gheVip' : '';
-            let classGheDaDat = ghe.daDat === true ? 'gheDaDat' : '';
+            let classGheDaDat = ghe.booked === true ? 'gheDaDat' : '';
             let classGheDangDat = '';
             //Kiểm tra từng ghế render xem có trong mảng ghế đang đặt hay không
-            let indexGheDD = danhSachGheDangDat.findIndex(gheDD => gheDD.maGhe === ghe.maGhe);
+            let indexGheDD = danhSachGheDangDat.findIndex(gheDD => gheDD.chairID === ghe.chairID);
 
             //Kiểm tra từng render xem có phải ghế khách đặt hay không
             let classGheKhachDat = '';
-            let indexGheKD = danhSachGheKhachDat.findIndex(gheKD => gheKD.maGhe === ghe.maGhe);
+            let indexGheKD = danhSachGheKhachDat.findIndex(gheKD => gheKD.chairID === ghe.chairID);
             if (indexGheKD !== -1) {
                 classGheKhachDat = 'gheKhachDat';
             }
             let classGheDaDuocDat = '';
-            if (userLogin.taiKhoan === ghe.taiKhoanNguoiDat) {
+            if (userLogin.username === ghe.userAccount) {
                 classGheDaDuocDat = 'gheDaDuocDat';
             }
 
+            // nếu đã có trong mảng đang đặt
             if (indexGheDD != -1) {
                 classGheDaDat = 'gheDangDat';
             }
@@ -140,8 +144,8 @@ function Checkout(props) {
                     dispatch(action);
 
                 }}
-                    disabled={ghe.daDat || classGheKhachDat !== ''} className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} ${classGheKhachDat}`} key={index}>
-
+                    disabled={ghe.booked || classGheKhachDat !== ''}
+                    className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} ${classGheKhachDat}`} key={index}>
                     {ghe.stt}
                 </button>
                 {(index + 1) % 12 === 0 ? <br /> : ''}
@@ -207,21 +211,21 @@ function Checkout(props) {
                 <Grid item xs={6} md={12} lg={4}>
                     <div>
                         <div className='img-checkout'>
-                            <img src={thongTinPhim.hinhAnh} alt="" />
+                            <img src={informationMovie.image} alt={informationMovie.title} />
                         </div>
-                        <h3 className="text-xl screen-name-film">{thongTinPhim.tenPhim}</h3>
+                        <h3 className="text-xl screen-name-film">{informationMovie.title}</h3>
                         <hr />
                         <div className='screen-info'>
                             <p>Địa điểm:</p>
-                            <span>{thongTinPhim.tenCumRap}</span>
+                            <span>{informationMovie.cinemaChildName}</span>
                         </div>
                         <div className='screen-info'>
                             <p>Rạp:</p>
-                            <span>{thongTinPhim.tenRap}</span>
+                            <span>{informationMovie.roomName}</span>
                         </div>
                         <div className='screen-info'>
                             <p>Ngày chiếu:</p>
-                            <span>{thongTinPhim.ngayChieu} - {thongTinPhim.gioChieu}</span>
+                            <span>{informationMovie.showday} - {(informationMovie.showtime)}</span>
                         </div>
                         <div className='scd'>
                             <p>Ghế:</p>
@@ -241,25 +245,24 @@ function Checkout(props) {
                             <p>Tổng tiền:</p>
                             <span className='screen-total'>
                                 {danhSachGheDangDat.reduce((tongTien, ghe, index) => {
-                                    return tongTien += ghe.giaVe;
+                                    return tongTien += ghe.price;
                                 }, 0).toLocaleString()} VNĐ
                             </span>
                         </div>
 
                         <div className='btn-book mb-0 flex flex-col items-center'>
                             <button onClick={() => {
-                                const thongTinDatVe = new ThongTinDatVe();
-                                thongTinDatVe.maLichChieu = props.match.params.id;
-                                thongTinDatVe.danhSachVe = danhSachGheDangDat;
-                                dispatch(datVeAction(thongTinDatVe))
+                                const bookingInformation = new ThongTinDatVe();
+                                bookingInformation.showID = props.match.params.id;
+                                bookingInformation.listChair = danhSachGheDangDat;
+                                bookingInformation.userAccount = userLogin.username;
+                                dispatch(datVeAction(bookingInformation))
 
                             }} className='pointer bg-green-500 text-white w-full text-center p-y-6 fw-500 fs-18 radius-5'>
                                 ĐẶT VÉ
                             </button>
                         </div>
                     </div>
-
-
                 </Grid>
             </Grid>
         </div >
@@ -267,16 +270,9 @@ function Checkout(props) {
 }
 
 
-
-
 const { TabPane } = Tabs;
 
 export default function CheckoutTab(props) {
-    const { tabActive } = useSelector(state => state.QuanLyDatVeReducer);
-    const dispatch = useDispatch();
-    console.log('tabActive', tabActive);
-
-    const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
     useEffect(() => {
         return () => {
             dispatch({
@@ -285,6 +281,19 @@ export default function CheckoutTab(props) {
             })
         }
     }, [])
+    const { tabActive } = useSelector(state => state.QuanLyDatVeReducer)
+    const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
+    const dispatch = useDispatch();
+
+
+
+    if (!localStorage.getItem(USER_LOGIN)) {
+        alert('Bạn không có quyền  truy cập vào trang này vui lòng đăng nhập!')
+        return <Redirect to='/' />
+    };
+
+
+
 
     const operations = <Fragment>
         {!_.isEmpty(userLogin) ?
@@ -293,6 +302,7 @@ export default function CheckoutTab(props) {
 
 
     </Fragment>
+
 
     return <div className="tab-checkout">
         <Tabs tabBarExtraContent={operations} defaultActiveKey="1" activeKey={tabActive} onChange={(key) => {
@@ -319,8 +329,9 @@ function KetQuaDatVe(props) {
 
     const dispatch = useDispatch();
     const { thongTinNguoiDung } = useSelector(state => state.QuanLyNguoiDungReducer);
-
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
+    console.log("thongTinnguoidung", thongTinNguoiDung)
+
 
 
     useEffect(() => {
@@ -328,20 +339,20 @@ function KetQuaDatVe(props) {
         dispatch(action)
     }, [])
 
-    console.log('thongTinNguoiDung', thongTinNguoiDung);
+    // console.log('thongTinNguoiDung', thongTinNguoiDung);
 
-    // return thongTinNguoiDung.thongTinDatVe?.map((ticket, index) => {
-    //     const seats = _.first(ticket.danhSachGhe);
-
+    // return thongTinNguoiDung.bookingInformation?.map((ticket, index) => {
+    //     const seats = _.first(ticket.listChair);
     //     return <div className="p-2 lg:w-1/3 md:w-1/2 w-full" key={index}>
     //         <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-    //             <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={ticket.hinhAnh} />
+    //             <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={ticket.image} />
     //             <div className="flex-grow">
-    //                 <h2 className="text-pink-500 title-font font-medium text-2xl">{ticket.tenPhim}</h2>
-    //                 <p className="text-gray-500"><span className="font-bold">Giờ chiếu:</span> {moment(ticket.ngayDat).format('hh:mm A')} - <span className="font-bold">Ngày chiếu:</span>  {moment(ticket.ngayDat).format('DD-MM-YYYY')} .</p>
-    //                 <p><span className="font-bold">Địa điểm:</span> {seats.tenHeThongRap}   </p>
+    //                 <h2 className="text-pink-500 title-font font-medium text-2xl">{ticket.title}</h2>
+    //                 <p className="text-gray-500"><span className="font-bold">Giờ chiếu:</span> {moment(ticket.showtime).format('hh:mm A')} - 
+    //                 <span className="font-bold">Ngày chiếu:</span>  {moment(ticket.ngayDat).format('DD-MM-YYYY')} .</p>
+    //                 <p><span className="font-bold">Địa điểm:</span> {seats.name}   </p>
     //                 <p>
-    //                     <span className="font-bold">Tên rạp:</span>  {seats.tenCumRap} -
+    //                     <span className="font-bold">Tên rạp:</span>  {seats.cinemaChildName} -
     //                 </p>
     //             </div>
     //         </div>
@@ -365,25 +376,27 @@ function KetQuaDatVe(props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {thongTinNguoiDung.thongTinDatVe?.map((ticket, index) => (
+                    {thongTinNguoiDung.bookingInformation?.map((ticket, index) => (
+
                         //  const seats = _.first(ticket.danhSachGhe);
-                        <StyledTableRow >
+                        < StyledTableRow >
                             <StyledTableCell align="center">{index + 1}</StyledTableCell>
                             <StyledTableCell align="center">
-                                {moment(ticket.ngayDat).format('hh:mm A')} - {moment(ticket.ngayDat).format('DD-MM-YYYY')}
+                                {ticket.bookingDate}
                             </StyledTableCell>
                             <StyledTableCell align="center">Rạp</StyledTableCell>
                             {/* <StyledTableCell align="right">{seats.tenHeThongRap}- {seats.tenCumRap}</StyledTableCell> */}
-                            <StyledTableCell align="center">{ticket.tenPhim}</StyledTableCell>
+                            <StyledTableCell align="center" > {ticket.titleMovie}</StyledTableCell>
                             <StyledTableCell align="center">
-                                <img src={ticket.hinhAnh} style={{ width: "50px", height: "50px" }} alt="" />
+                                {ticket.price}
+                                {/* <img src={ticket.image} style={{ width: "50px", height: "50px" }} alt="" /> */}
                             </StyledTableCell>
                             <StyledTableCell align="center">Giá</StyledTableCell>
                         </StyledTableRow>
                     ))};
                 </TableBody>
-            </Table>
-        </TableContainer>
+            </Table >
+        </TableContainer >
     )
 
 }

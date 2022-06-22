@@ -13,11 +13,11 @@ export class QuanLyNguoiDungService extends baseService {
         return this.post(`/api/QuanLyNguoiDung/DangNhap`, thongTinDangNhap);
     }
 
-    layDanhSachNguoiDung = (tuKhoa) => {
-        if (tuKhoa) {
-            return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung&tuKhoa=${tuKhoa}`)
+    layDanhSachNguoiDung = (username) => {
+        if (username) {
+            return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?textSearch=${username}`)
         }
-        return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung}`)
+        return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung`)
     };
 
     layThongTinNguoiDung = () => {
@@ -32,8 +32,8 @@ export class QuanLyNguoiDungService extends baseService {
         return this.post(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, formData)
     };
 
-    xoaND = (taiKhoan) => {
-        return this.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${taiKhoan}`)
+    xoaND = (username) => {
+        return this.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?username=${username}`)
     };
 
     layThongTinTaiKhoan = () => {

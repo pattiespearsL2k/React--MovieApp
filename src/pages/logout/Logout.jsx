@@ -6,7 +6,7 @@ import { LogoutAction } from '../../redux/actions/QuanLyNguoiDungAction';
 import { history } from '../../App';
 import { Link } from "react-router-dom";
 import $ from "jquery";
-
+import { TOKEN, USER_LOGIN } from '../../util/settings/config';
 export default function LogOut() {
   const dispatch = useDispatch()
   const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
@@ -27,7 +27,7 @@ export default function LogOut() {
       <img src="https://cdn4.vectorstock.com/i/1000x1000/62/48/green-round-glossy-login-icon-vector-2976248.jpg"
         alt="" class="header__navbar-user-img" />
       <UserOutlined className="buttonAccount" />
-      <span class="header__navbar-user-name">{userLogin.taiKhoan}</span>
+      <span class="header__navbar-user-name">{userLogin.username}</span>
       <ul class="header__navbar-user-menu">
         <li class="header__navbar-user-item">
           <Link class="header__navbar-user-item-link" href="">Tài khoản của tôi</Link>

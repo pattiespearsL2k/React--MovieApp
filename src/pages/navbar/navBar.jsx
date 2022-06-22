@@ -184,7 +184,7 @@ function Navbar(props) {
                         </div>
                         <div className="account hide-nav navright">
                             {/* <Login /> */}
-                            {!!userLogin.taiKhoan ?
+                            {!!userLogin.username ?
                                 <LogOut />
                                 :
                                 <>

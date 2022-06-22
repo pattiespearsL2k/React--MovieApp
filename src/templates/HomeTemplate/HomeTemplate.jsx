@@ -6,8 +6,7 @@ import Footer from "../../pages/footer/footer";
 export const HomeTemplate = (props) => {
     return (
         <Route
-            exact
-            path={props.path}
+            exact path={props.path}
             render={(propsRoute) => {
                 return (
                     <Fragment>

@@ -19,13 +19,12 @@ function Footer(props) {
                     <h1>Nhận các thông báo khuyến mãi, giảm giá về email của bạn</h1>
                 </div>
                 <div class="footer__form">
-                    <div>
-                        <input placeholder="Nhập email của bạn" type="text" name id />
-                        <button>
-                            <a href="#"><i className="las la-paper-plane" /></a>
-                        </button>
-                    </div>
-
+                    <input placeholder="Nhập email của bạn" type="text" name id />
+                    <button>
+                        <a href="#">
+                            OK
+                        </a>
+                    </button>
                 </div>
             </div>
             <div className="footer__main py-5">

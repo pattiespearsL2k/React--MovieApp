@@ -37,13 +37,14 @@ export const QuanLyPhimReducer = (state = stateDefault, action) => {
             state.arfDefault = state.arf;
             return { ...state }
         }
-        case SET_FILM_DANG_CHIEU: {
 
+        case SET_FILM_DANG_CHIEU: {
             state.arf = state.arfDefault.filter((item) => {
                 return item.nowShowing === true;
             });
             return { ...state };
         }
+
         case SET_FILM_SAP_CHIEU: {
             state.arf = state.arfDefault.filter((item) => {
                 return item.comingSoon === true;

@@ -7,7 +7,7 @@ export class QuanLyPhimService extends baseService {
 
     layDanhSachPhim = (title = '') => {
         if (title.trim() != '') {
-            return this.get(`/api/QuanLyPhim/LayDanhSachPhim&title=${title}`)
+            return this.get(`/api/QuanLyPhim/LayDanhSachPhim?title=${title}`)
         }
         return this.get(`/api/QuanLyPhim/LayDanhSachPhim`)
     }
@@ -21,12 +21,12 @@ export class QuanLyPhimService extends baseService {
     }
 
     capNhatPhimUpload = (formData) => {
-        return this.post(`/api/QuanLyPhim/CapNhatPhimUpload`, formData);
+        return this.post(`/api/QuanLyPhim/CapNhatPhim`, formData);
     }
 
 
-    xoaPhim = (maPhim) => {
-        return this.delete(`/api/QuanLyPhim/XoaPhim?MaPhim=${maPhim}`);
+    xoaPhim = (movieId) => {
+        return this.delete(`/api/QuanLyPhim/XoaPhim?movieId=${movieId}`);
     }
 }
 

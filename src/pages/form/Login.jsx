@@ -12,6 +12,7 @@ import classNames from 'classnames';
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { validationSchema } from "../../helper/validHelper";
+import { Redirect } from "react-router";
 
 
 export default function Login() {
@@ -34,38 +35,41 @@ export default function Login() {
     const { register, handleSubmit, formState, handleLogin } = useForm(formOptions);
     const { errors } = formState;
 
-    function onSubmit(data) {
 
 
-
-    }
     const dispatch = useDispatch();
-    const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
+    const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
+    console.log("userLogin", userLogin);
+
+
     const formik = useFormik({
         initialValues: {
-            taiKhoan: '',
-            matKhau: '',
+            username: '',
+            password: '',
         },
         validationSchema: Yup.object({
-            taiKhoan: Yup.string().required('Tài khoản không được để trống'),
-            matKhau: Yup.string().required("Mật khẩu không được để trống").min(6, "Mật khẩu phải từ 6-12 ký tự").max(12, 'Mật khẩu phải từ 6-12 ký tự'),
+            username: Yup.string().required('Tài khoản không được để trống'),
+            password: Yup.string().required("Mật khẩu không được để trống")
         }),
         onSubmit: values => {
             const action = dangNhapAction(values);
+            console.log(values, 'values');
             dispatch(action);
+
         }
     })
 
     useEffect(() => {
-        if (!!userLogin.taiKhoan) {
+        if (!!userLogin.username) {
             dispatch({
                 type: 'CLOSE_MODAL',
                 isVisible: false,
             })
         };
-        if (userLogin.maLoaiNguoiDung === 'QuanTri') {
+        if (userLogin.role === 'admin') {
             alert('Bạn là thành viên của Quản trị viên, trình duyệt sẽ chuyển sang trang quản trị')
-            history.push('/admin')
+            return (<Redirect to="/admin" />);
+
         }
 
     }, [userLogin])
@@ -77,6 +81,8 @@ export default function Login() {
         <form onSubmit={(e) => {
             e.preventDefault();
             formik.handleSubmit(e);
+            console.log(e.target.value, 'e.target');
+
 
         }}>
             <div id="container-fluid"
@@ -94,9 +100,9 @@ export default function Login() {
                             <div className="invalid-feedback">{errors.phone?.message}</div>
                         </Form.Group>
                     </div>
-                    <Form.Control onChange={formik.handleChange} placeholder="Tài khoản" onBlur={formik.handleBlur} type="text" name='taiKhoan' className="form-control" />
-                    {formik.touched.taiKhoan && formik.errors.taiKhoan ? (
-                        <div className='alert alert-danger'>{formik.errors.taiKhoan}</div>
+                    <Form.Control onChange={formik.handleChange} placeholder="Tài khoản" onBlur={formik.handleBlur} type="text" name='username' className="form-control" />
+                    {formik.touched.username && formik.errors.username ? (
+                        <div className='alert alert-danger'>{formik.errors.username}</div>
                     ) : null}
                     <Form.Control type="text" placeholder="Address" name="address" {...register('address')} className={`form-control inp ${errors.address ? 'is-invalid' : ''}`} />
                     <div className="invalid-feedback">{errors.address?.message}</div>
@@ -127,7 +133,7 @@ export default function Login() {
 
                 </div>
                 <div className="form-container sign-in-container">
-            
+
                     <h1>Sign in</h1>
                     <div className="social-container">
                         <a href="#" className="social"><i className="fab fa-facebook-f" /></a>
@@ -135,13 +141,13 @@ export default function Login() {
                         <a href="#" className="social"><i className="fab fa-linkedin-in" /></a>
                     </div>
                     <span>or use your account</span>
-                    <Form.Control onChange={formik.handleChange} placeholder="Tài khoản" onBlur={formik.handleBlur} type="text" name='taiKhoan' className="form-control" />
-                    {formik.touched.taiKhoan && formik.errors.taiKhoan ? (
-                        <div className='alert alert-danger'>{formik.errors.taiKhoan}</div>
+                    <Form.Control onChange={formik.handleChange} placeholder="Tài khoản" onBlur={formik.handleBlur} type="text" name='username' className="form-control" />
+                    {formik.touched.username && formik.errors.username ? (
+                        <div className='alert alert-danger'>{formik.errors.username}</div>
                     ) : null}
-                    <Form.Control onChange={formik.handleChange} placeholder="Mật khẩu" onBlur={formik.handleBlur} type="password" name='matKhau' className="form-control" />
-                    {formik.touched.matKhau && formik.errors.matKhau ? (
-                        <div className='alert alert-danger'>{formik.errors.matKhau}</div>
+                    <Form.Control onChange={formik.handleChange} placeholder="Mật khẩu" onBlur={formik.handleBlur} type="password" name='password' className="form-control" />
+                    {formik.touched.password && formik.errors.password ? (
+                        <div className='alert alert-danger'>{formik.errors.password}</div>
                     ) : null}
                     <a href="#">Forgot your password?</a>
                     <div className="login__btn">
@@ -171,19 +177,21 @@ export default function Login() {
             </div>
             {/* <div className="form-group">
                 <label >Tài khoản</label>
-                <input onChange={formik.handleChange} onBlur={formik.handleBlur} type="text" name='taiKhoan' className="form-control" />
-                {formik.touched.taiKhoan && formik.errors.taiKhoan ? (
-                    <div className='alert alert-danger'>{formik.errors.taiKhoan}</div>
+                <input onChange={formik.handleChange} onBlur={formik.handleBlur} type="text" name='username' className="form-control" />
+                {formik.touched.username && formik.errors.username ? (
+                    <div className='alert alert-danger'>{formik.errors.username}</div>
                 ) : null}
             </div>
             <div className="form-group">
                 <label>Mật khẩu</label>
-                <input onChange={formik.handleChange} onBlur={formik.handleBlur} type="password" name='matKhau' className="form-control" />
-                {formik.touched.matKhau && formik.errors.matKhau ? (
-                    <div className='alert alert-danger'>{formik.errors.matKhau}</div>
+                <input onChange={formik.handleChange} onBlur={formik.handleBlur} type="password" name='password' className="form-control" />
+                {formik.touched.password && formik.errors.password ? (
+                    <div className='alert alert-danger'>{formik.errors.password}</div>
                 ) : null}
             </div>
             <ButtonStyled type="submit" className="btn">Đăng Nhập</ButtonStyled> */}
         </form>
     )
 }
+
+

@@ -6,7 +6,7 @@ import {
 
 
 let user = {};
-if (localStorage.getItem(USER_LOGIN)) {
+if(localStorage.getItem(USER_LOGIN)) {
     user = JSON.parse(localStorage.getItem(USER_LOGIN));
 }
 
@@ -30,10 +30,12 @@ export const QuanLyNguoiDungReducer = (state = stateDefault, action) => {
 
 
         case DANG_NHAP_ACTION: {
-            const { thongTinDangNhap } = action;
-            localStorage.setItem(USER_LOGIN, JSON.stringify(thongTinDangNhap));
-            localStorage.setItem(TOKEN, thongTinDangNhap.accessToken);
-            return { ...state, userLogin: thongTinDangNhap }
+            // dispatch ở action nên qua reducer lấy ra
+            const {thongTinDangNhap} = action;
+            console.log(thongTinDangNhap,'thongTinDangNhap');
+            localStorage.setItem(USER_LOGIN,JSON.stringify(thongTinDangNhap));
+            localStorage.setItem(TOKEN,thongTinDangNhap.accessToken);
+            return {...state,userLogin:thongTinDangNhap}
         }
 
         case SET_THONG_TIN_NGUOI_DUNG: {
@@ -42,8 +44,8 @@ export const QuanLyNguoiDungReducer = (state = stateDefault, action) => {
         }
 
         case DANG_XUAT_ACTION:
-            localStorage.removeItem('LOGIN_USER');
-            localStorage.removeItem('TOKEN_MOVIE')
+            localStorage.removeItem(USER_LOGIN);
+            localStorage.removeItem( TOKEN)
             state.userLogin = action.userLogin;
             return { ...state }
 

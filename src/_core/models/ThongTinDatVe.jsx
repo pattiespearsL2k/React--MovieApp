@@ -1,6 +1,7 @@
 export class ThongTinDatVe { 
-    maLichChieu = 0;
-    danhSachVe = [];
+    showID = 0;
+    listChair = [];
+    userAccount=""
     constructor () {
         
     }
