@@ -3,16 +3,15 @@ import { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { datGheAction, layChiTietPhongVeAction } from '../../redux/actions/QuanLyDatVeActions';
 import './Booking.css';
-import style from './Booking.module.css'
-import { CHUYEN_TAB, DAT_VE } from '../../redux/actions/types/QuanLyDatVeType'
 import _ from 'lodash';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
 import { datVeAction } from '../../redux/actions/QuanLyDatVeActions';
-import { Tabs } from 'antd';
+import { Tabs, Button, Modal } from 'antd';
+// import { Alert } from "antd";
 import { layThongTinNguoiDungAction } from '../../redux/actions/QuanLyNguoiDungAction';
 import moment from 'moment';
 // import { connection } from '../../index';
-import { NavLink, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Grid } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
@@ -22,10 +21,20 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { createTheme } from '@mui/material/styles';
 import { USER_LOGIN } from '../../util/settings/config';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
+// const [open, setOpen] = useState(false);
 
+const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+const onClose = (e) => {
+    console.log(e, 'I was closed.');
+};
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
         color: theme.palette.common.white,
@@ -46,18 +55,37 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 
+// const handleClick = () => {
+//     setOpen(true);
+// };
+
+const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+        return;
+    }
+
+    // setOpen(false);
+};
+
+
+
 function Checkout(props) {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
     const { chiTietPhongVe, danhSachGheDangDat, danhSachGheKhachDat } = useSelector(state => state.QuanLyDatVeReducer);
 
     const dispatch = useDispatch();
-    // console.log('danhSachGheDangDat', danhSachGheDangDat);
+
+    console.log('danhSachGheDangDat', danhSachGheDangDat);
     useEffect(() => {
         //Gọi hàm tạo ra 1 async function 
         const action = layChiTietPhongVeAction(props.match.params.id);
         //Dispatch function này đi
         dispatch(action);
+
 
         //Có 1 client nào thực hiện việc đặt vé thành công mình sẽ load lại danh sách phòng vé của lịch chiếu đó
         // connection.on('datVeThanhCong', () => {
@@ -106,13 +134,16 @@ function Checkout(props) {
     //     connection.invoke('huyDat', userLogin.username, props.match.params.id);
     // }
 
-
+    // if (danhSachGheDangDat.length > 8) {
+    //     return (console.log("dont"))
+    // }
 
     const { informationMovie, listChair } = chiTietPhongVe;
     // console.log({ chiTietPhongVe });
     // console.log("ds", listChair)
 
     const renderSeats = () => {
+
         return listChair?.map((ghe, index) => {
             // nếu typeChair =vip => classGheVip ="gheVip"
             let classGheVip = ghe.typeChair === 'Vip' ? 'gheVip' : '';
@@ -138,11 +169,11 @@ function Checkout(props) {
                 classGheDaDat = 'gheDangDat';
             }
 
+
             return <Fragment key={index}>
                 <button onClick={() => {
                     const action = datGheAction(ghe, props.match.params.id);
                     dispatch(action);
-
                 }}
                     disabled={ghe.booked || classGheKhachDat !== ''}
                     className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} ${classGheKhachDat}`} key={index}>
@@ -326,12 +357,12 @@ export default function CheckoutTab(props) {
 
 
 function KetQuaDatVe(props) {
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     const dispatch = useDispatch();
     const { thongTinNguoiDung } = useSelector(state => state.QuanLyNguoiDungReducer);
-    const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
-    console.log("thongTinnguoidung", thongTinNguoiDung)
-
 
 
     useEffect(() => {
@@ -368,30 +399,37 @@ function KetQuaDatVe(props) {
                 <TableHead>
                     <TableRow>
                         <StyledTableCell align="center">Số thứ tự </StyledTableCell>
-                        <StyledTableCell align="center">Ngày giờ đặt</StyledTableCell>
+                        <StyledTableCell align="center">Giờ đặt vé</StyledTableCell>
+                        <StyledTableCell align="center">Ngày đặt vé</StyledTableCell>
                         <StyledTableCell align="center">Rạp</StyledTableCell>
                         <StyledTableCell align="center">Phim</StyledTableCell>
+                        <StyledTableCell align="center">Suất chiếu</StyledTableCell>
                         <StyledTableCell align="center">Hình ảnh</StyledTableCell>
                         <StyledTableCell align="center">Giá</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {thongTinNguoiDung.bookingInformation?.map((ticket, index) => (
 
+                    {thongTinNguoiDung.bookingInformation?.map((ticket, index) => (
                         //  const seats = _.first(ticket.danhSachGhe);
                         < StyledTableRow >
                             <StyledTableCell align="center">{index + 1}</StyledTableCell>
                             <StyledTableCell align="center">
-                                {ticket.bookingDate}
+                                {moment(ticket.bookingDate).format(' hh:mm:ss')}
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                                {moment(ticket.bookingDate).format('DD-MM-YYYY ')}
                             </StyledTableCell>
                             <StyledTableCell align="center">Rạp</StyledTableCell>
                             {/* <StyledTableCell align="right">{seats.tenHeThongRap}- {seats.tenCumRap}</StyledTableCell> */}
                             <StyledTableCell align="center" > {ticket.titleMovie}</StyledTableCell>
                             <StyledTableCell align="center">
-                                {ticket.price}
-                                {/* <img src={ticket.image} style={{ width: "50px", height: "50px" }} alt="" /> */}
+                                <img src={ticket.image} style={{ width: "50px", height: "50px" }} alt="" />
                             </StyledTableCell>
-                            <StyledTableCell align="center">Giá</StyledTableCell>
+                            <StyledTableCell align="center">
+                                <img src={ticket.image} style={{ width: "50px", height: "50px" }} alt="" />
+                            </StyledTableCell>
+                            <StyledTableCell align="center">{ticket.price}</StyledTableCell>
                         </StyledTableRow>
                     ))};
                 </TableBody>

@@ -68,8 +68,7 @@ export default function Login() {
         };
         if (userLogin.role === 'admin') {
             alert('Bạn là thành viên của Quản trị viên, trình duyệt sẽ chuyển sang trang quản trị')
-            return (<Redirect to="/admin" />);
-
+           history.push("/admin/dashboard")
         }
 
     }, [userLogin])

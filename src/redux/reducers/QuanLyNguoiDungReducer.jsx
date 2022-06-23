@@ -12,6 +12,7 @@ if(localStorage.getItem(USER_LOGIN)) {
 
 
 const stateDefault = {
+    mangND: [],
     userLogin: user,
     thongTinNguoiDung: {},
     mangLoaiND: [],

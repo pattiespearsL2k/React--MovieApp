@@ -144,8 +144,8 @@ const AddNew = () => {
           <input type="file" onChange={handleChangeFile} accept="image/png, image/jpeg,image/gif,image/png" />
 
         </Form.Item>
-        <Form.Item label="Tác vụ">
-          <button type="submit" className="bg-blue-300 text-white p-2">Thêm phim</button>
+        <Form.Item >
+          <button type="submit" className="btn-active-add-after">Thêm phim</button>
         </Form.Item>
       </Form>
     </>

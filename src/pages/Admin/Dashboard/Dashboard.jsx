@@ -134,7 +134,7 @@ export default function Dashboard(props) {
     return (
         <div>
             <h2>Quản Lý Người Dùng</h2>
-            <button className='my-3 btn btn-primary' onClick={() => {
+            <button className='my-3 btn btn-primary btn-add-film' onClick={() => {
                 history.push('/admin/adduser')
             }} >Thêm Người Dùng</button>
             <SearchStyled

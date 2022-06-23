@@ -1,26 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { Form, Cascader, DatePicker, InputNumber, Button, Select, message } from 'antd';
+import { Form, Cascader, TimePicker, DatePicker, InputNumber, Button, Input, Select, message } from 'antd';
 import { quanLyRapService } from '../../../services/QuanLyRapService';
 import { useFormik } from 'formik'
 import moment from 'moment';
 import { quanLyDatVeService } from '../../../services/QuanLyDatVeService';
 import { history } from '../../../App';
 import styled from 'styled-components';
+import { Grid } from "@mui/material"
+import * as Yup from 'yup';
+import { ListItemSecondaryAction } from '@material-ui/core';
+import {uniqBy} from 'lodash'
 
 export default function ShowTime(props) {
-
+  const { Option } = Select;
   const formik = useFormik({
     initialValues: {
       movieId: props.match.params.id,
       showday: '',
-      showtime:'',
+      showtime: '',
       roomID: '',
       price: '',
     },
+    validationSchema: Yup.object({
+      price: Yup.string().required('Giá vé không được để trống')
+        .matches(/-?[0-9]+[0-9]*/, "Nhập đúng định dạng giá từ 75000 đến 200000")
+       
+    }),
     onSubmit: async (values) => {
+      // console.log('values', values);
+
       try {
         let result = await quanLyDatVeService.taoLichChieu(values);
-        message.success(result.data.content)
+        message.success(result.data)
         history.push('/admin/films')
       } catch (err) {
         console.log('err', err.reponse?.data);
@@ -47,34 +58,78 @@ export default function ShowTime(props) {
   }, [])
 
   const handleChangeHeThongRap = async (value) => {
+    // console.log(value)
+    // từ hệ thống rạp call api lấy thông tin rạp
     try {
       let result = await quanLyRapService.layThongTinCumRap(value)
+      console.log(result, 'result');
       setState({
         ...state,
         cumRapChieu: result.data
-      })
+      }
+      )
+
     } catch (error) {
-      console.log("error", error.reponse?.data);
+      console.log(error);
     }
   }
 
   const handleChangeCumRap = (value) => {
-    formik.setFieldValue('roomID', value)
+    // formik.setFieldValue('roomID', value)
+    console.log(value);
   }
-  // const onOk = (values) => {
-  //   formik.setFieldValue('ngayChieuGioChieu', moment(values).format('DD/MM/YYYY HH:mm:ss'))
-  // }
+
+  const handleChangeRapcon = (value) => {
+    formik.setFieldValue('roomID', value)
+    console.log(value);
+  }
+
   const onChangeDate = (values) => {
     formik.setFieldValue('showday', moment(values).format('DD/MM/YYYY'));
   }
+
+  const onChangeTime = (values) => {
+    formik.setFieldValue('showtime', moment(values).format('hh:mm:ss'));
+  }
+
   const onChangeInputNumber = (value) => {
     formik.setFieldValue('price', value)
   }
+
   const convertSelecHRP = () => {
     return state.heThongRapChieu?.map((htr) => {
-      return { label: htr.name, value: htr.cinemaID}
+      return { label: htr.name, value: htr.cinemaID }
     })
   }
+
+  const convertSelectRapcon = () => {
+    return state.cumRapChieu?.map((cumrap, i) => {
+      return Object.values(cumrap)?.map((rapcon, i) => {
+        // console.log(rapcon)
+        return { label: rapcon.roomName, value: rapcon.roomID }
+      })
+    }
+    )
+
+  }
+  
+
+  console.log(state.cumRapChieu, 'cum rap chieu');
+
+  let options= []
+
+  const newData = state.cumRapChieu?.map(item => {
+    item.listRoom.map(cumRap => {
+      let option = {
+        label: cumRap.roomName,
+        value: cumRap.roomID,
+      }
+      options.push(option)
+    })
+  })
+
+  console.log(options, 'options');
+
 
   let film = {};
   if (localStorage.getItem('filmParams')) {
@@ -82,19 +137,20 @@ export default function ShowTime(props) {
   }
 
   return (
+
     <Form
       name="basic"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
+      labelCol={{ span: 4 }}
+      wrapperCol={{ span: 8 }}
       initialValues={{ remember: true }}
       onSubmitCapture={formik.handleSubmit}
     >
       <h3 className=''>Tạo Lịch Chiếu - <span style={{ color: "purple" }}>{film.title}</span></h3>
-      <div className="row mt-4">
-        <div className="col-2 text-right">
+      <Grid container spacing={1}>
+        <Grid item xs={6} md={4} lg={5}>
           <img src={film.image} width={200} height={300} />
-        </div>
-        <div className="col-8 text-left">
+        </Grid>
+        <Grid item xs={6} md={8} lg={7}>
           <Form.Item label="Hệ thống rạp">
             <Select options={convertSelecHRP()} onChange={handleChangeHeThongRap} placeholder='Chọn hệ thống rạp' />
           </Form.Item>
@@ -102,22 +158,41 @@ export default function ShowTime(props) {
             <Select options={state.cumRapChieu?.map(cumRap => ({
               label: cumRap.cinemaChildName, value: cumRap.cinemaChildID
             }))}
-              onChange={handleChangeCumRap} placeholder='Chọn cụm rạp' />
+              onChange={handleChangeCumRap}
+              placeholder='Chọn cụm rạp' />
           </Form.Item>
+          <Form.Item label="Rạp con">
+            <Select
+            options={options}
+              onChange={handleChangeRapcon}
+              placeholder='Chọn rạp con' />
+          </Form.Item>
+          {/* <Form.Item label="Rạp con">
+            <Select onChange={handleChangeRapcon}  placeholder='Chọn rạp con' >
+              <Option value="741">1</Option>
+            </Select>
+          </Form.Item> */}
           <Form.Item label="Ngày chiếu">
-            <DatePicker format='DD/MM/YYYY' showday onChange={onChangeDate}  />
+            <DatePicker format='DD/MM/YYYY' showday onChange={onChangeDate} />
           </Form.Item>
           <Form.Item label="Giờ chiếu">
-            <DatePicker format=' HH:mm:ss' showday onChange={onChangeDate}  />
+            <TimePicker format='hh:mm:ss' showtime onChange={onChangeTime} />
           </Form.Item>
           <Form.Item label="Giá vé">
-            <InputNumber onChange={onChangeInputNumber} />
+            <Input name="price" value={formik.values.price} onChange={formik.handleChange} />
+            {formik.touched.price && formik.errors.price
+              ? (<div className='alert alert-danger'>{formik.errors.price}</div>)
+              : null}
+            {/* onChange={onChangeInputNumber} */}
+
           </Form.Item>
-          <Form.Item label="Chức năng">
-            <ButtonStyled type="primary" htmlType="submit">Tạo Lịch chiếu</ButtonStyled>
+          <Form.Item >
+            <button type="primary" className='btn-active-add-after' htmlType="submit">Tạo Lịch chiếu</button>
           </Form.Item>
-        </div>
-      </div>
+        </Grid>
+      </Grid>
+
+
     </Form>
   )
 }

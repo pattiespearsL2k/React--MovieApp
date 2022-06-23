@@ -18,7 +18,7 @@ export class QuanLyRapService  extends baseService{
         return this.get(`/api/QuanLyRap/LayThongTinHeThongRap`);
     }
     layThongTinCumRap = (cinemaID) => {
-        return this.get(`/api/QuanLyRap/LayThongTinCumRapTheoHeThong?cinemaID=${cinemaID}`);
+        return this.get(`/api/QuanLyRap/LayThongTinCumRapTheoHeThong?maHeThongRap=${cinemaID}`);
     }
 }
 

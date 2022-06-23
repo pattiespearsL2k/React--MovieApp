@@ -12,7 +12,7 @@ export const layChiTietPhongVeAction = (showID) => {
         dispatch(displayLoadingAction)
         try {
             const result = await quanLyDatVeService.layChiTietPhongVe(showID);
-            console.log("result chi tiết pv",result)
+            console.log("result chi tiết pv", result)
             if (result.status === 200) {
                 dispatch({
                     type: SET_CHI_TIET_PHONG_VE,
@@ -64,7 +64,6 @@ export const datGheAction = (ghe, showID) => {
         //Call api về backend 
         let danhSachGheDangDat = getState().QuanLyDatVeReducer.danhSachGheDangDat;
         let username = getState().QuanLyNguoiDungReducer.userLogin.username;
-
         console.log('danhSachGheDangDat', danhSachGheDangDat);
         console.log('taiKhoan', username);
         console.log('maLichChieu', showID);

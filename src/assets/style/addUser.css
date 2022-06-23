@@ -10,3 +10,26 @@
   border: 0 solid transparent;
   border-radius: 0;
 }
+
+
+.add-user-form .ant-form-item-label {
+  overflow: unset;
+}
+
+.add-user-form .ant-col-4 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.add-user-form .ant-col-8 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.add-user-form .ant-form-item-label>label{
+  width: 200px;
+}
+
+.add-user-form .ant-form-horizontal .ant-form-item-control{
+  width: 500px;
+}
