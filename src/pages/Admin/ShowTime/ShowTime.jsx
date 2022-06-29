@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { Grid } from "@mui/material"
 import * as Yup from 'yup';
 import { ListItemSecondaryAction } from '@material-ui/core';
-import {uniqBy} from 'lodash'
+import { uniqBy } from 'lodash'
 
 export default function ShowTime(props) {
   const { Option } = Select;
@@ -24,10 +24,10 @@ export default function ShowTime(props) {
     validationSchema: Yup.object({
       price: Yup.string().required('Giá vé không được để trống')
         .matches(/-?[0-9]+[0-9]*/, "Nhập đúng định dạng giá từ 75000 đến 200000")
-       
+
     }),
     onSubmit: async (values) => {
-      // console.log('values', values);
+      console.log('values', values);
 
       try {
         let result = await quanLyDatVeService.taoLichChieu(values);
@@ -41,7 +41,8 @@ export default function ShowTime(props) {
 
   const [state, setState] = useState({
     heThongRapChieu: [],
-    cumRapChieu: []
+    cumRapChieu: [],
+    cumRapId: ""
   })
 
 
@@ -77,11 +78,14 @@ export default function ShowTime(props) {
   const handleChangeCumRap = (value) => {
     // formik.setFieldValue('roomID', value)
     console.log(value);
+    setState({
+      ...state,
+      cumRapId: value
+    })
   }
 
-  const handleChangeRapcon = (value) => {
-    formik.setFieldValue('roomID', value)
-    console.log(value);
+  const handleChangeRapcon = (label) => {
+    formik.setFieldValue('roomID', label)
   }
 
   const onChangeDate = (values) => {
@@ -103,32 +107,19 @@ export default function ShowTime(props) {
   }
 
   const convertSelectRapcon = () => {
-    return state.cumRapChieu?.map((cumrap, i) => {
-      return Object.values(cumrap)?.map((rapcon, i) => {
-        // console.log(rapcon)
-        return { label: rapcon.roomName, value: rapcon.roomID }
-      })
-    }
-    )
 
-  }
-  
-
-  console.log(state.cumRapChieu, 'cum rap chieu');
-
-  let options= []
-
-  const newData = state.cumRapChieu?.map(item => {
-    item.listRoom.map(cumRap => {
-      let option = {
-        label: cumRap.roomName,
-        value: cumRap.roomID,
+    let arrayRap = [];
+    state.cumRapChieu.forEach(item => {
+      if (item.cinemaChildID === state.cumRapId) {
+        arrayRap = Object.values(item.listRoom);
       }
-      options.push(option)
-    })
-  })
+    });
 
-  console.log(options, 'options');
+    return arrayRap.map((item) => {
+      return {lable: item.roomName, value: item.roomID}
+    }
+    );
+  }
 
 
   let film = {};
@@ -163,7 +154,7 @@ export default function ShowTime(props) {
           </Form.Item>
           <Form.Item label="Rạp con">
             <Select
-            options={options}
+              options={convertSelectRapcon()}
               onChange={handleChangeRapcon}
               placeholder='Chọn rạp con' />
           </Form.Item>

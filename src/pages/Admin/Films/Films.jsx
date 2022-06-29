@@ -82,6 +82,7 @@ export default function Films() {
                         <EditOutlined style={{ color: 'blue' }} />
                         <p>Sửa</p>
                     </NavLink>
+                    
                     <Popconfirm
                         className='action'
                         title="Bạn có chắc chắn xoá không?"
@@ -92,6 +93,7 @@ export default function Films() {
                         <DeleteOutlined style={{ color: 'red' }} />
                         <p>Xóa</p>
                     </Popconfirm>
+
                     <NavLink key={1} className="action" to={`/admin/films/showtime/${film.movieId}/${film.title}`} onClick={() => {
                         localStorage.setItem('filmParams', JSON.stringify(film));
                     }}>

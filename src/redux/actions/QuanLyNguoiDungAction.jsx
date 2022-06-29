@@ -20,12 +20,14 @@ export const dangKyAction = (thongTinDangKy) => {
             if (result.data.statusCode === 200) {
                 dispatch({
                     type: DANG_KY_ACTION,
-                    thongTinDangNhap: result.data.content
+                    thongTinDangKy: result.data
                 });
                 //Chuyển hướng đăng nhập về trang trước đó
                 history.goBack();
             }
             console.log('result', result);
+            console.log("abc");
+            message.success('Đăng ký thành công!');
         } catch (error) {
             console.log('error', error.response.data);
         }

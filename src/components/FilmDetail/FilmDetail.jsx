@@ -16,12 +16,12 @@ export default function FilmDetail(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-      // get data from url
-      let { id } = props.match.params;
-  
-      dispatch(layThongTinChiTietPhim(id));
+        // get data from url
+        let { id } = props.match.params;
+
+        dispatch(layThongTinChiTietPhim(id));
     }, []);
-  
+
     const filmDetail = useSelector((state) => state.QuanLyPhimReducer.filmDetail);
 
     return (
@@ -90,11 +90,11 @@ export default function FilmDetail(props) {
                                                 {cumRap.lichChieuPhim?.slice(0, 12).map((lichChieu, index) => {
                                                     return <NavLink to={`/booking/${lichChieu.showID}`} key={index} className="schedule-info col-span-1 text-green-800 font-bold">
                                                         {(lichChieu.showtime)}
+                                                        {/* {lichChieu.showday} */}
                                                     </NavLink>
                                                 })}
                                             </div>
                                         </div>
-
                                     </div>
                                 })}
                             </TabPane>

@@ -226,7 +226,7 @@
 }
 
 .tab-checkout .history-ticket thead {
-  background-color: orange !important;
+  background-color: orange;
   font-family: "Saira Semi Condensed", sans-serif !important;
   font-size: 18px;
 }

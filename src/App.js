@@ -23,6 +23,7 @@ import AddNew from "./pages/Admin/Films/AddNew";
 import Edit from "./pages/Admin/Films/Edit";
 import Dashboard from "./pages/Admin/Dashboard/Dashboard";
 import Films from "./pages/Admin/Films/Films";
+import History from './pages/History/History';
 
 
 export const history = createBrowserHistory();
@@ -35,6 +36,7 @@ function App() {
       <HomeTemplate exact path='/schedule' component={Schedule} />
       <HomeTemplate exact path='/event' component={Promotion} />
       <HomeTemplate exact path='/member' component={Member} />
+      <HomeTemplate exact path='/history' component={History}/>
       <HomeTemplate exact path='/detail/:id' component={FilmDetail} />
       <CheckoutTemplate path="/booking/:id" exact component={Booking} />
       <AdminTemplate path="/admin" component={Dashboard} />

@@ -4,10 +4,11 @@ import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { LogoutAction } from '../../redux/actions/QuanLyNguoiDungAction';
 import { history } from '../../App';
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import $ from "jquery";
 import { TOKEN, USER_LOGIN } from '../../util/settings/config';
-export default function LogOut() {
+import "./logout.css"
+export default function LogOutAdmin() {
   const dispatch = useDispatch()
   const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
 
@@ -16,10 +17,6 @@ export default function LogOut() {
     history.push('/')
   }
 
-  const handleHistory = () => {
-    history.push({ pathname: "/lich-su-dat-ve" });
-    $(window).scrollTop(0);
-  }
 
   return (
 
@@ -28,13 +25,7 @@ export default function LogOut() {
         alt="" class="header__navbar-user-img" />
       <UserOutlined className="buttonAccount" />
       <span class="header__navbar-user-name">{userLogin.username}</span>
-      <ul class="header__navbar-user-menu">
-        <li class="header__navbar-user-item">
-          <Link class="header__navbar-user-item-link" href="">Tài khoản của tôi</Link>
-        </li>
-        <li class="header__navbar-user-item">
-          <NavLink class="header__navbar-user-item-link" to="/history">Lịch sử đặt vé</NavLink>
-        </li>
+      <ul class="header__navbar-user-menu1">
         <li class=" header__navbar-user-item header__navbar-user-item--separate  ">
           <Link class="header__navbar-user-item-link" href="" onClick={handleLogout}>Đăng xuất</Link>
         </li>

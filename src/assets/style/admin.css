@@ -19,7 +19,7 @@
 
 .admin .site-layout-background {
   height: 84px;
-  background-color: #fafafa;
+  /* background-color: #222 */
 }
 
 .admin {
@@ -73,21 +73,21 @@
   border: var(--color-primary2);
 }
 
-.admin .ant-input-search-button:hover{
+.admin .ant-input-search-button:hover {
   background-color: var(--color-primary2);
-  
 }
 
-.admin .ant-input:focus{
-  border-color:var(--color-primary2);
-  box-shadow: none ;
+.admin .ant-input:focus {
+  border-color: var(--color-primary2);
+  box-shadow: none;
 }
 
-.admin .ant-input-search .ant-input:hover, .ant-input-search .ant-input:focus{
-  border-color:var(--color-primary2);
+.admin .ant-input-search .ant-input:hover,
+.ant-input-search .ant-input:focus {
+  border-color: var(--color-primary2);
 }
 
-.admin .btn-active-add-after{
+.admin .btn-active-add-after {
   display: block;
   text-align: center;
   color: #fff;
@@ -110,6 +110,32 @@
   border: var(--color-primary2);
 }
 
-.admin h3{
+.admin h3 {
   color: var(--color-primary2);
+}
+
+.admin .ant-layout-header {
+  color: #fff !important;
+  /* background-color: #444 ; */
+  line-height: 20px;
+}
+
+.admin .ant-layout-header .name-admin{
+font-size: 16px;
+float: right;
+margin-right: 20px;
+}
+
+.admin .ant-layout-header .name-admin .name{
+  margin-left:10px;
+  display: inline;
+}
+
+.history{
+  width: 90%;
+  margin: 200px auto 0;
+}
+
+.history .history-ticket thead{
+background-color: var(--color-primary1)
 }

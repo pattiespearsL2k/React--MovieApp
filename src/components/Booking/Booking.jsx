@@ -183,7 +183,6 @@ function Checkout(props) {
             </Fragment>
         })
     }
-
     return (
         <div className="mt-5" >
             <Grid container spacing={5} >
@@ -299,8 +298,6 @@ function Checkout(props) {
         </div >
     )
 }
-
-
 const { TabPane } = Tabs;
 
 export default function CheckoutTab(props) {
@@ -316,28 +313,19 @@ export default function CheckoutTab(props) {
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
     const dispatch = useDispatch();
 
-
-
     if (!localStorage.getItem(USER_LOGIN)) {
         alert('Bạn không có quyền  truy cập vào trang này vui lòng đăng nhập!')
         return <Redirect to='/' />
     };
 
-
-
-
     const operations = <Fragment>
         {!_.isEmpty(userLogin) ?
             <Fragment>
             </Fragment> : ''}
-
-
     </Fragment>
-
 
     return <div className="tab-checkout">
         <Tabs tabBarExtraContent={operations} defaultActiveKey="1" activeKey={tabActive} onChange={(key) => {
-
             dispatch({
                 type: 'CHANGE_TAB_ACTIVE',
                 number: key.toString()
@@ -350,9 +338,7 @@ export default function CheckoutTab(props) {
                 <KetQuaDatVe {...props} />
             </TabPane>
         </Tabs>
-
     </div>
-
 }
 
 
@@ -369,29 +355,6 @@ function KetQuaDatVe(props) {
         const action = layThongTinNguoiDungAction();
         dispatch(action)
     }, [])
-
-    // console.log('thongTinNguoiDung', thongTinNguoiDung);
-
-    // return thongTinNguoiDung.bookingInformation?.map((ticket, index) => {
-    //     const seats = _.first(ticket.listChair);
-    //     return <div className="p-2 lg:w-1/3 md:w-1/2 w-full" key={index}>
-    //         <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-    //             <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={ticket.image} />
-    //             <div className="flex-grow">
-    //                 <h2 className="text-pink-500 title-font font-medium text-2xl">{ticket.title}</h2>
-    //                 <p className="text-gray-500"><span className="font-bold">Giờ chiếu:</span> {moment(ticket.showtime).format('hh:mm A')} - 
-    //                 <span className="font-bold">Ngày chiếu:</span>  {moment(ticket.ngayDat).format('DD-MM-YYYY')} .</p>
-    //                 <p><span className="font-bold">Địa điểm:</span> {seats.name}   </p>
-    //                 <p>
-    //                     <span className="font-bold">Tên rạp:</span>  {seats.cinemaChildName} -
-    //                 </p>
-    //             </div>
-    //         </div>
-    //     </div>
-
-    // })
-
-
 
     return (
         <TableContainer className="history-ticket" component={Paper}>

@@ -17,6 +17,7 @@ const stateDefault = {
     thongTinNguoiDung: {},
     mangLoaiND: [],
     thongTinTK: {},
+    thongTinDangKy:{}
 
 }
 

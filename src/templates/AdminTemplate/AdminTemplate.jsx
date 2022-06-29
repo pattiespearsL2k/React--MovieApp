@@ -13,7 +13,8 @@ import { NavLink } from "react-router-dom";
 import _ from "lodash";
 import { history } from "../../App";
 import logo from "../../assets/images/logoM.png"
-import '../../assets/style/admin.css'
+import '../../assets/style/admin.css';
+import LogoutAdmin from "../../pages/logoutadmin/logoutAdmin"
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -25,14 +26,9 @@ const AdminTemplate = (props) => { //path, exact, Component
     const [collapsed, setCollapsed] = useState(false);
 
     const onCollapse = collapsed => {
-        // console.log(collapsed);
         setCollapsed(collapsed);
     };
 
-    // useEffect(() => {
-    //     window.scrollTo(0, 0);
-
-    // })
 
     // if (!localStorage.getItem(USER_LOGIN)) {
     //     alert('Bạn không có quyền truy cập vào trang này !')
@@ -93,8 +89,13 @@ const AdminTemplate = (props) => { //path, exact, Component
                             </Sider>
                             <Layout className="site-layout">
                                 <Header className="site-layout-background" style={{ padding: 0 }} >
-                                    <div className="text-right pr-10 pt-1">
-                                        {/* {operations} */}
+                                    <div className="name-admin account navright">
+                                        <div class="name">
+                                            {!!userLogin.name ?
+                                                <LogoutAdmin /> :
+                                                <></>
+                                            }
+                                        </div>
                                     </div>
                                 </Header>
                                 <Content style={{ margin: '0 16px' }}>

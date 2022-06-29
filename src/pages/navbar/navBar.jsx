@@ -170,7 +170,7 @@ function Navbar(props) {
                 <div className="header-main header-main-scroll">
                     <div className="header-top">
                         <div className={`hide-nav btn-search ${classes.search}`} >
-                            <div className={classes.searchIcon}>
+                            {/* <div className={classes.searchIcon}>
                                 <SearchIcon />
                             </div>
                             <InputBase
@@ -180,21 +180,13 @@ function Navbar(props) {
                                     input: classes.inputInput,
                                 }}
                                 inputProps={{ 'aria-label': 'search ' }}
-                            />
+                            /> */}
                         </div>
                         <div className="account hide-nav navright">
-                            {/* <Login /> */}
                             {!!userLogin.username ?
                                 <LogOut />
                                 :
                                 <>
-                                    {/* <Button onClick={showLogin}>
-                                        {t("Log in")}
-                                    </Button>
-                                    <Button onClick={showRegister}>
-                                        {t("Register")}
-                                    </Button> */}
-
                                     <Button variant="outlined" className="login" onClick={showLogin}>
                                         <div className='btn-login-flex'>
                                             Đăng nhập
@@ -207,7 +199,18 @@ function Navbar(props) {
                                             </div>
                                         </div>
                                     </Button>
-
+                                    <Button variant="outlined" className="login" onClick={showRegister}>
+                                        <div className='btn-login-flex'>
+                                            Đăng Ký
+                                            <span className="login-effect"></span>
+                                            <span className="login-effect"></span>
+                                            <span className="login-effect"></span>
+                                            <span className="login-effect"></span>
+                                            <div className="arrow">
+                                                {arrowRight}
+                                            </div>
+                                        </div>
+                                    </Button>
                                 </>
                             }
                             <div class="select">

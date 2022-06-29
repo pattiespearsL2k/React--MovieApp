@@ -3,6 +3,7 @@ import { Fragment, useEffect } from "react";
 import Navbar from "../../pages/navbar/navBar";
 import Footer from "../../pages/footer/footer";
 
+
 export const HomeTemplate = (props) => {
     return (
         <Route

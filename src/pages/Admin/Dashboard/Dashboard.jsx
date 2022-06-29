@@ -2,7 +2,7 @@
 import React, { Fragment, useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Table, Button, Input } from 'antd';
-import { EditOutlined, DeleteOutlined, SearchOutlined, CalendarOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, SearchOutlined, CalendarOutlined, UserOutlined} from '@ant-design/icons';
 import { NavLink, Redirect } from 'react-router-dom'
 import { history } from '../../../App';
 import { layDanhSachNDAction, xoaNDAction } from '../../../redux/actions/QuanLyNguoiDungAction';
@@ -106,7 +106,6 @@ export default function Dashboard(props) {
                             <EditOutlined />
                             <p>Sửa</p>
                         </NavLink>
-
                         <Popconfirm
                             className='action'
                             title="Bạn có chắc chắn xoá không?"
@@ -129,10 +128,12 @@ export default function Dashboard(props) {
 
     const onSearch = (value) => {
         dispatch(layDanhSachNDAction(value))
+        // alert("OK");
     };
 
     return (
         <div>
+          
             <h2>Quản Lý Người Dùng</h2>
             <button className='my-3 btn btn-primary btn-add-film' onClick={() => {
                 history.push('/admin/adduser')
@@ -144,6 +145,7 @@ export default function Dashboard(props) {
                 enterButton={<SearchOutlined />}
                 onSearch={onSearch}
             />
+            {/* <input type="text" onKeyDown={(value) => onSearch(value)} /> */}
             <Table columns={columns} dataSource={data} rowKey={"userId"} />
         </div>
     )

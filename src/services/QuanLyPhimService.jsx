@@ -24,7 +24,6 @@ export class QuanLyPhimService extends baseService {
         return this.post(`/api/QuanLyPhim/CapNhatPhim`, formData);
     }
 
-
     xoaPhim = (movieId) => {
         return this.delete(`/api/QuanLyPhim/XoaPhim?movieId=${movieId}`);
     }
