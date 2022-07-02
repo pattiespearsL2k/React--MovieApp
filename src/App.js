@@ -23,7 +23,10 @@ import AddNew from "./pages/Admin/Films/AddNew";
 import Edit from "./pages/Admin/Films/Edit";
 import Dashboard from "./pages/Admin/Dashboard/Dashboard";
 import Films from "./pages/Admin/Films/Films";
+import Film from "./pages/Manager/Film/Film.jsx";
 import History from './pages/History/History';
+import ManagerTemplate from './templates/ManagerTemplate/ManagerTemplate';
+
 
 
 export const history = createBrowserHistory();
@@ -47,6 +50,7 @@ function App() {
       <AdminTemplate path="/admin/films/edit/:id" component={Edit} />
       <AdminTemplate path="/admin/films/showtime/:id/:tenphim" component={ShowTime} />
       <AdminTemplate path="/admin/showtime" component={ShowTime} />
+      <ManagerTemplate path="/manager" component={Film} />
       <ScrollToTop />
     </Router>
   );

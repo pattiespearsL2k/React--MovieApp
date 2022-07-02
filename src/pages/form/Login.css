@@ -446,3 +446,28 @@ form .inp:focus {
 .form-container-login .social i {
 	margin-right: 4px;
 }
+
+.form-container-login .form-group.regi input {
+	height: 40px;
+}
+
+.form-container-login .form-group.regi label {
+	margin-top: 0px;
+}
+
+.login__btn .btn-register {
+    box-shadow: 0 0 0 3em var(--color-primary2) inset;
+    color: #fff;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    font-weight: 600;
+    transition: all 0.5s ease-in-out;
+    padding: 8px 45px 10px;
+    text-transform: uppercase;
+}
+
+.login__btn .btn-registerl:hover {
+	box-shadow: 0 0 0 1px var(--color-primary2) inset;
+	color: var(--color-primary2);
+}

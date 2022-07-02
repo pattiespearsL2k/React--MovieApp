@@ -88,6 +88,10 @@ export default function Login() {
             alert('Bạn là thành viên của Quản trị viên, trình duyệt sẽ chuyển sang trang quản trị')
             history.push("/admin/dashboard")
         }
+        if (userLogin.role === 'quantri') {
+            alert('Bạn là thành viên của Quản trị rạp, trình duyệt sẽ chuyển sang trang quản trị')
+            history.push("/manager")
+        }
 
     }, [userLogin])
 

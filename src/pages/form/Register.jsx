@@ -60,15 +60,15 @@ export default function Register() {
         }
     })
 
-    useEffect(() => {
-        if (!!thongTinDangKy.username) {
-            console.log("xyz")
-            dispatch({
-                type: 'CLOSE_MODAL',
-                isVisible: false,
-            })
-        }
-    }, [thongTinDangKy])
+    // useEffect(() => {
+    //     if (!!thongTinDangKy.username) {
+    //         console.log("xyz")
+    //         dispatch({
+    //             type: 'CLOSE_MODAL',
+    //             isVisible: false,
+    //         })
+    //     }
+    // }, [thongTinDangKy])
 
     return (
         <form onSubmit={(e) => {
@@ -76,7 +76,8 @@ export default function Register() {
             formik.handleSubmit(e);
         }}>
             <div className='form-container-login'>
-                <div className="form-group">
+                <h3>Đăng ký</h3>
+                <div className="form-group regi">
                     <label >Tài khoản</label>
                     <input onChange={formik.handleChange} onBlur={formik.handleBlur} type="text" name='username' className="form-control" />
                     {formik.touched.username && formik.errors.username ? (
@@ -85,35 +86,37 @@ export default function Register() {
 
                 </div>
 
-                <div className="form-group">
+                <div className="form-group regi">
                     <label>Email</label>
                     <input onChange={formik.handleChange} onBlur={formik.handleBlur} type="email" name='email' className="form-control" />
                     {formik.touched.email && formik.errors.email ? (
                         <div className='alert alert-danger'>{formik.errors.email}</div>
                     ) : null}
                 </div>
-                <div className="form-group">
+                <div className="form-group regi">
                     <label >Số điện thoại</label>
                     <input onChange={formik.handleChange} onBlur={formik.handleBlur} type="number" name='phoneNumber' className="form-control" />
                     {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
                         <div className='alert alert-danger'>{formik.errors.phoneNumber}</div>
                     ) : null}
                 </div>
-                <div className="form-group">
+                <div className="form-group regi">
                     <label>Họ và tên</label>
                     <input onChange={formik.handleChange} onBlur={formik.handleBlur} type="text" name='name' className="form-control" />
                     {formik.touched.name && formik.errors.name ? (
                         <div className='alert alert-danger'>{formik.errors.name}</div>
                     ) : null}
                 </div>
-                <div className="form-group">
+                <div className="form-group regi">
                     <label>Mật khẩu</label>
                     <input onChange={formik.handleChange} onBlur={formik.handleBlur} type="password" name='password' className="form-control" />
                     {formik.touched.password && formik.errors.password ? (
                         <div className='alert alert-danger'>{formik.errors.password}</div>
                     ) : null}
                 </div>
-                <ButtonStyled type="submit" className="btn btn-primary">Đăng Ký</ButtonStyled>
+                <div className="login__btn">
+                        <input className='btn-register' type="submit" value=" Đăng ký" />
+                    </div>
             </div>
 
         </form>

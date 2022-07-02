@@ -7,11 +7,14 @@ import { quanLyDatVeService } from '../../../services/QuanLyDatVeService';
 import { history } from '../../../App';
 import styled from 'styled-components';
 import { Grid } from "@mui/material"
+import { useDispatch, useSelector } from 'react-redux';
 import * as Yup from 'yup';
+import { displayLoadingAction, hideLoadingAction } from "../../../redux/actions/LoadingActions";
 import { ListItemSecondaryAction } from '@material-ui/core';
 import { uniqBy } from 'lodash'
 
 export default function ShowTime(props) {
+  const dispatch = useDispatch();
   const { Option } = Select;
   const formik = useFormik({
     initialValues: {
@@ -28,12 +31,14 @@ export default function ShowTime(props) {
     }),
     onSubmit: async (values) => {
       console.log('values', values);
-
+      dispatch(displayLoadingAction)
       try {
         let result = await quanLyDatVeService.taoLichChieu(values);
-        message.success(result.data)
-        history.push('/admin/films')
+        message.success("Tạo lịch chiếu thành công")
+        history.push('/manager')
+        dispatch(hideLoadingAction)
       } catch (err) {
+        dispatch(hideLoadingAction)
         console.log('err', err.reponse?.data);
       }
     }
