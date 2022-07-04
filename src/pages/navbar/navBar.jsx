@@ -6,12 +6,11 @@ import {
     AppBar, CssBaseline, InputBase,
     makeStyles, Tabs, Toolbar, useMediaQuery, useTheme
 } from "@material-ui/core";
-import SearchIcon from '@mui/icons-material/Search';
+
 import { alpha } from '@mui/material/styles';
 import { Button, Modal } from 'antd';
-import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from '../../assets/images/logoM.png';
 import Login from '../form/Login';
 import Register from '../form/Register';
@@ -86,7 +85,6 @@ const useStyles = makeStyles(() => ({
 
 
 function Navbar(props) {
-    const { t, i18n } = useTranslation()
 
     const dispatch = useDispatch()
     const { Component, isVisible } = useSelector(state => state.ModalReducer)
@@ -119,10 +117,6 @@ function Navbar(props) {
     // Select languages
     const [age, setAge] = useState('');
 
-    const handleChange = (event) => {
-        setAge(event.target.value);
-        i18n.changeLanguage(value)
-    };
 
     // Change when scroll
     const [header, setHeader] = useState("header");
@@ -154,7 +148,6 @@ function Navbar(props) {
 
     // Handle anything
     const [value, setValue] = useState();
-    const history = useHistory();
 
     const classes = useStyles();
     const theme = useTheme();
@@ -168,59 +161,6 @@ function Navbar(props) {
                     <img className="logoWeb logo-scroll hide-nav" src={logo} alt="logo" />
                 </NavLink>
                 <div className="header-main header-main-scroll">
-                    <div className="header-top">
-                        <div className={`hide-nav btn-search ${classes.search}`} >
-                            {/* <div className={classes.searchIcon}>
-                                <SearchIcon />
-                            </div>
-                            <InputBase
-                                placeholder="Tìm kiếm..."
-                                classes={{
-                                    root: classes.inputRoot,
-                                    input: classes.inputInput,
-                                }}
-                                inputProps={{ 'aria-label': 'search ' }}
-                            /> */}
-                        </div>
-                        <div className="account hide-nav navright">
-                            {!!userLogin.username ?
-                                <LogOut />
-                                :
-                                <>
-                                    <Button variant="outlined" className="login" onClick={showLogin}>
-                                        <div className='btn-login-flex'>
-                                            Đăng nhập
-                                            <span className="login-effect"></span>
-                                            <span className="login-effect"></span>
-                                            <span className="login-effect"></span>
-                                            <span className="login-effect"></span>
-                                            <div className="arrow">
-                                                {arrowRight}
-                                            </div>
-                                        </div>
-                                    </Button>
-                                    <Button variant="outlined" className="login" onClick={showRegister}>
-                                        <div className='btn-login-flex'>
-                                            Đăng Ký
-                                            <span className="login-effect"></span>
-                                            <span className="login-effect"></span>
-                                            <span className="login-effect"></span>
-                                            <span className="login-effect"></span>
-                                            <div className="arrow">
-                                                {arrowRight}
-                                            </div>
-                                        </div>
-                                    </Button>
-                                </>
-                            }
-                            <div class="select">
-                                <select>
-                                    <option selected value="1">VN</option>
-                                    <option value="3">EN</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
                     <div className="header-bottom">
                         {isMobile ? (
                             <DrawerComponent />
@@ -232,34 +172,66 @@ function Navbar(props) {
                                     <NavLink className="nav-scroll none-pad" to="/schedule" onClick={handleClick}>LỊCH CHIẾU</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink className="nav-scroll" to="/price" >GIÁ VÉ</NavLink>
+                                    <NavLink className="nav-scroll" to="/film" >PHIM</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink className="nav-scroll" to="/event" >KHUYẾN MÃI</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink className="nav-scroll" to="/contact" >LIÊN HỆ</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink className="nav-scroll" to="/blog" >BLOG PHIM </NavLink>
+                                    <NavLink className="nav-scroll " to="/event" >KHUYẾN MÃI</NavLink>
                                 </li>
                                 <li>
                                     <NavLink className="nav-scroll none" to="/member" >THÀNH VIÊN</NavLink>
                                 </li>
+
                             </nav>
 
                         )}
                     </div>
+                    <div className="header-top">
+                        <div className={`hide-nav btn-search ${classes.search}`} >
+                        </div>
+                        <div className="account  navright">
+                            {!!userLogin.username ?
+                                <LogOut />
+                                :
+                                <>
+                                    <Button variant="outlined" className="login register" onClick={showRegister}>
+                                        <div className='btn-login-flex'>
+                                            Đăng Ký
+                                            <span className="login-effect"></span>
+                                            <span className="login-effect"></span>
+                                            <span className="login-effect"></span>
+                                            <span className="login-effect"></span>
+
+                                        </div>
+                                    </Button>
+                                    <Button variant="outlined" className="login loginn" onClick={showLogin}>
+                                        <div className='btn-login-flex'>
+                                            Đăng nhập
+                                            <span className="login-effect"></span>
+                                            <span className="login-effect"></span>
+                                            <span className="login-effect"></span>
+                                            <span className="login-effect"></span>
+                                            <div className="arrow">
+                                                {arrowRight}
+                                            </div>
+                                        </div>
+
+                                    </Button>
+
+                                </>
+                            }
+                        </div>
+                        <Modal
+                            title={title}
+                            visible={isVisible}
+                            onCancel={handleCancel}
+                            footer={null}
+                        >
+                            {Component}
+                        </Modal>
+                    </div>
                 </div>
             </Toolbar>
-            <Modal
-                title={title}
-                visible={isVisible}
-                onCancel={handleCancel}
-                footer={null}
-            >
-                {Component}
-            </Modal>
+
         </AppBar>
     );
 }

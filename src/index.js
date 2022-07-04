@@ -9,6 +9,7 @@ import { DOMAIN } from './util/settings/config';
 //Cấu hình realtime (websocket với signalR)
 import * as signalR from '@aspnet/signalr'
 
+
 //Đoạn code để kết nối đến server lắng nghe sự kiện từ server
 // export const connection = new signalR.HubConnectionBuilder().withUrl(`${DOMAIN}/DatVeHub`).configureLogging(signalR.LogLevel.Information).build();
 

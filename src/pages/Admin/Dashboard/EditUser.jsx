@@ -1,55 +1,54 @@
-import React, { useEffect, useState } from 'react';
 import {
-  Form,
-  Input,
-  Button,
-  Select,
+  Button, Form,
+  Input
 } from 'antd';
+import { useEffect, useState } from 'react';
 
 import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
-import { useDispatch } from 'react-redux'
 // import { GROUPID } from '../../../util/settings/config';
-import { LockOutlined, MailOutlined, PhoneOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons';
+import { MailOutlined, PhoneOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons';
 
-import { CapNhatThongTinNguoiDungAction, layThongTinNguoiDungAction } from '../../../redux/actions/QuanLyNguoiDungAction';
 import { useSelector } from 'react-redux';
+import { CapNhatThongTinNguoiDungAction, layThongTinNguoiDungAction } from '../../../redux/actions/QuanLyNguoiDungAction';
 
-import '../../../assets/style/addUser.css'
 import styled from 'styled-components';
+import '../../../assets/style/addUser.css';
 
 
 const EditUser = (props) => {
   const [componentSize, setComponentSize] = useState('default');
-  const { thongTinND } = useSelector(state => state.QuanLyNguoiDungReducer);
+  const { thongTinNguoiDung } = useSelector(state => state.QuanLyNguoiDungReducer);
   const dispatch = useDispatch();
   const { mangND } = useSelector(state => state.QuanLyNguoiDungReducer);
-  
-  const userMail = mangND.map(value=>{return value.email}).filter(item => item !== thongTinND.email)
+
+  const userMail = mangND.map(value => { return value.email }).filter(item => item !== thongTinNguoiDung.email)
 
   useEffect(() => {
-    let { taiKhoan } = props.match.params;
-    dispatch(layThongTinNguoiDungAction(taiKhoan));
+    let { username } = props.match.params;
+    dispatch(layThongTinNguoiDungAction(username));
   }, [])
 
 
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      taiKhoan: thongTinND.taiKhoan,
-      hoTen: thongTinND.hoTen,
-      email: thongTinND.email,
-      soDT: thongTinND.soDT,
-      matKhau: thongTinND.matKhau,
-      maLoaiNguoiDung: thongTinND.maLoaiNguoiDung,
+      username: thongTinNguoiDung.username,
+      name: thongTinNguoiDung.name,
+      email: thongTinNguoiDung.email,
+      phoneNumber: thongTinNguoiDung.phoneNumber,
+      roleId: thongTinNguoiDung.roleId,
+      gender: ""
     },
     validationSchema: Yup.object({
       email: Yup.string()
-      .email('Email không đúng định dạng').trim('Email không được để trống').required('Email không được để trống').notOneOf(userMail, 'Email bị trùng trong mã nhóm GP03'),
-      
+        .email('Email không đúng định dạng').trim('Email không được để trống').required('Email không được để trống').notOneOf(userMail, 'Email bị trùng trong mã nhóm GP03'),
+
     }),
     onSubmit: values => {
       // values.maNhom = GROUPID
+      console.log(values)
       const action = CapNhatThongTinNguoiDungAction(values);
       dispatch(action);
     },
@@ -61,10 +60,8 @@ const EditUser = (props) => {
 
   return (
 
-    <Form
+    <Form className='add-user-form'
       onSubmitCapture={formik.handleSubmit}
-      labelCol={{ span: 4 }}
-      wrapperCol={{ span: 8 }}
       layout="horizontal"
       initialValues={{
         size: componentSize,
@@ -72,10 +69,10 @@ const EditUser = (props) => {
       onValuesChange={onFormLayoutChange}
       size={componentSize}
     >
-      <h3>Sửa thông tin tài khoản <span className='text-primary'>{thongTinND.taiKhoan}</span> </h3>
+      <h3>Sửa thông tin tài khoản <span className='text-primary'>{thongTinNguoiDung.username}</span> </h3>
 
       <Form.Item label="Tài Khoản" className='mt-4'>
-        <Input name='taiKhoan' disabled  value={formik.values.taiKhoan} prefix={<UserAddOutlined />} allowClear />
+        <Input name='username' disabled value={formik.values.username} prefix={<UserAddOutlined />} allowClear />
       </Form.Item>
       <Form.Item label="Họ Tên"
         rules={[
@@ -93,52 +90,9 @@ const EditUser = (props) => {
           }
         ]}
         hasFeedback >
-        <Input name='hoTen' value={formik.values.hoTen} onChange={formik.handleChange} allowClear prefix={<UserOutlined />} />
+        <Input name='name' value={formik.values.name} onChange={formik.handleChange} allowClear prefix={<UserOutlined />} />
       </Form.Item>
-      <Form.Item label="Mật Khẩu" 
-        rules={[
-          {
-            required: true,
-            message: 'Mật khẩukhông được để trống',
-          },
-          {
-            whitespace: true,
-            message: 'Mật khẩu không được để trống',
-          },
-          {
-            min: 6,
-            message: 'Mật khẩu ít nhất 6 kí tự',
-          }
-        ]}
-        hasFeedback>
-        <Input.Password name='matKhau' value={formik.values.matKhau} onChange={formik.handleChange} type='password' allowClear prefix={< LockOutlined />} />
-      </Form.Item>
-      <Form.Item label="Nhập lại Mật Khẩu"  
-        rules={[
-          {
-            required: true,
-            message: 'Mật khẩukhông được để trống',
-          },
-          {
-            whitespace: true,
-            message: 'Mật khẩu không được để trống'
-          },
-          {
-            min: 6,
-            message: 'Mật khẩu ít nhất 6 kí tự'
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue('matKhau') === value) {
-                return Promise.resolve()
-              }
-              return Promise.reject('Mật khẩu không trùng')
-            }
-          })
-        ]}
-        hasFeedback>
-        <Input.Password name='matKhau' value={formik.values.matKhau} onChange={formik.handleChange} type='password' allowClear prefix={< LockOutlined />} placeholder='Nhập lại Mật Khẩu' />
-      </Form.Item>
+
       <Form.Item label="Email"
         rules={[
           {
@@ -152,10 +106,10 @@ const EditUser = (props) => {
 
         ]}
         hasFeedback>
-        <Input name='email'value={formik.values.email} allowClear prefix={<MailOutlined />} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
-        { formik.touched.email && formik.errors.email 
-        ? (<div className='alert alert-danger'>{formik.errors.email}</div>) 
-        : null}
+        <Input name='email' value={formik.values.email} allowClear prefix={<MailOutlined />} onChange={formik.handleChange} onBlur={formik.handleBlur} />
+        {formik.touched.email && formik.errors.email
+          ? (<div className='alert alert-danger'>{formik.errors.email}</div>)
+          : null}
       </Form.Item>
       <Form.Item label="Số điện thoại"
         rules={[
@@ -173,26 +127,10 @@ const EditUser = (props) => {
           }
         ]}
         hasFeedback >
-        <Input name='soDT' value={formik.values.soDT} onChange={formik.handleChange}  allowClear prefix={<PhoneOutlined />} />
+        <Input name='phoneNumber' value={formik.values.phoneNumber} onChange={formik.handleChange} allowClear prefix={<PhoneOutlined />} />
       </Form.Item>
-      <Form.Item label="Loại người dùng" onChange={formik.handleChange}
-        rules={[
-          {
-            required: true,
-            message: 'Bạn chưa chọn loại người dùng'
-          }
-        ]}
-        hasFeedback>
-        <Select name='maLoaiNguoiDung'
-          onChange={(value) => {
-            formik.setFieldValue("maLoaiNguoiDung", value)
-          }} value={formik.values.maLoaiNguoiDung}>
-          <Select.Option value='KhachHang'>Khách Hàng</Select.Option>
-          <Select.Option value='QuanTri'>Quản Trị</Select.Option>
-        </Select>
-      </Form.Item>
-      <Form.Item label="Tác Vụ">
-        <ButtonStyled block htmlType='submit' type='primary' >Cập nhật người dùng</ButtonStyled>
+      <Form.Item>
+        <button type="submit" className="btn-active-add-after">Cập nhật</button>
       </Form.Item>
     </Form>
   );

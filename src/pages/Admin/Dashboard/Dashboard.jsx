@@ -1,13 +1,12 @@
 
-import React, { Fragment, useEffect, useRef, useState } from 'react'
+import { DeleteOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons';
+import { Input, Popconfirm, Table } from 'antd';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Table, Button, Input } from 'antd';
-import { EditOutlined, DeleteOutlined, SearchOutlined, CalendarOutlined, UserOutlined} from '@ant-design/icons';
-import { NavLink, Redirect } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
 import { history } from '../../../App';
 import { layDanhSachNDAction, xoaNDAction } from '../../../redux/actions/QuanLyNguoiDungAction';
-import styled from 'styled-components';
-import { message, Popconfirm } from 'antd';
 
 
 
@@ -77,19 +76,7 @@ export default function Dashboard(props) {
             dataIndex: 'phoneNumber',
             width: "15%"
         },
-        // {
-        //     title: 'Loại Người Dùng',
-        //     dataIndex: 'roleId',
-        //     width: "10%",
-        //     sorter: (a, b) => {
-        //         let loaiA = a.userId
-        //         let loaiB = b.userId
-        //         if (loaiA > loaiB) {
-        //             return 1;
-        //         }
-        //         return -1
-        //     },
-        // },
+
 
         {
             title: 'Hành Động',

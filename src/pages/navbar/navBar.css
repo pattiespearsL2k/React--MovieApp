@@ -17,11 +17,12 @@ body {
 .header-top {
     display: flex;
     margin-top: 10px;
-    justify-content: space-between;
+    margin-left: 80px;
 }
 
 .header-bottom {
     margin-top: 10px;
+ 
 }
 
 .header-top .MuiInputBase-root {
@@ -30,8 +31,7 @@ body {
 
 .header-main {
     display: flex;
-    flex-direction: column;
-    width: 80%;
+    justify-content: space-around;
 }
 
 .header-bottom nav li {
@@ -162,6 +162,8 @@ img.logoWeb {
     align-items: center;
     display: flex;
     font-family: "Saira Semi Condensed", sans-serif;
+    /* margin-left:80px; */
+    float: right;
 }
 
 .account i {
@@ -222,12 +224,13 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-colorInherit {
     color: #333;
     transform: translateY(0);
     transition: transform 0.6s ease;
+    z-index: 90;
 }
 
 .MuiPaper-root.header2 {
     position: fixed;
     background-color: rgb(255, 255, 255);
-    color: #000;
+    color: #000 !important;
     transform: translateY(20);
     transition: all 1s ease;
     height: 60px;
@@ -242,12 +245,16 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-colorInherit {
     display: none;
 }
 
+.header2 .account{
+    color:#000;
+}
+
 .header2 .header-main-scroll {
     width: 100%;
 }
 
 .header2 .nav-scroll {
-    color: #000;
+    color: #000 !important;
 }
 .MuiPaper-root.header-click {
     position: fixed;
@@ -268,6 +275,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-colorInherit {
     display: flex;
     align-items: center;
     position: relative;
+    margin-left: 100px;
 }
 
 .header__navbar-user:hover .header__navbar-user-menu {
@@ -354,8 +362,7 @@ button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-colorInherit {
 
 .account .login {
     color: #000 !important;
-    border-radius: 0.3em !important;
-    width: 10em;
+    border-radius: 0.3em;
     height: 2.35em;
     text-transform: uppercase;
     text-align: center;
@@ -470,6 +477,17 @@ option {
 .select:hover::after {
     color: #000;
 }
+
+.header-top .account .register{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.header-top .account .loginn{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
 
 @media (min-width: 600px) {
     .MuiTab-root {

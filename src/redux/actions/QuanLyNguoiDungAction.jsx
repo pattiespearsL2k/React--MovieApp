@@ -106,7 +106,7 @@ export const layThongTinNguoiDungAction = () => {
     return async (dispatch) => {
         try {
             const result = await quanLyNguoiDungService.layThongTinNguoiDung();
-            console.log("result", result)
+            // console.log("result", result)
             if (result.status === 200) {
                 dispatch({
                     type: SET_THONG_TIN_NGUOI_DUNG,
@@ -129,6 +129,7 @@ export const CapNhatThongTinNguoiDungAction = (formData) => {
     return async (dispatch) => {
         try {
             let result = await quanLyNguoiDungService.capNhatThongTinNguoiDung(formData);
+            console.log("result update", result);
             message.success('Cập nhật người dùng thành công')
             history.push('/admin')
             dispatch(layDanhSachNDAction())

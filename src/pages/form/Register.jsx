@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { dangKyAction, dangNhapAction } from '../../redux/actions/QuanLyNguoiDungAction';
 import styled from 'styled-components';
-import { layDanhSachNDAction } from '../../redux/actions/QuanLyNguoiDungAction';
+import * as Yup from 'yup';
+import { dangKyAction, layDanhSachNDAction } from '../../redux/actions/QuanLyNguoiDungAction';
 
 export default function Register() {
 

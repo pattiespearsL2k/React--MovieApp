@@ -29,7 +29,7 @@ export class QuanLyNguoiDungService extends baseService {
     }
 
     capNhatThongTinNguoiDung = (formData) => {
-        return this.post(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, formData)
+        return this.put(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, formData)
     };
 
     xoaND = (username) => {

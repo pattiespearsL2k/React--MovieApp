@@ -16,27 +16,20 @@ export default function LogOut() {
     history.push('/')
   }
 
-  const handleHistory = () => {
-    history.push({ pathname: "/lich-su-dat-ve" });
-    $(window).scrollTop(0);
-  }
 
   return (
 
-    <div class="header__navbar--item header__navbar-user">
+    <div className="header__navbar--item header__navbar-user">
       <img src="https://cdn4.vectorstock.com/i/1000x1000/62/48/green-round-glossy-login-icon-vector-2976248.jpg"
-        alt="" class="header__navbar-user-img" />
+        alt="" className="header__navbar-user-img" />
       <UserOutlined className="buttonAccount" />
-      <span class="header__navbar-user-name">{userLogin.username}</span>
-      <ul class="header__navbar-user-menu">
-        <li class="header__navbar-user-item">
-          <Link class="header__navbar-user-item-link" href="">Tài khoản của tôi</Link>
+      <span className="header__navbar-user-name">{userLogin.username}</span>
+      <ul className="header__navbar-user-menu">
+        <li className="header__navbar-user-item">
+          <NavLink className="header__navbar-user-item-link" to="/history">Lịch sử đặt vé</NavLink>
         </li>
-        <li class="header__navbar-user-item">
-          <NavLink class="header__navbar-user-item-link" to="/history">Lịch sử đặt vé</NavLink>
-        </li>
-        <li class=" header__navbar-user-item header__navbar-user-item--separate  ">
-          <Link class="header__navbar-user-item-link" href="" onClick={handleLogout}>Đăng xuất</Link>
+        <li className=" header__navbar-user-item header__navbar-user-item--separate  ">
+          <Link className="header__navbar-user-item-link" href="" onClick={handleLogout}>Đăng xuất</Link>
         </li>
       </ul>
     </div>

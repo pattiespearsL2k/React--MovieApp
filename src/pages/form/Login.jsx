@@ -1,38 +1,34 @@
-import React, { useEffect, useState } from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { Button, Form } from 'react-bootstrap';
-import { Modal } from 'antd';
-import { dangNhapAction } from '../../redux/actions/QuanLyNguoiDungAction';
-import { useDispatch, useSelector } from 'react-redux';
-import { history } from '../../App';
-import "./Login.css"
-import classNames from 'classnames';
-import { useForm } from "react-hook-form";
+import { UserAddOutlined } from '@ant-design/icons';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Modal } from 'antd';
+import { useFormik } from 'formik';
+import { useEffect, useState } from 'react';
+import { Form } from 'react-bootstrap';
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from "react-router-dom";
+import * as Yup from 'yup';
 import { validationSchema } from "../../helper/validHelper";
-import { NavLink } from "react-router-dom";
-import { LockOutlined, MailOutlined, PhoneOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons';
-import { Redirect } from "react-router";
-import Register from './Register';
-
+import { dangNhapAction } from '../../redux/actions/QuanLyNguoiDungAction';
+import "./Login.css";
 
 export default function Login() {
     const [isModalVisible, setIsModalVisible] = useState(false);
+    let history = useHistory();
 
     const showModal = () => {
-      setIsModalVisible(true);
-    };
-  
-    const handleOk = () => {
-      setIsModalVisible(false);
-    };
-  
-    const handleCancel = () => {
-      setIsModalVisible(false);
+        setIsModalVisible(true);
     };
 
-   
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
+
     // const showRegister = () => {
     //     setTitle("Register");
     //     dispatch({
@@ -77,6 +73,8 @@ export default function Login() {
         }
     })
 
+
+
     useEffect(() => {
         if (!!userLogin.username) {
             dispatch({
@@ -85,12 +83,20 @@ export default function Login() {
             })
         };
         if (userLogin.role === 'admin') {
-            alert('Bạn là thành viên của Quản trị viên, trình duyệt sẽ chuyển sang trang quản trị')
-            history.push("/admin/dashboard")
+            Modal.confirm({
+                content: 'Bạn có muốn chuyển đến trang admin không?',
+                onOk() {
+                    history.push("/admin")
+                }
+            })
         }
         if (userLogin.role === 'quantri') {
-            alert('Bạn là thành viên của Quản trị rạp, trình duyệt sẽ chuyển sang trang quản trị')
-            history.push("/manager")
+            Modal.confirm({
+                content: 'Bạn có muốn chuyển đến trang quản trị không?',
+                onOk() {
+                    history.push("/manager")
+                }
+            })
         }
 
     }, [userLogin])
@@ -106,32 +112,15 @@ export default function Login() {
 
 
             }}>
-                {/* <div id="container-fluid"
-                className={classNames('login-form container-fluid', { 'right-panel-active': isContainerActive })}
-            >
-                <div className="form-container sign-in-container">
-                    <h1>Đăng nhập</h1>
-                    <Form.Control onChange={formik.handleChange} placeholder="Tài khoản" onBlur={formik.handleBlur} type="text" name='username' className="form-control" />
-                    {formik.touched.username && formik.errors.username ? (
-                        <div className='alert alert-danger'>{formik.errors.username}</div>
-                    ) : null}
-                    <Form.Control onChange={formik.handleChange} placeholder="Mật khẩu" onBlur={formik.handleBlur} type="password" name='password' className="form-control" />
-                    {formik.touched.password && formik.errors.password ? (
-                        <div className='alert alert-danger'>{formik.errors.password}</div>
-                    ) : null}
-                    <div className="login__btn">
-                        <Form.Control type="submit" value=" Đăng nhập" />
-                    </div>
-                </div>
-            </div> */}
+
                 <div className="form-container-login">
                     <h3>Đăng nhập</h3>
-                    <label for="username">Tài khoản</label>
+                    <label htmlFor="username">Tài khoản</label>
                     <Form.Control prefix={<UserAddOutlined />} allowClear onChange={formik.handleChange} onBlur={formik.handleBlur} type="text" name='username' className="form-control" />
                     {formik.touched.username && formik.errors.username ? (
                         <div className='alert alert-danger'>{formik.errors.username}</div>
                     ) : null}
-                    <label for="password">Mật khẩu</label>
+                    <label htmlFor="password">Mật khẩu</label>
                     <Form.Control onChange={formik.handleChange} onBlur={formik.handleBlur} type="password" name='password' className="form-control" />
                     {formik.touched.password && formik.errors.password ? (
                         <div className='alert alert-danger'>{formik.errors.password}</div>
@@ -146,17 +135,7 @@ export default function Login() {
 
                 </div>
             </Form>
-            {/* <Modal
-                title={title}
-                visible={isVisible}
-                onCancel={handleCancel}
-                footer={null}
-            >
-                {Component}
-            </Modal> */}
-            <Modal title="Basic Modal" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-               <Register/>
-            </Modal>
+
         </div>
     )
 }

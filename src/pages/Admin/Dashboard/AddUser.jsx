@@ -33,7 +33,7 @@ const AddUser = () => {
       name: '',
       email: '',
       phoneNumber: '',
-      roleId: '',
+      roleId: '3',
       password: '',
 
     },
@@ -129,23 +129,6 @@ const AddUser = () => {
         hasFeedback >
         <Input name='phoneNumber' maxLength={11} allowClear prefix={<PhoneOutlined />} />
       </Form.Item>
-      <Form.Item label="Loại người dùng" name='roleId' onChange={formik.handleChange}
-        rules={[
-          {
-            required: true,
-            message: 'Bạn chưa chọn loại người dùng'
-          }
-        ]}
-        hasFeedback>
-        <Select name='roleId'
-          defaultValue="Khách Hàng"
-          onChange={(value) => {
-            formik.setFieldValue("roleId", value)
-          }}>
-          <Option value='1'>Khách Hàng</Option>
-          <Option value='2'>Quản Trị</Option>
-        </Select>
-      </Form.Item>
       <Form.Item label="Mật Khẩu" name='password' onChange={formik.handleChange}
         rules={[
           {
@@ -191,11 +174,9 @@ const AddUser = () => {
         hasFeedback>
         <Input.Password name='password' type='password' allowClear prefix={< LockOutlined />} />
       </Form.Item>
-
       <Form.Item>
         <button type="submit" className="btn-active-add-after">Thêm người dùng</button>
       </Form.Item>
-
     </Form>
   );
 };

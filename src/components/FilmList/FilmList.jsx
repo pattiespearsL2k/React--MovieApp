@@ -6,19 +6,40 @@ import { Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_FILM_DANG_CHIEU, SET_FILM_SAP_CHIEU } from '../../redux/actions/types/QuanLyPhimType'
 import "./FilmList.css"
+import { layDanhSachPhimAction } from "../../redux/actions/QuanLyPhimActions";
 
 
 const FilmList = (props) => {
 
   const dispatch = useDispatch();
-  const { nowShowing, comingSoon } = useSelector(state => state.QuanLyPhimReducer);
-  const [styleDang, setStyleDang] = useState(true);
+  const { nowShowing, comingSoon, isAll } = useSelector(state => state.QuanLyPhimReducer);
+  const [styleDang, setStyleDang] = useState(false);
   const [styleSap, setStyleSap] = useState(false);
+  const [styleAll, setStyleAll] = useState(true);
 
 
   return (
     <div className="film-list">
       <div className="div-btn-film">
+      <Button className="btn-film"
+          style={
+            styleAll === isAll
+              ? {
+                color: "#fc9a07",
+                borderBottom: "#fc9a07 solid 2px",
+                background: "rgb(20, 20, 20)"
+              }
+              : {}
+          }
+          onClick={() => {
+            dispatch(layDanhSachPhimAction())
+            setStyleDang(false);
+            setStyleSap(false);
+            setStyleAll(true)
+          }}
+        >
+          TẤT CẢ CÁC PHIM
+        </Button>
         <Button className="btn-film"
           style={
             styleDang === nowShowing
@@ -36,7 +57,7 @@ const FilmList = (props) => {
             dispatch(action);
             setStyleDang(true);
             setStyleSap(false);
-            console.log(props.arrPhim)
+            setStyleAll(false)
           }}
         >
           PHIM ĐANG CHIẾU
@@ -59,7 +80,6 @@ const FilmList = (props) => {
             dispatch(action);
             setStyleSap(true);
             setStyleDang(false);
-            console.log(props.arf)
           }}
         >
           PHIM SẮP CHIẾU

@@ -1,26 +1,17 @@
-import React, { useEffect, useState } from 'react';
 import {
-  Form,
-  Input,
-  Button,
-  Radio,
-  Select,
-  Cascader,
-  DatePicker,
-  InputNumber,
-  TreeSelect,
-  Switch,
+  DatePicker, Form,
+  Input, InputNumber,
+  Switch
 } from 'antd';
 import { useFormik } from 'formik';
 import moment from 'moment';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { capNhatPhimUploadAction, layThongTinPhimAction } from '../../../redux/actions/QuanLyPhimActions';
 
 const Edit = (props) => {
 
   const { thongTinPhim } = useSelector(state => state.QuanLyPhimReducer);
-  console.log('thongTinPhim', thongTinPhim);
   const [imgSrc, setImgSrc] = useState('');
   const dispatch = useDispatch();
 
@@ -52,31 +43,38 @@ const Edit = (props) => {
 
     onSubmit: (values) => {
       console.log('values', values);
+      values.releaseDate = moment(values.releaseDate).format('DD/MM/YYYY');
       // values.maNhom = GROUPID;
       //Tạo đối tượng formdata => Đưa giá trị values từ formik vào formdata
       let formData = new FormData();
       for (let key in values) {
-        // if (key !== 'image') {
-        formData.append(key, values[key]);
-        // } else {
-        //   if (values.image !== null) {
-        //     formData.append('File', values.image, values.image.name);
-        //   }
-        // }
+        if (key !== 'image') {
+          formData.append(key, values[key]);
+        } else {
+          if (values.image !== null) {
+            formData.append('File', values.image, values.image.name);
+          }
+        }
       }
       //Cập nhật phim upload hình
       dispatch(capNhatPhimUploadAction(formData));
 
     }
   })
+  // const [value, setValue] = useState(1);
 
+  // const onChange = (e) => {
+  //   console.log('radio checked', e.target.value);
+  //   setValue(e.target.value);
+  // };
+
+ 
   const handleChangeDatePicker = (value) => {
-    // let releaseDate = moment(value);
-    let releaseDate = moment(value).utcOffset('+0700').format('YYYY-MM-DD HH:mm')
+    let releaseDate = value;
     formik.setFieldValue('releaseDate', releaseDate);
+    console.log(releaseDate)
 
   }
-
   const handleChangeSwitch = (name) => {
     return (value) => {
       formik.setFieldValue(name, value)
@@ -99,7 +97,6 @@ const Edit = (props) => {
       let reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = (e) => {
-        // console.log(e.target.result);
         setImgSrc(e.target.result);//Hình base 64
       }
 
@@ -153,20 +150,19 @@ const Edit = (props) => {
         </div>
         <div className='form-flex-display'>
           <Form.Item label="Sắp chiếu">
-            <Switch onChange={handleChangeSwitch('comingSoon')} checked={formik.values.comingSoon} />
+            <Switch onChange={handleChangeSwitch('comingSoon')} checked={formik.values.comingSoon} disabled={formik.values.nowShowing}/>
           </Form.Item>
           <Form.Item label="Số sao">
             <InputNumber onChange={handleChangeInputNumber('rating')} min={1} max={10} value={formik.values.rating} />
           </Form.Item>
         </div>
-
         <Form.Item label="Hình ảnh">
-          <input type="file" onChange={handleChangeFile} accept="image/png, image/jpeg,image/gif,image/png" />
+          <input name="image" type="file" onChange={handleChangeFile} accept="image/png, image/jpeg,image/gif,image/png" />
           <br />
-          <img width={100} height={100} src={imgSrc === '' ? thongTinPhim.hinhAnh : imgSrc} />
+          <img width={50} height={50} src={imgSrc === '' ? thongTinPhim.image : imgSrc} />
         </Form.Item>
-        <Form.Item label="Tác vụ">
-          <button type="submit" className="bg-blue-300 text-white p-2">Cập nhật</button>
+        <Form.Item>
+          <button type="submit" className="btn-active-add-after">Cập nhật</button>
         </Form.Item>
       </Form>
 

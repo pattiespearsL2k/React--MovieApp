@@ -29,35 +29,10 @@ const AdminTemplate = (props) => { //path, exact, Component
         setCollapsed(collapsed);
     };
 
-
-    // if (!localStorage.getItem(USER_LOGIN)) {
-    //     alert('Bạn không có quyền truy cập vào trang này !')
-    //     return <Redirect to='/' />
-    // }
-
-    // if (userLogin.role !== 'admin') {
-    //     alert('Bạn không có quyền truy cập vào trang này !')
-    //     return <Redirect to='/' />
-
-    // }
-
-    // const operations = <Fragment>
-    //     {!_.isEmpty(userLogin) ? <Fragment> <button onClick={() => {
-    //         history.push('/profile')
-    //     }}> <div style={{ width: 50, height: 50, display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="text-2xl ml-5 rounded-full bg-red-200">{userLogin.taiKhoan.substr(0, 1)}</div>Hello ! {userLogin.taiKhoan}</button> <button onClick={() => {
-    //         localStorage.removeItem(USER_LOGIN);
-    //         localStorage.removeItem(TOKEN);
-    //         history.push('/home');
-    //         window.location.reload();
-    //     }} className="text-blue-800">Đăng xuất</button> </Fragment> : ''}
-    // </Fragment>
-
-
     return (
         <Route
             exact path={props.path}
             render={(propsRoute) => { //props.location,props.history,props.match
-
                 return (
                     <Fragment>
                         <Layout className="admin" style={{ minHeight: '100vh' }}>
@@ -82,15 +57,12 @@ const AdminTemplate = (props) => { //path, exact, Component
                                             <NavLink to='/admin/films/addnew'>Add film</NavLink>
                                         </Menu.Item>
                                     </Menu.SubMenu>
-                                    <Menu.Item key="3" icon={<DesktopOutlined />}>
-                                        <NavLink to="/admin/showtimes">Lịch chiếu</NavLink>
-                                    </Menu.Item>
                                 </Menu>
                             </Sider>
                             <Layout className="site-layout">
                                 <Header className="site-layout-background" style={{ padding: 0 }} >
                                     <div className="name-admin account navright">
-                                        <div class="name">
+                                        <div className="name">
                                             {!!userLogin.name ?
                                                 <LogoutAdmin /> :
                                                 <></>

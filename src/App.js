@@ -10,11 +10,9 @@ import ScrollToTop from "react-scroll-to-top";
 import Schedule from './components/Schedule/Schedule.jsx';
 import FilmDetail from './components/FilmDetail/FilmDetail.jsx';
 import Promotion from './pages/promotion/Promotion';
-import FilmList from './components/FilmList/FilmList';
 import Booking from './components/Booking/Booking';
 import Loading from './components/Loading/Loading';
 import Member from './pages/member/Member';
-import Login from './pages/form/Login';
 import AdminTemplate from "./templates/AdminTemplate/AdminTemplate";
 import AddUser from "./pages/Admin/Dashboard/AddUser";
 import EditUser from "./pages/Admin/Dashboard/EditUser";
@@ -26,6 +24,7 @@ import Films from "./pages/Admin/Films/Films";
 import Film from "./pages/Manager/Film/Film.jsx";
 import History from './pages/History/History';
 import ManagerTemplate from './templates/ManagerTemplate/ManagerTemplate';
+import ShowtimeManager from './pages/Manager/Showtime/ShowTime.jsx'
 
 
 
@@ -51,6 +50,7 @@ function App() {
       <AdminTemplate path="/admin/films/showtime/:id/:tenphim" component={ShowTime} />
       <AdminTemplate path="/admin/showtime" component={ShowTime} />
       <ManagerTemplate path="/manager" component={Film} />
+      <ManagerTemplate path="/manager/showtime/:id/:tenphim" component={ShowtimeManager} />
       <ScrollToTop />
     </Router>
   );

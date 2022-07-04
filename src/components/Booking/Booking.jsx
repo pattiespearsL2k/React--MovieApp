@@ -372,10 +372,9 @@ function KetQuaDatVe(props) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-
                     {thongTinNguoiDung.bookingInformation?.map((ticket, index) => (
-                        //  const seats = _.first(ticket.danhSachGhe);
-                        < StyledTableRow >
+                        //  const seats = _.first(ticket.listChair);
+                        < StyledTableRow key={index}>
                             <StyledTableCell align="center">{index + 1}</StyledTableCell>
                             <StyledTableCell align="center">
                                 {moment(ticket.bookingDate).format(' hh:mm:ss')}
@@ -383,11 +382,11 @@ function KetQuaDatVe(props) {
                             <StyledTableCell align="center">
                                 {moment(ticket.bookingDate).format('DD-MM-YYYY ')}
                             </StyledTableCell>
-                            <StyledTableCell align="center">Rạp</StyledTableCell>
+                            <StyledTableCell align="center"></StyledTableCell>
                             {/* <StyledTableCell align="right">{seats.tenHeThongRap}- {seats.tenCumRap}</StyledTableCell> */}
                             <StyledTableCell align="center" > {ticket.titleMovie}</StyledTableCell>
                             <StyledTableCell align="center">
-                                <img src={ticket.image} style={{ width: "50px", height: "50px" }} alt="" />
+                                jjjj
                             </StyledTableCell>
                             <StyledTableCell align="center">
                                 <img src={ticket.image} style={{ width: "50px", height: "50px" }} alt="" />

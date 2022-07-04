@@ -20,7 +20,6 @@ export default function Film() {
 
     useEffect(() => {
         dispatch(layDanhSachPhimAction());
-
     }, [])
 
     const columns = [
@@ -72,7 +71,7 @@ export default function Film() {
             dataIndex: 'movieId',
             render: (text, film) => {
                 return <div className="parent-action">
-                    <NavLink key={1} className="action" to={`/admin/films/showtime/${film.movieId}/${film.title}`} onClick={() => {
+                    <NavLink key={1} className="action" to={`/manager/showtime/${film.movieId}/${film.title}`} onClick={() => {
                         localStorage.setItem('filmParams', JSON.stringify(film));
                     }}>
                         <CalendarOutlined style={{ color: 'green' }} />

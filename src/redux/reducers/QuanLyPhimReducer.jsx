@@ -23,22 +23,26 @@ const stateDefault = {
     ],
     nowShowing: true,
     comingSoon: false,
+    isAll: true,
     arfDefault: [],
     filmDetail: {},
     thongTinPhim: {}
 
 }
+console.log(stateDefault.arf, 'arf');
 
 export const QuanLyPhimReducer = (state = stateDefault, action) => {
     switch (action.type) {
 
         case SET_DANH_SACH_PHIM: {
+            console.log('SET_DANH_SACH_PHIM');
             state.arf = action.arf;
             state.arfDefault = state.arf;
             return { ...state }
         }
 
         case SET_FILM_DANG_CHIEU: {
+            console.log('4');
             state.arf = state.arfDefault.filter((item) => {
                 return item.nowShowing === true;
             });

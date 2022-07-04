@@ -51,18 +51,15 @@ const History = () => {
                             <StyledTableCell align="center">Số thứ tự </StyledTableCell>
                             <StyledTableCell align="center">Giờ đặt vé</StyledTableCell>
                             <StyledTableCell align="center">Ngày đặt vé</StyledTableCell>
-                            <StyledTableCell align="center">Rạp</StyledTableCell>
+                            {/* <StyledTableCell align="center">Rạp</StyledTableCell> */}
                             <StyledTableCell align="center">Phim</StyledTableCell>
-                            <StyledTableCell align="center">Suất chiếu</StyledTableCell>
-                            <StyledTableCell align="center">Hình ảnh</StyledTableCell>
                             <StyledTableCell align="center">Giá</StyledTableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-
-                        {thongTinNguoiDung.bookingInformation?.map((ticket, index) => (
+                        {thongTinNguoiDung.bookingInformation?.map((ticket, index) => {
                             //  const seats = _.first(ticket.danhSachGhe);
-                            < StyledTableRow >
+                            return < StyledTableRow key={index} >
                                 <StyledTableCell align="center">{index + 1}</StyledTableCell>
                                 <StyledTableCell align="center">
                                     {moment(ticket.bookingDate).format(' hh:mm:ss')}
@@ -70,18 +67,16 @@ const History = () => {
                                 <StyledTableCell align="center">
                                     {moment(ticket.bookingDate).format('DD-MM-YYYY ')}
                                 </StyledTableCell>
-                                <StyledTableCell align="center">Rạp</StyledTableCell>
-                                {/* <StyledTableCell align="right">{seats.tenHeThongRap}- {seats.tenCumRap}</StyledTableCell> */}
-                                <StyledTableCell align="center" > {ticket.titleMovie}</StyledTableCell>
-                                <StyledTableCell align="center">
-                                    <img src={ticket.image} style={{ width: "50px", height: "50px" }} alt="" />
-                                </StyledTableCell>
-                                <StyledTableCell align="center">
-                                    <img src={ticket.image} style={{ width: "50px", height: "50px" }} alt="" />
-                                </StyledTableCell>
                                 <StyledTableCell align="center">{ticket.price}</StyledTableCell>
-                            </StyledTableRow>
-                        ))};
+                                {ticket.listChair?.map((seat, index)=>{
+                              return <StyledTableCell key={index} align="center">{seat.cinemaName}</StyledTableCell> 
+                               {/* <StyledTableCell align="right">{seat.roomName}</StyledTableCell>  */}
+                                
+
+        
+                            })}
+                                </StyledTableRow>
+                        })};
                     </TableBody>
                 </Table >
             </TableContainer >

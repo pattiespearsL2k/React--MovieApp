@@ -263,10 +263,7 @@ form .inp:focus {
 	margin-right: 10px;
 }
 
-/* .login label {
-	font-size: 13px;
-	margin-right: 14%;
-} */
+
 .login form .invalid-feedback {
 	text-align: left;
 	font-size: 12px;
@@ -312,8 +309,6 @@ form .inp:focus {
 	line-height: 0;
 }
 
-.ant-modal-root .ant-modal-body {
-}
 
 .ant-modal-root .ant-modal-content {
 	background-color: transparent !important;
@@ -367,6 +362,8 @@ form .inp:focus {
 	letter-spacing: 0.5px;
 	outline: none;
 	border: none;
+	z-index: 150;
+	position: relative;
 }
 .form-container-login h3 {
 	font-size: 25px;
@@ -470,4 +467,8 @@ form .inp:focus {
 .login__btn .btn-registerl:hover {
 	box-shadow: 0 0 0 1px var(--color-primary2) inset;
 	color: var(--color-primary2);
+}
+
+.ant-modal-confirm-content{
+color:#fff !important;
 }
