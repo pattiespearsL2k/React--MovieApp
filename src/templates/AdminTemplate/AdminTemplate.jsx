@@ -1,20 +1,14 @@
-import { Fragment, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Redirect, Route } from "react-router";
-import { TOKEN, USER_LOGIN } from "../../util/settings/config";
-import { Layout, Menu, Breadcrumb } from 'antd';
 import {
-    DesktopOutlined,
-    FileOutlined,
-    TeamOutlined,
-    UserOutlined,
+    FileOutlined, UserOutlined
 } from '@ant-design/icons';
+import { Breadcrumb, Layout, Menu } from 'antd';
+import { Fragment, useState } from "react";
+import { useSelector } from "react-redux";
+import { Route } from "react-router";
 import { NavLink } from "react-router-dom";
-import _ from "lodash";
-import { history } from "../../App";
-import logo from "../../assets/images/logoM.png"
+import logo from "../../assets/images/logoM.png";
 import '../../assets/style/admin.css';
-import LogoutAdmin from "../../pages/logoutadmin/logoutAdmin"
+import LogoutAdmin from "../../pages/logoutadmin/logoutAdmin";
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -41,20 +35,28 @@ const AdminTemplate = (props) => { //path, exact, Component
                                     <img style={{ width: '40%', height: '80px' }} src={logo} alt="..." />
                                 </div>
                                 <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                                    <Menu.SubMenu key="1" icon={<UserOutlined />} title='Users'>
+                                    <Menu.SubMenu key="1" icon={<UserOutlined />} title='Quản lý người dùng'>
                                         <Menu.Item key="21" icon={<UserOutlined />}>
-                                            <NavLink to='/admin'>Users</NavLink>
+                                            <NavLink to='/admin'>Người dùng</NavLink>
                                         </Menu.Item>
                                         <Menu.Item key="20" icon={<FileOutlined />}>
-                                            <NavLink to='/admin/adduser'>Add user</NavLink>
+                                            <NavLink to='/admin/adduser'>Thêm người dùng</NavLink>
                                         </Menu.Item>
                                     </Menu.SubMenu>
-                                    <Menu.SubMenu key='sub1' icon={<FileOutlined />} title='Films'>
+                                    <Menu.SubMenu key='sub1' icon={<FileOutlined />} title='Quản lý phim'>
                                         <Menu.Item key="10" icon={<FileOutlined />}>
-                                            <NavLink to='/admin/films'>Films</NavLink>
+                                            <NavLink to='/admin/films'>Phim</NavLink>
                                         </Menu.Item>
                                         <Menu.Item key="11" icon={<FileOutlined />}>
-                                            <NavLink to='/admin/films/addnew'>Add film</NavLink>
+                                            <NavLink to='/admin/films/addnew'>Thêm phim</NavLink>
+                                        </Menu.Item>
+                                    </Menu.SubMenu>
+                                    <Menu.SubMenu key='sub1' icon={<FileOutlined />} title='Quản lý rạp'>
+                                        <Menu.Item key="10" icon={<FileOutlined />}>
+                                            <NavLink to='/admin/cinema'>Rạp</NavLink>
+                                        </Menu.Item>
+                                        <Menu.Item key="11" icon={<FileOutlined />}>
+                                            <NavLink to='/admin/cinema/addcinema'>Thêm rạp</NavLink>
                                         </Menu.Item>
                                     </Menu.SubMenu>
                                 </Menu>

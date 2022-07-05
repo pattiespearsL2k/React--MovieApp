@@ -1,27 +1,17 @@
-import React, { useState } from 'react';
 import {
-  Form,
-  Input,
-  Button,
-  Radio,
-  Select,
-  Cascader,
-  DatePicker,
-  InputNumber,
-  TreeSelect,
-  Switch,
+  DatePicker, Form,
+  Input, InputNumber, Switch
 } from 'antd';
 import { useFormik } from 'formik';
 import moment from 'moment';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { themPhimUploadHinhAction } from '../../../redux/actions/QuanLyPhimActions';
-import _ from 'lodash';
 
 const AddNew = () => {
 
   const [imgSrc, setImgSrc] = useState('');
   const dispatch = useDispatch();
-
   const formik = useFormik({
     initialValues: {
 

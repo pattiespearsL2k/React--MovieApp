@@ -1,20 +1,14 @@
-import { Fragment, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Redirect, Route } from "react-router";
-import { TOKEN, USER_LOGIN } from "../../util/settings/config";
-import { Layout, Menu, Breadcrumb } from 'antd';
 import {
-    DesktopOutlined,
-    FileOutlined,
-    TeamOutlined,
-    UserOutlined,
+    FileOutlined
 } from '@ant-design/icons';
+import { Breadcrumb, Layout, Menu } from 'antd';
+import { Fragment, useState } from "react";
+import { useSelector } from "react-redux";
+import { Route } from "react-router";
 import { NavLink } from "react-router-dom";
-import _ from "lodash";
-import { history } from "../../App";
-import logo from "../../assets/images/logoM.png"
+import logo from "../../assets/images/logoM.png";
 import '../../assets/style/admin.css';
-import LogoutAdmin from "../../pages/logoutadmin/logoutAdmin"
+import LogoutAdmin from "../../pages/logoutadmin/logoutAdmin";
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 
@@ -29,28 +23,6 @@ const ManagerTemplate = (props) => { //path, exact, Component
         setCollapsed(collapsed);
     };
 
-
-    // if (!localStorage.getItem(USER_LOGIN)) {
-    //     alert('Bạn không có quyền truy cập vào trang này !')
-    //     return <Redirect to='/' />
-    // }
-
-    // if (userLogin.role !== 'admin') {
-    //     alert('Bạn không có quyền truy cập vào trang này !')
-    //     return <Redirect to='/' />
-
-    // }
-
-    // const operations = <Fragment>
-    //     {!_.isEmpty(userLogin) ? <Fragment> <button onClick={() => {
-    //         history.push('/profile')
-    //     }}> <div style={{ width: 50, height: 50, display: 'flex', justifyContent: 'center', alignItems: 'center' }} className="text-2xl ml-5 rounded-full bg-red-200">{userLogin.taiKhoan.substr(0, 1)}</div>Hello ! {userLogin.taiKhoan}</button> <button onClick={() => {
-    //         localStorage.removeItem(USER_LOGIN);
-    //         localStorage.removeItem(TOKEN);
-    //         history.push('/home');
-    //         window.location.reload();
-    //     }} className="text-blue-800">Đăng xuất</button> </Fragment> : ''}
-    // </Fragment>
 
 
     return (
@@ -71,13 +43,12 @@ const ManagerTemplate = (props) => { //path, exact, Component
                                             <NavLink to='/admin/films'>Films</NavLink>
                                         </Menu.Item>
                                     </Menu.SubMenu>
-
                                 </Menu>
                             </Sider>
                             <Layout className="site-layout">
                                 <Header className="site-layout-background" style={{ padding: 0 }} >
                                     <div className="name-admin account navright">
-                                        <div class="name">
+                                        <div className="name">
                                             {!!userLogin.name ?
                                                 <LogoutAdmin /> :
                                                 <></>

@@ -31,7 +31,7 @@ export default function Films() {
             dataIndex: 'movieId',
             sorter: (a, b) => a.movieId - b.movieId,
             sortDirections: ['descend', 'ascend'],
-            width: '15%'
+            width: '10%'
 
         },
         {
@@ -56,7 +56,7 @@ export default function Films() {
                 return -1;
             },
             sortDirections: ['descend', 'ascend'],
-            width: '20%'
+            width: '15%'
         },
         {
             title: 'Mô tả',
@@ -80,9 +80,8 @@ export default function Films() {
                 return <div className="parent-action">
                     <NavLink key={1} className="action" to={`/admin/films/edit/${film.movieId}`}>
                         <EditOutlined style={{ color: 'blue' }} />
-                        <p>Sửa</p>
+                        <p>Sửa</p> 
                     </NavLink>
-                    
                     <Popconfirm
                         className='action'
                         title="Bạn có chắc chắn xoá không?"
@@ -99,6 +98,10 @@ export default function Films() {
                     }}>
                         <CalendarOutlined style={{ color: 'green' }} />
                         <p>Tạo lịch chiếu</p>
+                    </NavLink>
+                    <NavLink key={1} className="action" to={`/admin/films/showtime/${film.movieId}`}>
+                        <CalendarOutlined style={{ color: 'green' }} />
+                        <p>Xem lịch chiếu</p>
                     </NavLink>
                 </div>
             },

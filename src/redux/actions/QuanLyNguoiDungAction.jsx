@@ -132,7 +132,7 @@ export const CapNhatThongTinNguoiDungAction = (formData) => {
             console.log("result update", result);
             message.success('Cập nhật người dùng thành công')
             history.push('/admin')
-            dispatch(layDanhSachNDAction())
+            // dispatch(layDanhSachNDAction())
         } catch (err) {
             console.log('err', err);
         }

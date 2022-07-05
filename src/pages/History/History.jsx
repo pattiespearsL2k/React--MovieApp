@@ -67,14 +67,12 @@ const History = () => {
                                 <StyledTableCell align="center">
                                     {moment(ticket.bookingDate).format('DD-MM-YYYY ')}
                                 </StyledTableCell>
+                                <StyledTableCell align="center" > {ticket.titleMovie}</StyledTableCell>
                                 <StyledTableCell align="center">{ticket.price}</StyledTableCell>
-                                {ticket.listChair?.map((seat, index)=>{
-                              return <StyledTableCell key={index} align="center">{seat.cinemaName}</StyledTableCell> 
-                               {/* <StyledTableCell align="right">{seat.roomName}</StyledTableCell>  */}
-                                
-
-        
-                            })}
+                                {/* {ticket.listChair?.map((seat, index)=>{
+                              return <StyledTableCell key={index} align="center">{seat.cinemaName}</StyledTableCell>  */}
+                               {/* <StyledTableCell align="right">{seat.roomName}</StyledTableCell>  */}      
+                            {/* })} */}
                                 </StyledTableRow>
                         })};
                     </TableBody>

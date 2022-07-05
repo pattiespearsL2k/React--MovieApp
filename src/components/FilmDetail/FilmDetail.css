@@ -2857,5 +2857,12 @@ body.modal-open .modal {
 }
 
 .tab-left .name {
-  color: #000 !important
+  color: #000 !important;
+}
+
+.btn-view-showtime {
+  color: black;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 8px;
 }

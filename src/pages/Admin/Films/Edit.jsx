@@ -150,7 +150,7 @@ const Edit = (props) => {
         </div>
         <div className='form-flex-display'>
           <Form.Item label="Sắp chiếu">
-            <Switch onChange={handleChangeSwitch('comingSoon')} checked={formik.values.comingSoon} disabled={formik.values.nowShowing}/>
+            <Switch onChange={handleChangeSwitch('comingSoon')} checked={formik.values.comingSoon}/>
           </Form.Item>
           <Form.Item label="Số sao">
             <InputNumber onChange={handleChangeInputNumber('rating')} min={1} max={10} value={formik.values.rating} />

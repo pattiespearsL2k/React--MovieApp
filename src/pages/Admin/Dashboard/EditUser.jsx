@@ -20,6 +20,7 @@ import '../../../assets/style/addUser.css';
 const EditUser = (props) => {
   const [componentSize, setComponentSize] = useState('default');
   const { thongTinNguoiDung } = useSelector(state => state.QuanLyNguoiDungReducer);
+  console.log(thongTinNguoiDung);
   const dispatch = useDispatch();
   const { mangND } = useSelector(state => state.QuanLyNguoiDungReducer);
 
@@ -28,6 +29,7 @@ const EditUser = (props) => {
   useEffect(() => {
     let { username } = props.match.params;
     dispatch(layThongTinNguoiDungAction(username));
+    // console.log(username)
   }, [])
 
 

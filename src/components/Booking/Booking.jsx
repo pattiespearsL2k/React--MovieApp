@@ -364,10 +364,10 @@ function KetQuaDatVe(props) {
                         <StyledTableCell align="center">Số thứ tự </StyledTableCell>
                         <StyledTableCell align="center">Giờ đặt vé</StyledTableCell>
                         <StyledTableCell align="center">Ngày đặt vé</StyledTableCell>
-                        <StyledTableCell align="center">Rạp</StyledTableCell>
+                        {/* <StyledTableCell align="center">Rạp</StyledTableCell> */}
                         <StyledTableCell align="center">Phim</StyledTableCell>
-                        <StyledTableCell align="center">Suất chiếu</StyledTableCell>
-                        <StyledTableCell align="center">Hình ảnh</StyledTableCell>
+                        {/* <StyledTableCell align="center">Suất chiếu</StyledTableCell> */}
+                        {/* <StyledTableCell align="center">Hình ảnh</StyledTableCell> */}
                         <StyledTableCell align="center">Giá</StyledTableCell>
                     </TableRow>
                 </TableHead>
@@ -382,15 +382,15 @@ function KetQuaDatVe(props) {
                             <StyledTableCell align="center">
                                 {moment(ticket.bookingDate).format('DD-MM-YYYY ')}
                             </StyledTableCell>
-                            <StyledTableCell align="center"></StyledTableCell>
+                            {/* <StyledTableCell align="center"></StyledTableCell> */}
                             {/* <StyledTableCell align="right">{seats.tenHeThongRap}- {seats.tenCumRap}</StyledTableCell> */}
                             <StyledTableCell align="center" > {ticket.titleMovie}</StyledTableCell>
-                            <StyledTableCell align="center">
+                            {/* <StyledTableCell align="center">
                                 jjjj
                             </StyledTableCell>
                             <StyledTableCell align="center">
                                 <img src={ticket.image} style={{ width: "50px", height: "50px" }} alt="" />
-                            </StyledTableCell>
+                            </StyledTableCell> */}
                             <StyledTableCell align="center">{ticket.price}</StyledTableCell>
                         </StyledTableRow>
                     ))};

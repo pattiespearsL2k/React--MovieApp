@@ -2,11 +2,13 @@ import { quanLyPhimService } from "../../services/QuanLyPhimService";
 import { SET_DANH_SACH_PHIM, SET_FILM_DANG_CHIEU, SET_FILM_SAP_CHIEU, SET_THONG_TIN_PHIM } from "./types/QuanLyPhimType";
 import { history } from '../../App'
 import { message} from 'antd';
+import { displayLoadingAction, hideLoadingAction } from "./LoadingActions";
 
 
 export const layDanhSachPhimAction = (title = '') => {
 
     return async (dispatch) => {
+     
         try {
             const result = await quanLyPhimService.layDanhSachPhim(title);
             //Sau khi lấy dữ liệu từ api về => redux (reducer)
@@ -39,12 +41,15 @@ export const layThongTinPhimAction = (movieId) => {
 
 export const themPhimUploadHinhAction = (formData) => {
     return async (dispatch) => {
+        dispatch(displayLoadingAction)
         try {
             let result = await quanLyPhimService.themPhimUploadHinh(formData);
             message.success("Thêm phim thành công")
-            console.log('result', result.data);
+            history.push('/admin/films')
+            dispatch(hideLoadingAction)
 
         } catch (errors) {
+            dispatch(hideLoadingAction)
             console.log("er", errors.response?.data)
         }
     }
@@ -53,14 +58,15 @@ export const themPhimUploadHinhAction = (formData) => {
 
 export const capNhatPhimUploadAction = (formData) => {
     return async (dispatch) => {
+        dispatch(displayLoadingAction)
         try {
             let result = await quanLyPhimService.capNhatPhimUpload(formData);
-            alert('Cập nhật phim thành công!')
+            message.success('Cập nhật phim thành công!')
             console.log('result', result.data);
-
-            // dispatch(layDanhSachPhimAction());
+            dispatch(hideLoadingAction)
             history.push('/admin/films');
         } catch (errors) {
+            dispatch(hideLoadingAction)
             console.log(errors.response?.data)
         }
     }

@@ -77,6 +77,12 @@ export default function Film() {
                         <CalendarOutlined style={{ color: 'green' }} />
                         <p>Tạo lịch chiếu</p>
                     </NavLink>
+                    <NavLink key={1} className="action" to={`/manager/showtime/${film.movieId}`} onClick={() => {
+                        localStorage.setItem('filmParams', JSON.stringify(film));
+                    }}>
+                        <CalendarOutlined style={{ color: 'green' }} />
+                        <p>Xem lịch chiếu</p>
+                    </NavLink>
                 </div>
             },
             sortDirections: ['descend', 'ascend'],
