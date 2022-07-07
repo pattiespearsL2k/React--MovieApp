@@ -105,7 +105,6 @@ const AddUser = () => {
         hasFeedback >
         <Input name='name' allowClear prefix={<UserOutlined />} />
       </Form.Item>
-
       <Form.Item label="Email">
         <Input name='email' allowClear prefix={<MailOutlined />} onChange={formik.handleChange} onBlur={formik.handleBlur} />
         {formik.touched.email && formik.errors.email
@@ -115,11 +114,11 @@ const AddUser = () => {
       <Form.Item label="Số điện thoại" name='phoneNumber' onChange={formik.handleChange} rules={[
         {
           required: true,
-          message: 'Số điện thoại được để trống',
+          message: 'Số điện thoại không được để trống',
         },
         {
           whitespace: true,
-          message: 'Số điện thoại được để trống',
+          message: 'Số điện thoại không được để trống',
         },
         {
           min: 10,
@@ -134,7 +133,6 @@ const AddUser = () => {
           {
             required: true,
             message: 'Mật khẩukhông được để trống',
-            // autoComplete:'off'
           },
           {
             whitespace: true,

@@ -1,50 +1,52 @@
 import { baseService } from "./baseService";
-// import { GROUPID } from '../util/settings/config'
 export class QuanLyNguoiDungService extends baseService {
+  constructor() {
+    super();
+  }
 
-    constructor() {
-        super();
+  dangKy = (thongTinDangKy) => {
+    return this.post(`/api/QuanLyNguoiDung/DangKy`, thongTinDangKy);
+  };
+  dangNhap = (thongTinDangNhap) => {
+    return this.post(`/api/QuanLyNguoiDung/DangNhap`, thongTinDangNhap);
+  };
+
+  layDanhSachNguoiDung = (username) => {
+    if (username) {
+      return this.get(
+        `/api/QuanLyNguoiDung/LayDanhSachNguoiDung?textSearch=${username}`
+      );
     }
+    return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung`);
+  };
 
-    dangKy = (thongTinDangKy) => {
-        return this.post(`/api/QuanLyNguoiDung/DangKy`, thongTinDangKy)
-    }
-    dangNhap = (thongTinDangNhap) => { // {taiKhoan:'',matKhau:''}
-        return this.post(`/api/QuanLyNguoiDung/DangNhap`, thongTinDangNhap);
-    }
+  layThongTinNguoiDung = () => {
+    return this.post("/api/QuanLyNguoiDung/ThongTinTaiKhoan");
+  };
 
-    layDanhSachNguoiDung = (username) => {
-        if (username) {
-            return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung?textSearch=${username}`)
-        }
-        return this.get(`/api/QuanLyNguoiDung/LayDanhSachNguoiDung`)
-    };
+  themNguoiDung = (formData) => {
+    return this.post(`/api/QuanLyNguoiDung/ThemNguoiDung`, formData);
+  };
 
-    layThongTinNguoiDung = () => {
-        return this.post('/api/QuanLyNguoiDung/ThongTinTaiKhoan');
-    }
+  capNhatThongTinNguoiDung = (formData) => {
+    return this.put(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, formData);
+  };
 
-    themNguoiDung = (formData) => {
-        return this.post(`/api/QuanLyNguoiDung/ThemNguoiDung`, formData)
-    }
+  xoaND = (username) => {
+    return this.delete(
+      `/api/QuanLyNguoiDung/XoaNguoiDung?username=${username}`
+    );
+  };
 
-    capNhatThongTinNguoiDung = (formData) => {
-        return this.put(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, formData)
-    };
+  layThongTinTaiKhoan = () => {
+    return this.post("/api/QuanLyNguoiDung/ThongTinTaiKhoan");
+  };
 
-    xoaND = (username) => {
-        return this.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?username=${username}`)
-    };
-
-    layThongTinTaiKhoan = () => {
-        return this.post('/api/QuanLyNguoiDung/ThongTinTaiKhoan')
-    };
-
-
-
-
+  layThongTinKH = (username) => {
+    return this.get(
+      `/api/QuanLyNguoiDung/ThongTinKhachHang?username=${username}`
+    );
+  };
 }
-
-
 
 export const quanLyNguoiDungService = new QuanLyNguoiDungService();

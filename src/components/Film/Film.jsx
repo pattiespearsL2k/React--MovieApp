@@ -14,14 +14,14 @@ export default function Film(props) {
                     component="img"
                     image={item.image}
                 />
-                <div class="latest__overlay">
-                    <div class="latest__icon">
+                <div className="latest__overlay">
+                    <div className="latest__icon">
                         <NavLink to={`/detail/${item.movieId}`} href="#">Đặt vé</NavLink>
                     </div>
-                    <div class="latest__text">
+                    <div className="latest__text">
                         <p> {item.title}</p>
                     </div>
-                    <div class="latest__shine">
+                    <div className="latest__shine">
                     </div>
                 </div>
             </Card>

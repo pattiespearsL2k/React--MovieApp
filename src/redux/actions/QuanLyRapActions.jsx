@@ -34,8 +34,6 @@ export const layThongTinChiTietPhim = (id) => {
     dispatch(displayLoadingAction);
     try {
       const result = await quanLyRapService.layThongTinLichChieuPhim(id);
-
-      console.log("result", result);
       //Lấy được dữ liệu từ api về  => reducer
 
       dispatch({
@@ -84,23 +82,7 @@ export const layThongTinHeThongRapByUserIDAction = () => {
   };
 };
 
-// export const layThongTinLichChieuHeThongRapTheoNgayAction = (day) => {
-//   return async (dispatch) => {
-//     try {
-//       const result =
-//         await quanLyRapService.layThongTinLichChieuHeThongRapTheoNgay(day);
-//       console.log("resultAction", result.data.content);
-//       if (result.status === 200) {
-//         dispatch({
-//           type: SHOW_RAP_DAY,
-//           rapDay: result.data,
-//         });
-//       }
-//     } catch (errors) {
-//       console.log("errors", errors.response?.data);
-//     }
-//   };
-// };
+
 
 export const xoaLichChieuAction = (showID) => {
   return async (dispatch) => {

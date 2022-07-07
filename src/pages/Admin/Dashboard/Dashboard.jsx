@@ -20,24 +20,6 @@ export default function Dashboard(props) {
         dispatch(layDanhSachNDAction());
     }, [])
 
-    // if (userLogin.userId === 'KhachHang' && userLogin.maNhom !== 'GP03' || !(userLogin.userId)) {
-    //     alert("Bạn không có quyền truy cập vào trang admin! Hãy đăng nhập băng tài khoản Admin thuộc nhóm GP03")
-    //     history.push('/')
-    // }
-
-    //   if(!localStorage.getItem("LOGIN_USER")){
-    //     alert('Bạn không có quyền  truy cập vào trang này!')
-    //     return <Redirect to='/'/>
-    //   };
-
-    //   if(userLogin.role!== 'admin'){
-    //     alert('Bạn không có quyền truy cập vào trang này!')
-    //     return <Redirect to='/'/>
-    //   }
-
-
-
-
     const columns = [
         {
             title: 'Tài Khoản',
@@ -115,7 +97,6 @@ export default function Dashboard(props) {
 
     const onSearch = (value) => {
         dispatch(layDanhSachNDAction(value))
-        // alert("OK");
     };
 
     return (
@@ -132,7 +113,6 @@ export default function Dashboard(props) {
                 enterButton={<SearchOutlined />}
                 onSearch={onSearch}
             />
-            {/* <input type="text" onKeyDown={(value) => onSearch(value)} /> */}
             <Table columns={columns} dataSource={data} rowKey={"userId"} />
         </div>
     )

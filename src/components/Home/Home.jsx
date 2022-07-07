@@ -13,13 +13,7 @@ export default function Home(props) {
     useEffect(() => {
     dispatch(layDanhSachPhimAction())
     }, [])
-
-  
-  
     const { arf } = useSelector(state => state.QuanLyPhimReducer);
-
-    // console.log(arf, 'arf');
-
     return (
         <div>
             <SlideHome />

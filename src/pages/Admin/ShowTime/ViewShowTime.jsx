@@ -19,31 +19,29 @@ const { TabPane } = Tabs;
 
 export default function ViewShowTime(props) {
   const [statePhim, setStatePhim] = useState({
-    cumRapChieu: [],
+    heThongRap: [],
   });
 
-  const [state, setState] = useState();
+  const [state, setState] = useState(moment(new Date()).format("DD/MM/YYYY"));
   const dispatch = useDispatch();
   console.log(state, "state");
+  let { id } = props.match.params;
 
   useEffect(() => {
     // get data from url
-    let { id } = props.match.params;
 
     dispatch(layThongTinChiTietPhim(id));
   }, []);
 
   const handleChangeHeThongRap = async (state) => {
-    // console.log(value)
     // từ hệ thống rạp call api lấy thông tin rạp
     console.log(state, "handleRap");
     try {
-      let result =
-        await quanLyRapService.layThongTinLichChieuHeThongRapTheoNgay(state);
+      let result = await quanLyRapService.layThongTinLichChieuPhim(id, state);
       console.log(result, "resultRap");
       setStatePhim({
         ...statePhim,
-        cumRapChieu: result.data,
+        heThongRap: result.data.cinema,
       });
     } catch (error) {
       console.log(error);
@@ -56,21 +54,21 @@ export default function ViewShowTime(props) {
     handleChangeHeThongRap(state);
   }, [state]);
 
-  console.log(statePhim.cumRapChieu, "cumRapChieu");
+  console.log(statePhim.heThongRap, "heThongRap");
 
   return (
     <div className="film-detail">
       <Grid container spacing={6}>
-        <Grid item xs={12} className="schedule-padding">
+        <Grid lichChieu xs={12} className="schedule-padding">
           <h4 className="film-content">LỊCH CHIẾU</h4>
           <DayList setState={setState} />
           <Tabs className="tab-film" tabPosition={"left"}>
-            {statePhim.cumRapChieu?.map((htr, index) => {
+            {statePhim.heThongRap?.map((htr, index) => {
               return (
                 <TabPane
                   className="tab-left"
                   tab={
-                    <div className="flex flex-row items-center justify-center">
+                    <div className="flex flex-row lichChieus-center justify-center">
                       <img
                         src={htr.logo}
                         className="rounded-full w-full"
@@ -82,7 +80,7 @@ export default function ViewShowTime(props) {
                   }
                   key={index}
                 >
-                  {htr.lstCinemaChild?.map((cumRap, index) => {
+                  {htr.cumRapChieu?.map((cumRap, index) => {
                     return (
                       <div className="mt-5 cinema-part" key={index}>
                         <div className="flex flex-row">
@@ -103,43 +101,30 @@ export default function ViewShowTime(props) {
                             >
                               {cumRap.address}
                             </p>
-                            {cumRap.listMovie
-                              ?.slice(0, 12)
-                              .map((lichChieu, index) => {
-                                return (
-                                  <p key={index}>
-                                    {" "}
-                                    {lichChieu.lstShowFlowMovie?.map(
-                                      (item, index) => {
-                                        return (
-                                          <button
-                                            className="btn-view-showtime"
-                                            onClick={() => {
-                                              if (
-                                                window.confirm(
-                                                  "Bạn có chắc muốn xoá lịch chiếu " +
-                                                    item.showtime +
-                                                    "không?"
-                                                )
-                                              ) {
-                                                dispatch(
-                                                  xoaLichChieuAction(
-                                                    item.showID
-                                                  )
-                                                );
-                                              }
-                                            }}
-                                            key={index}
-                                          >
-                                            <DeleteOutlined />
-                                            {item.showtime}
-                                          </button>
-                                        );
-                                      }
-                                    )}
-                                  </p>
-                                );
-                              })}
+                            {cumRap.lichChieuPhim.map((lichChieu, index) => {
+                              return (
+                                <button
+                                  className="btn-view-showtime"
+                                  onClick={() => {
+                                    if (
+                                      window.confirm(
+                                        "Bạn có chắc muốn xoá lịch chiếu " +
+                                          lichChieu.showtime +
+                                          "không?"
+                                      )
+                                    ) {
+                                      dispatch(
+                                        xoaLichChieuAction(lichChieu.showID)
+                                      );
+                                    }
+                                  }}
+                                  key={index}
+                                >
+                                  <DeleteOutlined />
+                                  {lichChieu.showtime}
+                                </button>
+                              );
+                            })}
                           </div>
                         </div>
                       </div>

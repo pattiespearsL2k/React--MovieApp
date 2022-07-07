@@ -9,9 +9,9 @@ export class QuanLyRapService extends baseService {
     return this.get(`/api/QuanLyRap/LayThongTinLichChieuHeThongRap`);
   };
 
-  layThongTinLichChieuPhim = (maPhim) => {
+  layThongTinLichChieuPhim = (maPhim, showday) => {
     return this.get(
-      `/api/QuanLyRap/LayThongTinLichChieuPhim?movieId=${maPhim}`
+      `/api/QuanLyRap/LayThongTinLichChieuPhim?movieId=${maPhim}&showday=${showday}`
     );
   };
 
@@ -34,9 +34,9 @@ export class QuanLyRapService extends baseService {
   xoaLichChieu = (showID) => {
     return this.delete(`/api/QuanLyDatVe/XoaLichChieu?showID=${showID}`);
   };
-  layThongTinLichChieuTheoNgayVaRap = (showday) => {
+  layThongTinLichChieuTheoNgayVaRap = (showday, movieId) => {
     return this.get(
-      `/api/QuanLyRap/LayThongTinLichChieuHeThongRapTheoNgayVaTheoRap?showday=${showday}`
+      `/api/QuanLyRap/LayThongTinLichChieuHeThongRapTheoNgayVaTheoRap?showday=${showday}&movieId=${movieId}`
     );
   };
 }

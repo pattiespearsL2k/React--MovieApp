@@ -16,7 +16,6 @@ export const layDanhSachPhimAction = (title = '') => {
                 type: SET_DANH_SACH_PHIM,
                 arf: result.data
             })
-            console.log(result.data, 'content');
         } catch (errors) {
             console.log('errors', errors)
         }
@@ -31,7 +30,6 @@ export const layThongTinPhimAction = (movieId) => {
                 type: SET_THONG_TIN_PHIM,
                 thongTinPhim: result.data
             })
-            console.log(result.data, 'hi');
         } catch (errors) {
             console.log('errors', errors)
         }

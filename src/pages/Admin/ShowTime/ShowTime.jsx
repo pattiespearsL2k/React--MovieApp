@@ -1,33 +1,26 @@
-import React, { useEffect, useState } from "react";
+import { Grid } from "@mui/material";
 import {
-  Form,
-  Cascader,
-  TimePicker,
   DatePicker,
+  Form,
   InputNumber,
-  Button,
-  Input,
-  Select,
   message,
+  Select,
+  TimePicker,
 } from "antd";
-import { quanLyRapService } from "../../../services/QuanLyRapService";
+import dayjs from "dayjs";
 import { useFormik } from "formik";
 import moment from "moment";
-import { quanLyDatVeService } from "../../../services/QuanLyDatVeService";
-import { history } from "../../../App";
-import styled from "styled-components";
-import { Grid } from "@mui/material";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
+import { history } from "../../../App";
 import {
   displayLoadingAction,
   hideLoadingAction,
 } from "../../../redux/actions/LoadingActions";
-import { ListItemSecondaryAction } from "@material-ui/core";
-import { uniqBy } from "lodash";
-import { cloneDeep } from "lodash/cloneDeep";
 import { layHeThongRapAction } from "../../../redux/actions/QuanLyRapActions";
-import dayjs from "dayjs";
+import { quanLyDatVeService } from "../../../services/QuanLyDatVeService";
+import { quanLyRapService } from "../../../services/QuanLyRapService";
 
 export default function ShowTime(props) {
   const dispatch = useDispatch();
@@ -54,7 +47,7 @@ export default function ShowTime(props) {
       try {
         let result = await quanLyDatVeService.taoLichChieu(values);
         message.success("Tạo lịch chiếu thành công");
-        // history.push('/admin')
+        history.push("/admin");
         dispatch(hideLoadingAction);
       } catch (err) {
         dispatch(hideLoadingAction);
@@ -68,7 +61,8 @@ export default function ShowTime(props) {
     cumRapChieu: [],
     cumRapId: "",
   });
-
+  const [errDay, setErrDay] = useState("");
+  const [errTime, setErrTime] = useState("");
   useEffect(async () => {
     try {
       let result = await quanLyRapService.layThongTinHeThongRap();
@@ -149,10 +143,17 @@ export default function ShowTime(props) {
   if (localStorage.getItem("filmParams")) {
     film = JSON.parse(localStorage.getItem("filmParams"));
   }
-
   const onFinish = async (values) => {
+    var nowDate = new Date().toLocaleDateString("en-GB");
+    var nowTime = new Date().toLocaleTimeString();
     values.showtime = dayjs(values.showtime).format("HH:mm:ss");
     values.showday = dayjs(values.showday).format("DD/MM/YYYY");
+    if (values.showday < nowDate) {
+      setErrDay("Ngày chiếu nên lớn hơn ngày hiện tại");
+    }
+    if (values.showtime < nowTime) {
+      setErrTime("Giờ chiếu nên lớn hơn giờ hiện tại");
+    }
     let newValue = {
       ...values,
       movieId: props.match.params.id,
@@ -190,7 +191,9 @@ export default function ShowTime(props) {
           <Form.Item
             name="heThongRap"
             label="Hệ thống rạp"
-            rules={[{ required: true, message: "dasd" }]}
+            rules={[
+              { required: true, message: "Hệ thống rạp không được để trống" },
+            ]}
           >
             <Select
               options={convertSelecHRP()}
@@ -201,7 +204,7 @@ export default function ShowTime(props) {
           <Form.Item
             name="cumRap"
             label="Cụm rạp"
-            rules={[{ required: true, message: "dasd" }]}
+            rules={[{ required: true, message: "Cụm rạp không được để trống" }]}
           >
             <Select
               options={state.cumRapChieu?.map((cumRap) => ({
@@ -215,7 +218,7 @@ export default function ShowTime(props) {
           <Form.Item
             name="roomID"
             label="Rạp con"
-            rules={[{ required: true, message: "dasd" }]}
+            rules={[{ required: true, message: "Rạp con không được để trống" }]}
           >
             <Select
               options={convertSelectRapcon()}
@@ -223,29 +226,30 @@ export default function ShowTime(props) {
               placeholder="Chọn rạp con"
             />
           </Form.Item>
-          {/* <Form.Item label="Rạp con">
-            <Select onChange={handleChangeRapcon}  placeholder='Chọn rạp con' >
-              <Option value="741">1</Option>
-            </Select>
-          </Form.Item> */}
           <Form.Item
             name="showday"
             label="Ngày chiếu"
-            rules={[{ required: true, message: "dasd" }]}
+            rules={[
+              { required: true, message: "Ngày chiếu không được để trống" },
+            ]}
           >
             <DatePicker format="DD/MM/YYYY" showday onChange={onChangeDate} />
           </Form.Item>
+          <p style={{ color: "red", textAlign: "left" }}>{errDay}</p>
           <Form.Item
             name="showtime"
             label="Giờ chiếu"
-            rules={[{ required: true, message: "dasd" }]}
+            rules={[
+              { required: true, message: "Giờ chiếu không được để trống" },
+            ]}
           >
             <TimePicker format="hh:mm:ss" showtime onChange={onChangeTime} />
           </Form.Item>
+          <p style={{ color: "red", textAlign: "left" }}>{errTime}</p>
           <Form.Item
             label="Giá vé"
             name="price"
-            rules={[{ required: true, message: "dasd" }]}
+            rules={[{ required: true, message: "Giá vé không được để trống" }]}
           >
             <InputNumber min={75000} max={200000} />
           </Form.Item>
@@ -262,10 +266,4 @@ export default function ShowTime(props) {
       </Grid>
     </Form>
   );
-
-  const ButtonStyled = styled(Button)`
-    color: #fff;
-    border-color: #1890ff !important;
-    background: #1890ff;
-  `;
 }

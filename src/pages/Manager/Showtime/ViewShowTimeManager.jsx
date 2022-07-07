@@ -22,13 +22,13 @@ export default function ViewShowTimeManager(props) {
     cumRapChieu: [],
   });
 
-  const [state, setState] = useState();
+  const [state, setState] = useState(moment(new Date()).format("DD/MM/YYYY"));
   const dispatch = useDispatch();
   console.log(state, "state");
+  let { id } = props.match.params;
 
   useEffect(() => {
     // get data from url
-    let { id } = props.match.params;
 
     dispatch(layThongTinChiTietPhim(id));
   }, []);
@@ -38,8 +38,10 @@ export default function ViewShowTimeManager(props) {
     // từ hệ thống rạp call api lấy thông tin rạp
     console.log(state, "handleRap");
     try {
-      let result =
-        await quanLyRapService.layThongTinLichChieuTheoNgayVaRap(state);
+      let result = await quanLyRapService.layThongTinLichChieuTheoNgayVaRap(
+        state,
+        id
+      );
       console.log(result, "resultRap");
       setStatePhim({
         ...statePhim,
