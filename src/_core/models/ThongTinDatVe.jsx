@@ -1,9 +1,6 @@
-export class ThongTinDatVe { 
-    showID = 0;
-    listChair = [];
-    userAccount=""
-    constructor () {
-        
-    }
+export class ThongTinDatVe {
+  showID = 0;
+  listChair = [];
+  totalPrice = "";
+  constructor() {}
 }
-

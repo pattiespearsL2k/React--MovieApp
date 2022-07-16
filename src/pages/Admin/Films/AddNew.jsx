@@ -31,6 +31,7 @@ const AddNew = () => {
       releaseDate: Yup.string()
         .trim("Ngày khởi chiếu không được để trống")
         .required("Ngày khởi chiếu không được để trống"),
+      image: Yup.mixed().required("none"),
     }),
     onSubmit: (values) => {
       console.log("values", values);
@@ -84,91 +85,77 @@ const AddNew = () => {
   return (
     <>
       <Form
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 8 }}
         className="addnew"
         onSubmitCapture={formik.handleSubmit}
         layout="horizontal"
       >
-        <h3>Thêm mới phim </h3>
-        <div className="form-flex-display">
-          <Form.Item
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-            hasFeedback
-            name="title"
-            onChange={formik.handleChange}
-            label="Tên phim"
-          >
-            <Input name="title" onChange={formik.handleChange} />
-            {formik.touched.title && formik.errors.title ? (
-              <div className="alert alert-danger">{formik.errors.title}</div>
-            ) : null}
-          </Form.Item>
-          <Form.Item label="Trailer">
-            <Input name="trailer" onChange={formik.handleChange} />
-          </Form.Item>
-        </div>
-        <div className="form-flex-display">
-          <Form.Item label="Thời gian">
-            <Input name="duration" onChange={formik.handleChange} />
-          </Form.Item>
-          <Form.Item label="Quốc gia">
-            <Input name="country" onChange={formik.handleChange} />
-          </Form.Item>
-        </div>
-        <div className="form-flex-display">
-          <Form.Item label="Ngôn ngữ">
-            <Input name="languague" onChange={formik.handleChange} />
-          </Form.Item>
-          <Form.Item label="Thể loại">
-            <Input name="genre" onChange={formik.handleChange} />
-          </Form.Item>
-        </div>
-        <div className="form-flex-display">
-          <Form.Item label="Mô tả">
-            <Input name="description" onChange={formik.handleChange} />
-          </Form.Item>
-        </div>
-        <div className="form-flex-display">
-          <Form.Item
-            label="Ngày khởi chiếu"
-            onChange={handleChangeDatePicker}
-            name="releaseDate"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-            hasFeedback
-          >
-            <DatePicker
-              format={"DD/MM/YYYY"}
-              onChange={handleChangeDatePicker}
-            />
-            {formik.touched.releaseDate && formik.errors.releaseDate ? (
-              <div className="alert alert-danger">
-                {formik.errors.releaseDate}
-              </div>
-            ) : null}
-          </Form.Item>
-          <Form.Item label="Đang chiếu">
-            <Switch onChange={handleChangeSwitch("nowShowing")} />
-          </Form.Item>
-        </div>
-        <div className="form-flex-display">
-          <Form.Item label="Sắp chiếu">
-            <Switch onChange={handleChangeSwitch("comingSoon")} />
-          </Form.Item>
-          <Form.Item label="Số sao">
-            <InputNumber
-              onChange={handleChangeInputNumber("rating")}
-              min={1}
-              max={10}
-            />
-          </Form.Item>
-        </div>
+        <h3 style={{ textAlign: "center" }}>Thêm mới phim </h3>
+
+        <Form.Item
+          hasFeedback
+          name="title"
+          onChange={formik.handleChange}
+          label="Tên phim"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input name="title" onChange={formik.handleChange} />
+          {formik.touched.title && formik.errors.title ? (
+            <div className="alert alert-danger">{formik.errors.title}</div>
+          ) : null}
+        </Form.Item>
+        <Form.Item label="Trailer">
+          <Input name="trailer" onChange={formik.handleChange} />
+        </Form.Item>
+
+        <Form.Item label="Thời gian">
+          <Input name="duration" onChange={formik.handleChange} />
+        </Form.Item>
+        <Form.Item label="Quốc gia">
+          <Input name="country" onChange={formik.handleChange} />
+        </Form.Item>
+        <Form.Item label="Thể loại">
+          <Input name="genre" onChange={formik.handleChange} />
+        </Form.Item>
+
+        <Form.Item label="Mô tả">
+          <Input name="description" onChange={formik.handleChange} />
+        </Form.Item>
+
+        <Form.Item
+          label="Ngày khởi chiếu"
+          onChange={handleChangeDatePicker}
+          name="releaseDate"
+          rules={[
+            {
+              required: true,
+          
+            },
+          ]}
+          hasFeedback
+
+        >
+          <DatePicker format={"DD/MM/YYYY"} onChange={handleChangeDatePicker} />
+          {formik.touched.releaseDate && formik.errors.releaseDate ? (
+            <div className="alert alert-danger">
+              {formik.errors.releaseDate}
+            </div>
+          ) : null}
+        </Form.Item>
+
+        <Form.Item label="Đang chiếu">
+          <Switch onChange={handleChangeSwitch("nowShowing")} />
+        </Form.Item>
+
+        <Form.Item label="Sắp chiếu">
+          <Switch onChange={handleChangeSwitch("comingSoon")} />
+        </Form.Item>
+
         <Form.Item
           label="Hình ảnh"
           rules={[
@@ -185,12 +172,15 @@ const AddNew = () => {
             onChange={handleChangeFile}
             accept="image/png, image/jpeg,image/gif,image/png"
           />
+          {formik.touched.image && formik.errors.image ? (
+            <div className="alert alert-danger">{formik.errors.image}</div>
+          ) : null}
         </Form.Item>
-        <Form.Item>
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <button type="submit" className="btn-active-add-after">
             Thêm phim
           </button>
-        </Form.Item>
+        </div>
       </Form>
     </>
   );

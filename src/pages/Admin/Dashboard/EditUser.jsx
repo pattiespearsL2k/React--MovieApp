@@ -46,11 +46,17 @@ const EditUser = (props) => {
       phoneNumber: thongTinKH.phoneNumber,
     },
     validationSchema: Yup.object({
+      name: Yup.string()
+        .trim("Họ tên không được để trống")
+        .required("Họ tên không được để trống"),
       email: Yup.string()
         .email("Email không đúng định dạng")
         .trim("Email không được để trống")
         .required("Email không được để trống")
-        .notOneOf(userMail, "Email bị trùng trong mã nhóm GP03"),
+        .notOneOf(userMail, "Email bị trùng"),
+      phoneNumber: Yup.string()
+        .trim("Số điện thoại không được để trống")
+        .required("Số điện thoại không được để trống"),
     }),
     onSubmit: (values) => {
       console.log(values);
@@ -73,8 +79,10 @@ const EditUser = (props) => {
       }}
       onValuesChange={onFormLayoutChange}
       size={componentSize}
+      labelCol={{ span: 4 }}
+      wrapperCol={{ span: 7 }}
     >
-      <h3>
+      <h3 style={{ textAlign: "center" }}>
         Sửa thông tin tài khoản{" "}
         <span className="text-primary">{thongTinKH.username}</span>{" "}
       </h3>
@@ -93,18 +101,11 @@ const EditUser = (props) => {
         rules={[
           {
             required: true,
-            message: "Họ Tên không được để trống",
-          },
-          {
-            whitespace: true,
-            message: "Họ Tên không được để trống",
-          },
-          {
-            min: 3,
-            message: "Họ Tên có ít nhất 3 kí tự",
           },
         ]}
         hasFeedback
+        name="name"
+        onChange={formik.handleChange}
       >
         <Input
           name="name"
@@ -112,19 +113,20 @@ const EditUser = (props) => {
           onChange={formik.handleChange}
           allowClear
           prefix={<UserOutlined />}
+          onBlur={formik.handleBlur}
         />
+        {formik.touched.name && formik.errors.name ? (
+          <div className="alert alert-danger">{formik.errors.name}</div>
+        ) : null}
       </Form.Item>
 
       <Form.Item
         label="Email"
+        name="email"
+        onChange={formik.handleChange}
         rules={[
           {
             required: true,
-            message: "Email không được để trống",
-          },
-          {
-            type: "email",
-            message: "Email không đúng định dạng",
           },
         ]}
         hasFeedback
@@ -148,30 +150,28 @@ const EditUser = (props) => {
             required: true,
             message: "Số điện thoại được để trống",
           },
-          {
-            whitespace: true,
-            message: "Số điện thoại được để trống",
-          },
-          {
-            min: 10,
-            message: "Số điện thoại có ít nhất 10 kí tự",
-          },
         ]}
         hasFeedback
+        name="phoneNumber"
+        onChange={formik.handleChange}
       >
         <Input
           name="phoneNumber"
+          onBlur={formik.handleBlur}
           value={formik.values.phoneNumber}
           onChange={formik.handleChange}
           allowClear
           prefix={<PhoneOutlined />}
         />
+        {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+          <div className="alert alert-danger">{formik.errors.phoneNumber}</div>
+        ) : null}
       </Form.Item>
-      <Form.Item>
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <button type="submit" className="btn-active-add-after">
           Cập nhật
         </button>
-      </Form.Item>
+      </div>
     </Form>
   );
 };

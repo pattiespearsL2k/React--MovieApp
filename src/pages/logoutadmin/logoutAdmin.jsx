@@ -1,13 +1,11 @@
-import React, { useEffect } from 'react';
 import { UserOutlined } from '@ant-design/icons';
-import styled from 'styled-components';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { LogoutAction } from '../../redux/actions/QuanLyNguoiDungAction';
-import { history } from '../../App';
 import { Link } from "react-router-dom";
-import $ from "jquery";
-import { TOKEN, USER_LOGIN } from '../../util/settings/config';
-import "./logout.css"
+import styled from 'styled-components';
+import { history } from '../../App';
+import { LogoutAction } from '../../redux/actions/QuanLyNguoiDungAction';
+import "./logout.css";
 export default function LogOutAdmin() {
   const dispatch = useDispatch()
   const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer)
@@ -20,14 +18,14 @@ export default function LogOutAdmin() {
 
   return (
 
-    <div class="header__navbar--item header__navbar-user">
+    <div className="header__navbar--item header__navbar-user">
       <img src="https://cdn4.vectorstock.com/i/1000x1000/62/48/green-round-glossy-login-icon-vector-2976248.jpg"
-        alt="" class="header__navbar-user-img" />
+        alt="" className="header__navbar-user-img" />
       <UserOutlined className="buttonAccount" />
-      <span class="header__navbar-user-name">{userLogin.username}</span>
-      <ul class="header__navbar-user-menu1">
-        <li class=" header__navbar-user-item header__navbar-user-item--separate  ">
-          <Link class="header__navbar-user-item-link" href="" onClick={handleLogout}>Đăng xuất</Link>
+      <span className="header__navbar-user-name">{userLogin.username}</span>
+      <ul className="header__navbar-user-menu1">
+        <li className=" header__navbar-user-item header__navbar-user-item--separate  ">
+          <Link className="header__navbar-user-item-link" href="" onClick={handleLogout}>Đăng xuất</Link>
         </li>
       </ul>
     </div>

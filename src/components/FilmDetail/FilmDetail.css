@@ -57,8 +57,9 @@
 }
 
 .film-detail .film-margin {
-  font-size: 16px;
+  font-size: 18px;
   margin: 40px 0;
+  line-height: 40px;
 }
 
 .film-detail .tab-film {
@@ -110,7 +111,7 @@
 .schedule-info {
   margin-right: 20px;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 6px;
   font-size: 16px;
   color: rgb(196, 193, 193);
   font-weight: 500;
@@ -162,7 +163,7 @@
 
 .cinema-child {
   border: 1px solid rgb(196, 193, 193);
-  padding: 20px 0 40px 20px;
+  padding: 20px 0 20px 20px;
   border-radius: 6px;
 }
 
@@ -2865,4 +2866,15 @@ body.modal-open .modal {
   padding: 10px;
   font-size: 18px;
   border-radius: 8px;
+}
+
+.movie-info-trailer {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}
+
+.movie-info-trailer label {
+  width: 120px;
+  font-weight: 600;
 }

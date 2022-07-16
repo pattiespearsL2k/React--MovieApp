@@ -5,7 +5,7 @@
     font-family: "Saira Semi Condensed", sans-serif;
 }
 
-.div-btn-film .ant-btn {
+.div-btn-film .ant-btn.btn-film {
     padding: 0 20px;
     outline: none;
     box-shadow: none;

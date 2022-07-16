@@ -66,13 +66,15 @@ export default function ShowTime(props) {
   });
   const [errDay, setErrDay] = useState("");
   const [errTime, setErrTime] = useState("");
-
+  const { thongTinCumRap } = useSelector((state) => state.QuanLyRapReducer);
+  console.log(thongTinCumRap);
   useEffect(async () => {
     try {
-      let result = await quanLyRapService.layThongTinHeThongRapByUserID();
+      let result = await quanLyRapService.layThongTinCumRapTheoHeThongManager();
+      console.log("result", result);
       setState({
         ...state,
-        rapID: result.data,
+        rapID: result,
       });
     } catch (error) {
       console.log(error);
@@ -83,10 +85,10 @@ export default function ShowTime(props) {
     dispatch(layHeThongRapAction());
   }, []);
 
-  const rapData = useSelector(
-    (state) => state.QuanLyRapReducer.heThongRapAdmin
-  );
-  console.log(rapData, "rapData");
+  // const rapData = useSelector(
+  //   (state) => state.QuanLyRapReducer.heThongRapAdmin
+  // );
+  // console.log(rapData, "rapData");
 
   const handleChangeCumRap = (value) => {
     console.log(value);
@@ -105,7 +107,7 @@ export default function ShowTime(props) {
 
   const convertSelectRapcon = () => {
     let arrayRap = [];
-    state.rapID.cinemaChild?.forEach((item) => {
+    state.rapID.data?.forEach((item) => {
       if (item.cinemaChildID === state.cumRapId) {
         arrayRap = Object.values(item.listRoom);
       }
@@ -124,16 +126,22 @@ export default function ShowTime(props) {
   const onFinish = async (values) => {
     console.log(values, "values");
     var nowDate = new Date().toLocaleDateString("en-GB");
-    var nowTime = new Date().toLocaleTimeString();
+    var nowTime = new Date().toLocaleTimeString("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
     values.showtime = dayjs(values.showtime).format("HH:mm:ss");
     values.showday = dayjs(values.showday).format("DD/MM/YYYY");
     if (values.showday < nowDate) {
       setErrDay("Ngày chiếu nên lớn hơn ngày hiện tại");
     }
-    if (values.showtime < nowTime) {
-      setErrTime("Giờ chiếu nên lớn hơn giờ hiện tại");
+    if (values.showday === nowDate) {
+      if (values.showtime < nowTime) {
+        setErrTime("Giờ chiếu nên lớn hơn giờ hiện tại");
+      } else {
+        setErrTime("");
+      }
     }
-
     let newValue = {
       ...values,
       movieId: props.match.params.id,
@@ -173,7 +181,7 @@ export default function ShowTime(props) {
             rules={[{ required: true, message: "Cụm rạp không được để trống" }]}
           >
             <Select
-              options={state.rapID.cinemaChild?.map((cumRap) => ({
+              options={state.rapID.data?.map((cumRap) => ({
                 label: cumRap.cinemaChildName,
                 value: cumRap.cinemaChildID,
               }))}

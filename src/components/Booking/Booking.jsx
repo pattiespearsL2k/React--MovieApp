@@ -1,59 +1,31 @@
-import { Tabs } from "antd";
+import { message, Tabs } from "antd";
 import _ from "lodash";
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   datGheAction,
-  datVeAction,
   layChiTietPhongVeAction,
 } from "../../redux/actions/QuanLyDatVeActions";
 import { ThongTinDatVe } from "../../_core/models/ThongTinDatVe";
-import "./Booking.css";
-// import { Alert } from "antd";
-import moment from "moment";
-import { layThongTinNguoiDungAction } from "../../redux/actions/QuanLyNguoiDungAction";
-// import { connection } from '../../index';
+
 import { Grid } from "@mui/material";
-import MuiAlert from "@mui/material/Alert";
-import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
+import { pick } from "lodash";
 import { Redirect } from "react-router-dom";
+import Payment from "../../pages/Payment/Payment";
 import { USER_LOGIN } from "../../util/settings/config";
-// const [open, setOpen] = useState(false);
+import "./Booking.css";
 
-const Alert = React.forwardRef(function Alert(props, ref) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
-
-const onClose = (e) => {
-  console.log(e, "I was closed.");
-};
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    color: theme.palette.common.white,
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
+import { useState } from "react";
+import {
+  LIST_CHAIR,
+  SHOW_ID,
+  TOTAL_PRICE,
+  USER_ACCOUNT,
+} from "../../util/settings/config";
 
 function Checkout(props) {
+  const [visiable, setVisiable] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -63,7 +35,9 @@ function Checkout(props) {
     useSelector((state) => state.QuanLyDatVeReducer);
 
   const dispatch = useDispatch();
-
+  const total = danhSachGheDangDat.reduce((tongTien, ghe, index) => {
+    return (tongTien += ghe.price);
+  }, 0);
   console.log("danhSachGheDangDat", danhSachGheDangDat);
   useEffect(() => {
     //Gọi hàm tạo ra 1 async function
@@ -73,7 +47,28 @@ function Checkout(props) {
     return () => {};
   }, []);
 
+  const handleVisiable = () => {
+    setVisiable(false);
+  };
+
   const { informationMovie, listChair } = chiTietPhongVe;
+  const handleAlert = () => {
+    if (danhSachGheDangDat.length > 0) {
+      // dispatch({
+      //   type: "CHUYEN_TAB",
+      // });
+      setVisiable(true);
+    } else {
+      console.log("ok");
+      message.error({
+        content: "Hãy chọn ghế",
+        className: "custom-class",
+        style: {
+          marginTop: "20vh",
+        },
+      });
+    }
+  };
 
   const renderSeats = () => {
     return listChair?.map((ghe, index) => {
@@ -123,6 +118,7 @@ function Checkout(props) {
       );
     });
   };
+
   return (
     <div className="mt-5">
       <Grid container spacing={5}>
@@ -185,7 +181,7 @@ function Checkout(props) {
               <span>{informationMovie.roomName}</span>
             </div>
             <div className="screen-info">
-              <p>Ngày chiếu:</p>
+              <p>Suất chiếu:</p>
               <span>
                 {informationMovie.showday} - {informationMovie.showtime}
               </span>
@@ -224,16 +220,46 @@ function Checkout(props) {
                 onClick={() => {
                   const bookingInformation = new ThongTinDatVe();
                   bookingInformation.showID = props.match.params.id;
+                  let newDanhSachGheDangDat = [];
+                  danhSachGheDangDat?.map((item) => {
+                    let newDatGhe = pick(item, ["chairID", "price"]);
+                    newDanhSachGheDangDat.push(newDatGhe);
+                  });
+                  console.log(newDanhSachGheDangDat, "newDanhSachGheDangDat");
                   bookingInformation.listChair = danhSachGheDangDat;
-                  bookingInformation.userAccount = userLogin.username;
-                  dispatch(datVeAction(bookingInformation));
+                  // bookingInformation.userAccount = userLogin.username;
+                  bookingInformation.totalPrice = total;
+                  localStorage.setItem(
+                    SHOW_ID,
+                    JSON.stringify(bookingInformation.showID)
+                  );
+                  localStorage.setItem(
+                    LIST_CHAIR,
+                    JSON.stringify(newDanhSachGheDangDat)
+                  );
+                  localStorage.setItem(
+                    USER_ACCOUNT,
+                    JSON.stringify(bookingInformation.userAccount)
+                  );
+                  localStorage.setItem(
+                    TOTAL_PRICE,
+                    JSON.stringify(bookingInformation.totalPrice)
+                  );
+                  // alert("Hãy chọn ghế!");
+                  handleAlert();
                 }}
                 className="pointer bg-green-500 text-white w-full text-center p-y-6 fw-500 fs-18 radius-5"
               >
-                ĐẶT VÉ
+                TIẾP TỤC
               </button>
             </div>
           </div>
+          <Payment
+            visiable={visiable}
+            handleVisiable={handleVisiable}
+            setVisiable={setVisiable}
+          />
+          ;
         </Grid>
       </Grid>
     </div>
@@ -242,14 +268,6 @@ function Checkout(props) {
 const { TabPane } = Tabs;
 
 export default function CheckoutTab(props) {
-  useEffect(() => {
-    return () => {
-      dispatch({
-        type: "CHANGE_TAB_ACTIVE",
-        number: "1",
-      });
-    };
-  }, []);
   const { tabActive } = useSelector((state) => state.QuanLyDatVeReducer);
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
   const dispatch = useDispatch();
@@ -271,92 +289,18 @@ export default function CheckoutTab(props) {
         activeKey={tabActive}
         onChange={(key) => {
           dispatch({
-            type: "CHANGE_TAB_ACTIVE",
-            number: key.toString(),
+            type: "CHUYEN_TAB",
+            // number: key.toString(),
           });
         }}
       >
-        <TabPane tab="01 CHỌN GHẾ & THANH TOÁN" key="1">
+        <TabPane tab="CHỌN GHẾ" key="1">
           <Checkout {...props} />
         </TabPane>
-        <TabPane tab="02 KẾT QUẢ ĐẶT VÉ" key="2">
-          <KetQuaDatVe {...props} />
-        </TabPane>
+        {/* <TabPane tab="02 THANH TOÁN" key="2">
+          <Payment {...props} />
+        </TabPane> */}
       </Tabs>
     </div>
-  );
-}
-
-function KetQuaDatVe(props) {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  const dispatch = useDispatch();
-  const { thongTinNguoiDung } = useSelector(
-    (state) => state.QuanLyNguoiDungReducer
-  );
-
-  useEffect(() => {
-    const action = layThongTinNguoiDungAction();
-    dispatch(action);
-  }, []);
-
-  return (
-    <TableContainer className="history-ticket" component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="center">Số thứ tự </StyledTableCell>
-            <StyledTableCell align="center">Giờ đặt vé</StyledTableCell>
-            <StyledTableCell align="center">Ngày đặt vé</StyledTableCell>
-            <StyledTableCell align="center">Phim</StyledTableCell>
-            <StyledTableCell align="center">Giá</StyledTableCell>
-            <StyledTableCell align="center">Hệ thống rạp</StyledTableCell>
-            <StyledTableCell align="center">Cụm rạp</StyledTableCell>
-            <StyledTableCell align="center">Rạp</StyledTableCell>
-            <StyledTableCell align="center">Ghế</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {thongTinNguoiDung.bookingInformation?.map((ticket, index) => (
-            <StyledTableRow key={index}>
-              <StyledTableCell align="center">{index + 1}</StyledTableCell>
-              <StyledTableCell align="center">
-                {moment(ticket.bookingDate).utc("+0700").format("HH:mm:ss")}
-              </StyledTableCell>
-              <StyledTableCell align="center">
-                {moment(ticket.bookingDate).utc("+0700").format("DD-MM-YYYY ")}
-              </StyledTableCell>
-              <StyledTableCell align="center">
-                {" "}
-                {ticket.titleMovie}
-              </StyledTableCell>
-              <StyledTableCell align="center">{ticket.price}</StyledTableCell>
-              <StyledTableCell align="center">
-                {ticket.listChair[0].cinemaID}
-              </StyledTableCell>
-              <StyledTableCell align="center">
-                {ticket.listChair[0].cinemaChildName}
-              </StyledTableCell>
-              <StyledTableCell align="center">
-                {ticket.listChair[0].roomName}
-              </StyledTableCell>
-              <StyledTableCell className="chair-history">
-                {ticket.listChair?.map((seat, index) => {
-                  return (
-                    <>
-                      <span align="center">{seat.chairName}</span>
-                      <span> </span>
-                    </>
-                  );
-                })}
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-          ;
-        </TableBody>
-      </Table>
-    </TableContainer>
   );
 }

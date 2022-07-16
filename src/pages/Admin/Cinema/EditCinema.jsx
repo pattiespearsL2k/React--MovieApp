@@ -1,146 +1,163 @@
+import { DatePicker, Form, Input, InputNumber, Switch } from "antd";
+import { useFormik } from "formik";
+import moment from "moment";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
-    Button, Form,
-    Input
-  } from 'antd';
-  import { useEffect, useState } from 'react';
-  
-  import { useFormik } from 'formik';
-  import { useDispatch } from 'react-redux';
-  import * as Yup from 'yup';
-  // import { GROUPID } from '../../../util/settings/config';
-  import { MailOutlined, PhoneOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons';
-  
-  import { useSelector } from 'react-redux';
-  import { CapNhatThongTinNguoiDungAction, layThongTinNguoiDungAction } from '../../../redux/actions/QuanLyNguoiDungAction';
-  
-  import styled from 'styled-components';
-  import '../../../assets/style/addUser.css';
-  
-  
-  const EditUser = (props) => {
-    const [componentSize, setComponentSize] = useState('default');
-    const { thongTinNguoiDung } = useSelector(state => state.QuanLyNguoiDungReducer);
-    console.log(thongTinNguoiDung);
-    const dispatch = useDispatch();
-    const { mangND } = useSelector(state => state.QuanLyNguoiDungReducer);
-  
-    const userMail = mangND.map(value => { return value.email }).filter(item => item !== thongTinNguoiDung.email)
-  
-    useEffect(() => {
-      let { username } = props.match.params;
-      dispatch(layThongTinNguoiDungAction(username));
-      // console.log(username)
-    }, [])
-  
-  
-    const formik = useFormik({
-      enableReinitialize: true,
-      initialValues: {
-        username: thongTinNguoiDung.username,
-        name: thongTinNguoiDung.name,
-        email: thongTinNguoiDung.email,
-        phoneNumber: thongTinNguoiDung.phoneNumber,
-        roleId: thongTinNguoiDung.roleId,
-        gender: ""
-      },
-      validationSchema: Yup.object({
-        email: Yup.string()
-          .email('Email không đúng định dạng').trim('Email không được để trống').required('Email không được để trống').notOneOf(userMail, 'Email bị trùng trong mã nhóm GP03'),
-  
-      }),
-      onSubmit: values => {
-        // values.maNhom = GROUPID
-        console.log(values)
-        const action = CapNhatThongTinNguoiDungAction(values);
-        dispatch(action);
-      },
-    })
-  
-    const onFormLayoutChange = ({ size }) => {
-      setComponentSize(size);
-    };
-  
-    return (
-  
-      <Form className='add-user-form'
+  capNhatHeThongRapAction,
+  layThongTinChiTietHeThongRapAction,
+} from "../../../redux/actions/QuanLyRapActions";
+import * as Yup from "yup";
+
+const EditCinema = (props) => {
+  const { thongTinRap } = useSelector((state) => state.QuanLyRapReducer);
+  console.log(thongTinRap);
+  const [imgSrc, setImgSrc] = useState("");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let { id } = props.match.params;
+    dispatch(layThongTinChiTietHeThongRapAction(id));
+  }, []);
+
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      cinemaID: thongTinRap.cinemaID,
+      name: thongTinRap.name,
+      aliases: thongTinRap.aliases,
+      logo: null,
+    },
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .trim("Tên rạp không được để trống")
+        .required("Tên rạp không được để trống"),
+      aliases: Yup.string()
+        .trim("Bí danh không được để trống")
+        .required("Bí không được để trống"),
+    }),
+
+    onSubmit: (values) => {
+      console.log("values", values);
+      values.releaseDate = moment(values.releaseDate).format("DD/MM/YYYY");
+      //Tạo đối tượng formdata => Đưa giá trị values từ formik vào formdata
+      let formData = new FormData();
+      for (let key in values) {
+        if (key !== "logo") {
+          formData.append(key, values[key]);
+        } else {
+          if (values.logo !== null) {
+            formData.append("File", values.logo, values.logo.name);
+          }
+        }
+      }
+      //Cập nhật phim upload hình
+      dispatch(capNhatHeThongRapAction(formData));
+    },
+  });
+
+  const handleChangeFile = async (e) => {
+    //Lấy file ra từ e
+    let file = e.target.files[0];
+    if (
+      file.type === "image/jpeg" ||
+      file.type === "image/jpg" ||
+      file.type === "image/gif" ||
+      file.type === "image/png"
+    ) {
+      //Đem dữ liệu file lưu vào formik
+      await formik.setFieldValue("logo", file);
+      //Tạo đối tượng để đọc file
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (e) => {
+        setImgSrc(e.target.result); //Hình base 64
+      };
+    }
+  };
+
+  return (
+    <>
+      <Form
+        className="addnew"
         onSubmitCapture={formik.handleSubmit}
         layout="horizontal"
-        initialValues={{
-          size: componentSize,
-        }}
-        onValuesChange={onFormLayoutChange}
-        size={componentSize}
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 8 }}
       >
-        <h3>Sửa thông tin tài khoản <span className='text-primary'>{thongTinNguoiDung.username}</span> </h3>
-  
-        <Form.Item label="Tài Khoản" className='mt-4'>
-          <Input name='username' disabled value={formik.values.username} prefix={<UserAddOutlined />} allowClear />
-        </Form.Item>
-        <Form.Item label="Họ Tên"
+        <h3 style={{ textAlign: "center" }}>Cập nhật hệ thống rạp </h3>
+        <Form.Item
+          label="Tên rạp"
           rules={[
             {
               required: true,
-              message: 'Họ Tên không được để trống',
             },
-            {
-              whitespace: true,
-              message: 'Họ Tên không được để trống',
-            },
-            {
-              min: 3,
-              message: 'Họ Tên có ít nhất 3 kí tự',
-            }
           ]}
-          hasFeedback >
-          <Input name='name' value={formik.values.name} onChange={formik.handleChange} allowClear prefix={<UserOutlined />} />
+          hasFeedback
+          name="name"
+          onChange={formik.handleChange}
+        >
+          <Input
+            name="name"
+            onChange={formik.handleChange}
+            value={formik.values.name}
+          />
+          {formik.touched.name && formik.errors.name ? (
+            <div className="alert alert-danger">{formik.errors.name}</div>
+          ) : null}
         </Form.Item>
-  
-        <Form.Item label="Email"
+        <Form.Item
+          label="Bí danh"
           rules={[
             {
               required: true,
-              message: 'Email không được để trống',
             },
-            {
-              type: 'email',
-              message: 'Email không đúng định dạng',
-            },
-  
           ]}
-          hasFeedback>
-          <Input name='email' value={formik.values.email} allowClear prefix={<MailOutlined />} onChange={formik.handleChange} onBlur={formik.handleBlur} />
-          {formik.touched.email && formik.errors.email
-            ? (<div className='alert alert-danger'>{formik.errors.email}</div>)
-            : null}
+          hasFeedback
+          name="aliases"
+          onChange={formik.handleChange}
+        >
+          <Input
+            name="aliases"
+            onChange={formik.handleChange}
+            value={formik.values.aliases}
+          />
+          {formik.touched.aliases && formik.errors.aliases ? (
+            <div className="alert alert-danger">{formik.errors.aliases}</div>
+          ) : null}
         </Form.Item>
-        <Form.Item label="Số điện thoại"
+        <Form.Item
+          label="Hình ảnh"
+          onChange={handleChangeFile}
+          name="logo"
           rules={[
             {
               required: true,
-              message: 'Số điện thoại được để trống',
             },
-            {
-              whitespace: true,
-              message: 'Số điện thoại được để trống',
-            },
-            {
-              min: 10,
-              message: 'Số điện thoại có ít nhất 10 kí tự',
-            }
           ]}
-          hasFeedback >
-          <Input name='phoneNumber' value={formik.values.phoneNumber} onChange={formik.handleChange} allowClear prefix={<PhoneOutlined />} />
+          hasFeedback
+        >
+          <input
+            name="logo"
+            type="file"
+            onChange={handleChangeFile}
+            accept="image/png, image/jpeg,image/gif,image/jpg"
+          />
+          <br />
+          <img
+            width={50}
+            height={50}
+            src={imgSrc === "" ? thongTinRap.logo : imgSrc}
+          />
         </Form.Item>
-        <Form.Item>
-          <button type="submit" className="btn-active-add-after">Cập nhật</button>
-        </Form.Item>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button type="submit" className="btn-active-add-after">
+            Cập nhật rạp
+          </button>
+        </div>
       </Form>
-    );
-  };
-  const ButtonStyled = styled(Button)`
-        color: #fff;
-        border-color: #1890ff;
-        background: #1890ff;
-      
-  `
-  export default EditUser
+    </>
+  );
+};
+
+export default EditCinema;

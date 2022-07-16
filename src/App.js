@@ -28,6 +28,13 @@ import ShowtimeManager from './pages/Manager/Showtime/ShowTime.jsx'
 import Cinema from './pages/Admin/Cinema/Cinema';
 import ViewShowTime from './pages/Admin/ShowTime/ViewShowTime';
 import ViewShowTimeManager from './pages/Manager/Showtime/ViewShowTimeManager';
+import AddCinema from './pages/Admin/Cinema/AddCinema';
+import EditCinema from './pages/Admin/Cinema/EditCinema';
+import CinemaChild from './pages/Manager/CinemaChild/CinemaChild';
+import AddCinemaChild from './pages/Manager/CinemaChild/AddCinemaChild';
+import EditCinemaChild from './pages/Manager/CinemaChild/EditCinemaChild';
+import DetailTicket from './pages/DetailTicket/DetailTicket';
+import QR from './pages/QR/QR';
 
 
 
@@ -38,7 +45,9 @@ function App() {
     <Router history={history}>
       <Loading />
       <HomeTemplate exact path="/" component={Home} />
+      <Route exact path="/detailticket/:id" component={DetailTicket} />
       <HomeTemplate exact path='/schedule' component={Schedule} />
+      <Route exact path='/qr/:id' component={QR} />
       <HomeTemplate exact path='/event' component={Promotion} />
       <HomeTemplate exact path='/member' component={Member} />
       <HomeTemplate exact path='/history' component={History} />
@@ -52,11 +61,16 @@ function App() {
       <AdminTemplate path="/admin/films/edit/:id" component={Edit} />
       <AdminTemplate path="/admin/films/showtime/:id/:title" component={ShowTime} />
       <AdminTemplate path="/admin/showtime" component={ShowTime} />
+      <AdminTemplate path="/admin/cinema" component={Cinema} />
+      <AdminTemplate path="/admin/cinema/addnew" component={AddCinema} />
+      <AdminTemplate path="/admin/films/showtime/:id" component={ViewShowTime} />
+      <AdminTemplate path="/admin/cinema/edit/:id" component={EditCinema} />
       <ManagerTemplate path="/manager" component={Film} />
       <ManagerTemplate path="/manager/showtime/:id/:title" component={ShowtimeManager} />
       <ManagerTemplate path="/manager/showtime/:id" component={ViewShowTimeManager} />
-      <AdminTemplate path="/admin/cinema" component={Cinema} />
-      <AdminTemplate path="/admin/films/showtime/:id" component={ViewShowTime} />
+      <ManagerTemplate path="/manager/cinemachild" component={CinemaChild} />
+      <ManagerTemplate path="/manager/cinemachild/add" component={AddCinemaChild} />
+      <ManagerTemplate path="/manager/cinemachild/edit/:id" component={EditCinemaChild} />
       <ScrollToTop />
     </Router>
   );

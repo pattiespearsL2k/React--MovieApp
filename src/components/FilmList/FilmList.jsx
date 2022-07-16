@@ -62,7 +62,7 @@ const FilmList = (props) => {
         >
           PHIM ĐANG CHIẾU
         </Button>
-        <Button
+        <Button className="btn-film"
           style={
             styleSap === comingSoon
               ? {

@@ -36,13 +36,21 @@ const ManagerTemplate = (props) => {
                   />
                 </div>
                 <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
+                  <Menu.SubMenu key="sub1" icon={<FileOutlined />} title="Phim">
+                    <Menu.Item key="10" icon={<FileOutlined />}>
+                      <NavLink to="/manager">Phim</NavLink>
+                    </Menu.Item>
+                  </Menu.SubMenu>
                   <Menu.SubMenu
                     key="sub1"
                     icon={<FileOutlined />}
-                    title="Films"
+                    title="Cụm rạp"
                   >
-                    <Menu.Item key="10" icon={<FileOutlined />}>
-                      <NavLink to="/admin/films">Films</NavLink>
+                    <Menu.Item key="sub2" icon={<FileOutlined />}>
+                      <NavLink to="/manager/cinemachild">Cụm rạp</NavLink>
+                    </Menu.Item>
+                    <Menu.Item key="2" icon={<FileOutlined />}>
+                      <NavLink to="/manager/cinemachild/add">Thêm rạp</NavLink>
                     </Menu.Item>
                   </Menu.SubMenu>
                 </Menu>

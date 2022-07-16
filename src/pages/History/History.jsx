@@ -90,19 +90,17 @@ const History = () => {
                     {ticket.listChair[0].roomName}
                   </StyledTableCell>
                   <StyledTableCell className="chair-history">
-                    {ticket.listChair?.map((seat, index) => {
+                    {ticket.listChair.map((seat, index) => {
                       return (
-                        <>
-                          <span align="center">{seat.chairName}</span>
-                          <span> </span>
-                        </>
+                        <span key={index} align="center">
+                          {seat.chairName + " "}
+                        </span>
                       );
                     })}
                   </StyledTableCell>
                 </StyledTableRow>
               );
             })}
-            
           </TableBody>
         </Table>
       </TableContainer>

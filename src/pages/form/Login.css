@@ -91,7 +91,7 @@
 	outline: none;
 }
 
-form {
+/* form {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -99,7 +99,7 @@ form {
 	padding: 0 20px;
 	height: 100%;
 	text-align: center;
-}
+} */
 
 .form-control {
 	background-color: #eee;
@@ -263,7 +263,6 @@ form .inp:focus {
 	margin-right: 10px;
 }
 
-
 .login form .invalid-feedback {
 	text-align: left;
 	font-size: 12px;
@@ -309,9 +308,28 @@ form .inp:focus {
 	line-height: 0;
 }
 
-
 .ant-modal-root .ant-modal-content {
-	background-color: transparent !important;
+	background-color: #444;
+	opacity: 0.9;
+}
+
+.ant-modal-content .ant-modal-header {
+	background-color: orange;
+}
+button.ant-btn.ant-btn-primary {
+	background-color: orange;
+	box-shadow: none;
+	border: orange;
+	font-size: 17px;
+}
+button.ant-btn.ant-btn-default {
+	font-size: 16px;
+}
+.ant-modal-header .ant-modal-title {
+	text-align: center;
+	font-size: 20px;
+	font-weight: 600;
+	font-family: "Montserrat";
 }
 @media (max-width: 1259px) {
 	.modal-dialog {
@@ -453,15 +471,15 @@ form .inp:focus {
 }
 
 .login__btn .btn-register {
-    box-shadow: 0 0 0 3em var(--color-primary2) inset;
-    color: #fff;
-    border: none;
-    outline: none;
-    border-radius: 20px;
-    font-weight: 600;
-    transition: all 0.5s ease-in-out;
-    padding: 8px 45px 10px;
-    text-transform: uppercase;
+	box-shadow: 0 0 0 3em var(--color-primary2) inset;
+	color: #fff;
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	font-weight: 600;
+	transition: all 0.5s ease-in-out;
+	padding: 8px 45px 10px;
+	text-transform: uppercase;
 }
 
 .login__btn .btn-registerl:hover {
@@ -469,6 +487,64 @@ form .inp:focus {
 	color: var(--color-primary2);
 }
 
-.ant-modal-confirm-content{
-color:#fff !important;
+.ant-modal-confirm-content {
+	color: #fff !important;
+}
+
+form.payment {
+	padding-top: 50px;
+	font-family: "Montserrat";
+	display: flex;
+	justify-content: space-evenly;
+}
+
+form.payment .ant-form-item-label > label {
+	font-size: 16px;
+	color: #fff;
+}
+
+.timer-wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.timer {
+	font-family: "Montserrat";
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.text {
+	color: #aaa;
+}
+
+.value {
+	font-size: 40px;
+	color: var(--color-primary1);
+}
+
+.info {
+	max-width: 360px;
+	margin: 40px auto 0;
+	text-align: center;
+	font-size: 16px;
+}
+
+.payment-top {
+	padding-right: 50px;
+}
+
+.timeup {
+	font-size: 20px;
+	color: red;
+	text-align: center;
+}
+
+form.payment .ant-form-horizontal .ant-form-item-control {
+	flex: 0;
+}
+
+form.payment .ant-form-item-control-input {
+	width: 300px !important;
 }

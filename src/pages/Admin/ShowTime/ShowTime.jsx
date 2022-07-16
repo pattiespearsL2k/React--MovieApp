@@ -79,10 +79,10 @@ export default function ShowTime(props) {
     dispatch(layHeThongRapAction());
   }, []);
 
-  const rapData = useSelector(
-    (state) => state.QuanLyRapReducer.heThongRapAdmin
-  );
-  console.log(rapData, "rapData");
+  // const rapData = useSelector(
+  //   (state) => state.QuanLyRapReducer.heThongRapAdmin
+  // );
+  // console.log(rapData, "rapData");
 
   const handleChangeHeThongRap = async (value) => {
     // console.log(value)
@@ -145,14 +145,25 @@ export default function ShowTime(props) {
   }
   const onFinish = async (values) => {
     var nowDate = new Date().toLocaleDateString("en-GB");
-    var nowTime = new Date().toLocaleTimeString();
+    var nowTime = new Date().toLocaleTimeString("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
     values.showtime = dayjs(values.showtime).format("HH:mm:ss");
     values.showday = dayjs(values.showday).format("DD/MM/YYYY");
     if (values.showday < nowDate) {
       setErrDay("Ngày chiếu nên lớn hơn ngày hiện tại");
     }
-    if (values.showtime < nowTime) {
-      setErrTime("Giờ chiếu nên lớn hơn giờ hiện tại");
+    if (values.showday === nowDate) {
+      console.log("ok");
+      console.log(values.showtime, "showtime");
+      console.log(nowTime, "nowtime");
+      if (values.showtime < nowTime) {
+        console.log("hi");
+        setErrTime("Giờ chiếu nên lớn hơn giờ hiện tại");
+      } else {
+        setErrTime("");
+      }
     }
     let newValue = {
       ...values,
@@ -163,7 +174,7 @@ export default function ShowTime(props) {
     try {
       let result = await quanLyDatVeService.taoLichChieu(newValue);
       message.success("Tạo lịch chiếu thành công");
-      history.push("/admin");
+      history.push("/admin/films");
       dispatch(hideLoadingAction);
     } catch (err) {
       dispatch(hideLoadingAction);

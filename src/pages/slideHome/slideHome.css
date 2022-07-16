@@ -1,4 +1,3 @@
-
 .pageMovie {
     position: absolute;
     top: 0;
@@ -11,7 +10,7 @@
 .slideHome {
     height: 100vh;
     position: relative;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "Courier New", Courier, monospace;
 }
 
 .slideVideo {
@@ -43,8 +42,8 @@ section.pageMovie video {
     z-index: 99;
     width: 100%;
     position: absolute;
-    bottom: 100px;
-    padding: 0 150px;
+    bottom: 250px;
+    /* padding: 0 150px; */
     color: #ffffff;
 }
 
@@ -55,17 +54,11 @@ section.pageMovie video {
 }
 
 .slideVideo--content__name {
-    font-size: 60px;
+    font-size: 40px;
     font-weight: 700;
-    font-family: 'Syne Tactile', cursive;
+    font-family: "Montserrat", cursive;
     letter-spacing: 10px;
-    margin-top: 10px;
-}
-
-.slideVideo--content__digital {
-    font-weight: 500;
-    font-size: 20px;
-    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
 }
 
 .slideVideo--content__watch {
@@ -79,19 +72,19 @@ section.pageMovie video {
     width: 56px;
     border: 1px solid #ffffff;
     border-radius: 30px;
-    margin-right:10px ;
+    margin-right: 10px;
     cursor: pointer;
     display: inline-block;
     display: flex;
 }
 
-.slideVideo--content__watch-button svg{
-    margin:auto;
+.slideVideo--content__watch-button svg {
+    margin: auto;
 }
 
 .slideVideo--content__watch-title {
     font-weight: 500;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: "Courier New", Courier, monospace;
     font-size: 20px;
 }
 
@@ -165,9 +158,9 @@ section.pageMovie video {
     max-width: 950px !important;
 }
 
-
 .MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded {
     width: 90%;
     height: 80%;
 }
+
 

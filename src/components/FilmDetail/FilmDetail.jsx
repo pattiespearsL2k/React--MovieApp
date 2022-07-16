@@ -8,9 +8,13 @@ import { layThongTinChiTietPhim } from "../../redux/actions/QuanLyRapActions";
 import { quanLyRapService } from "../../services/QuanLyRapService";
 import DayList from "./DayList";
 import "./FilmDetail.css";
+import _ from "lodash";
 const { TabPane } = Tabs;
 
 export default function FilmDetail(props) {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [statePhim, setStatePhim] = useState({
     heThongRap: [],
   });
@@ -88,6 +92,14 @@ export default function FilmDetail(props) {
             <label>Rated: </label>
             <div className="std">{filmDetail.rating}</div>
           </div>
+          <div className="movie-info-trailer">
+            <label>Trailer: </label>
+            <iframe
+              width="420"
+              height="205"
+              src={filmDetail.trailer}
+            ></iframe>
+          </div>
         </Grid>
         <Grid item xs={12}>
           <h4 className="film-content">NỘI DUNG PHIM</h4>
@@ -116,7 +128,7 @@ export default function FilmDetail(props) {
                 >
                   {htr.cumRapChieu?.map((cumRap, index) => {
                     return (
-                      <div className="mt-5 cinema-part" key={index}>
+                      <div className="mt-2 cinema-part" key={index}>
                         <div className="flex flex-row">
                           <p
                             className="cinema-p"
@@ -135,18 +147,20 @@ export default function FilmDetail(props) {
                             >
                               {cumRap.address}
                             </p>
-                            {cumRap.lichChieuPhim.map((lichChieu, index) => {
-                              return (
-                                <p key={index}>
-                                  <NavLink
-                                    to={`/booking/${lichChieu.showID}`}
-                                    className="schedule-info col-span-1 text-green-800 font-bold"
-                                  >
-                                    {lichChieu.showtime}
-                                  </NavLink>
-                                </p>
-                              );
-                            })}
+                            {_.sortBy(cumRap.lichChieuPhim, ["showtime"]).map(
+                              (lichChieu, index) => {
+                                return (
+                                  <span key={index}>
+                                    <NavLink
+                                      to={`/booking/${lichChieu.showID}`}
+                                      className="schedule-info col-span-1 text-green-800 font-bold"
+                                    >
+                                      {lichChieu.showtime}
+                                    </NavLink>
+                                  </span>
+                                );
+                              }
+                            )}
                           </div>
                         </div>
                       </div>
