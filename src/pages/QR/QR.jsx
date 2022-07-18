@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
 import { layThongTinChiTietVeAction } from "../../redux/actions/QuanLyDatVeActions";
+import moment from "moment";
 const QR = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -27,7 +28,7 @@ const QR = (props) => {
   }, []);
 
   return (
-    <div className="qr-code" style={{ padding: "20px 0" }}>
+    <div className="qr-code" style={{ padding: "150px 0" }}>
       <p style={{ fontSize: "20px", textAlign: "center" }}>
         {" "}
         <b>Mã vé: {chiTietVe.couponID}</b>
@@ -64,7 +65,11 @@ const QR = (props) => {
           </tr>
           <tr>
             <td>Ngày giờ đặt vé</td>
-            <td>{chiTietVe.bookingDate}</td>
+            <td>
+              {moment(chiTietVe.bookingDate)
+                .utcOffset("+0700")
+                .format("DD/MM/YYYY HH:mm")}
+            </td>
           </tr>
           <tr>
             <td>Suất chiếu</td>

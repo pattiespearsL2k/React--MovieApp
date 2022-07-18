@@ -86,7 +86,7 @@ export default function Login() {
   }, [userLogin]);
 
   return (
-    <div>
+   
       <Form
         className="login"
         onSubmit={(e) => {
@@ -96,7 +96,7 @@ export default function Login() {
         }}
       >
         <div className="form-container-login">
-          <h3>Đăng nhập</h3>
+          <h3>ĐĂNG NHẬP</h3>
           <label htmlFor="username">Tài khoản</label>
           <Form.Control
             prefix={<UserAddOutlined />}
@@ -124,15 +124,7 @@ export default function Login() {
           <div className="login__btn">
             <Form.Control type="submit" value=" Đăng nhập" />
           </div>
-          <div className="no-acc">
-            Bạn chưa có tài khoản?
-            <a href="" onClick={showModal}>
-              {" "}
-              Đăng ký
-            </a>
-          </div>
         </div>
       </Form>
-    </div>
   );
 }

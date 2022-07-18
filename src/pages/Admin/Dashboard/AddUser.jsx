@@ -166,54 +166,44 @@ const AddUser = () => {
           <div className="alert alert-danger">{formik.errors.phoneNumber}</div>
         ) : null}
       </Form.Item>
-      <Form.Item
-        label="Mật Khẩu"
+       <Form.Item
         name="password"
+        label="Mật khẩu"
         onChange={formik.handleChange}
         rules={[
           {
             required: true,
+            message: 'Please input your password!',
           },
         ]}
         hasFeedback
       >
-        <Input.Password
-          name="password"
-          type="password"
-          allowClear
-          prefix={<LockOutlined />}
-        />
-        {formik.touched.password && formik.errors.password ? (
-          <div className="alert alert-danger">{formik.errors.password}</div>
-        ) : null}
+        <Input.Password />
       </Form.Item>
+
       <Form.Item
-        label="Nhập lại Mật Khẩu"
+        name="confirmPassword"
+        label="Nhập lại mật khẩu"
         onChange={formik.handleChange}
-        name="comfirmPassword"
+        dependencies={['password']}
+        hasFeedback
         rules={[
           {
             required: true,
-            message: "Mật khẩu không được để trống",
+            message: 'Please confirm your password!',
           },
-
           ({ getFieldValue }) => ({
             validator(_, value) {
-              if (!value || getFieldValue("password") === value) {
-                return Promise.resolve("done");
+              if (!value || getFieldValue('password') === value) {
+                return Promise.resolve();
               }
-              return Promise.reject("Mật khẩu không trùng");
+
+              return Promise.reject(new Error('Mật khẩu không trùng!'));
             },
           }),
         ]}
-        hasFeedback
       >
-        <Input.Password
-          name="password"
-          type="password"
-          allowClear
-          prefix={<LockOutlined />}
-        />
+        <Input.Password />
       </Form.Item>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <button

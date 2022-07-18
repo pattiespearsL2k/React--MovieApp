@@ -6,6 +6,7 @@ import {
   layThongTinChiTietPhim,
   xoaLichChieuAction,
 } from "../../../redux/actions/QuanLyRapActions";
+import _ from "lodash";
 import moment from "moment"; //npm i moment
 import { StarFilled, StarOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
@@ -59,9 +60,11 @@ export default function ViewShowTimeManager(props) {
   }, [state]);
 
   console.log(statePhim.cumRapChieu, "cumRapChieu");
+  const filmDetail = useSelector((state) => state.QuanLyPhimReducer.filmDetail);
 
   return (
     <div className="film-detail">
+      <h1 style={{ color: "#fff", textAlign: "center" }}>{filmDetail.title}</h1>
       <Grid container spacing={6}>
         <Grid item xs={12} className="schedule-padding">
           <h4 className="film-content">LỊCH CHIẾU</h4>
@@ -105,43 +108,39 @@ export default function ViewShowTimeManager(props) {
                             >
                               {cumRap.address}
                             </p>
-                            {cumRap.listMovie
-                              ?.slice(0, 12)
-                              .map((lichChieu, index) => {
-                                return (
-                                  <p key={index}>
-                                    {" "}
-                                    {lichChieu.lstShowFlowMovie?.map(
-                                      (item, index) => {
-                                        return (
-                                          <button
-                                            className="btn-view-showtime"
-                                            onClick={() => {
-                                              if (
-                                                window.confirm(
-                                                  "Bạn có chắc muốn xoá lịch chiếu " +
-                                                    item.showtime +
-                                                    "không?"
-                                                )
-                                              ) {
-                                                dispatch(
-                                                  xoaLichChieuAction(
-                                                    item.showID
-                                                  )
-                                                );
-                                              }
-                                            }}
-                                            key={index}
-                                          >
-                                            <DeleteOutlined />
-                                            {item.showtime}
-                                          </button>
-                                        );
-                                      }
-                                    )}
-                                  </p>
-                                );
-                              })}
+                            {cumRap.listMovie.map((lichChieu, index) => {
+                              return (
+                                <p key={index}>
+                                  {" "}
+                                  {_.sortBy(lichChieu.lstShowFlowMovie, [
+                                    "showtime",
+                                  ]).map((item, index) => {
+                                    return (
+                                      <button
+                                        className="btn-view-showtime"
+                                        onClick={() => {
+                                          if (
+                                            window.confirm(
+                                              "Bạn có chắc muốn xoá lịch chiếu " +
+                                                item.showtime +
+                                                "không?"
+                                            )
+                                          ) {
+                                            dispatch(
+                                              xoaLichChieuAction(item.showID)
+                                            );
+                                          }
+                                        }}
+                                        key={index}
+                                      >
+                                        <DeleteOutlined />
+                                        {item.showtime}
+                                      </button>
+                                    );
+                                  })}
+                                </p>
+                              );
+                            })}
                           </div>
                         </div>
                       </div>

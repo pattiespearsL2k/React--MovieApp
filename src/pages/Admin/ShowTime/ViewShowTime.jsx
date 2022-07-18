@@ -1,19 +1,16 @@
+import { DeleteOutlined } from "@ant-design/icons";
+import { Grid } from "@mui/material";
+import { Tabs } from "antd";
+import moment from "moment"; //npm i moment
 import React, { useEffect, useState } from "react";
-import { Tabs, Radio, Space, Rate } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import { layfilmDetailAction } from "../../../redux/actions/QuanLyPhimActions";
+import { useDispatch, useSelector } from "react-redux";
+import DayList from "../../../components/FilmDetail/DayList";
 import {
   layThongTinChiTietPhim,
   xoaLichChieuAction,
 } from "../../../redux/actions/QuanLyRapActions";
-import moment from "moment"; //npm i moment
-import { StarFilled, StarOutlined } from "@ant-design/icons";
-import { NavLink } from "react-router-dom";
-import { Grid } from "@mui/material";
-import DayList from "../../../components/FilmDetail/DayList";
+import _ from "lodash";
 import { quanLyRapService } from "../../../services/QuanLyRapService";
-import { message, Popconfirm } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
 
 const { TabPane } = Tabs;
 
@@ -29,9 +26,9 @@ export default function ViewShowTime(props) {
 
   useEffect(() => {
     // get data from url
-
     dispatch(layThongTinChiTietPhim(id));
   }, []);
+  const filmDetail = useSelector((state) => state.QuanLyPhimReducer.filmDetail);
 
   const handleChangeHeThongRap = async (state) => {
     // từ hệ thống rạp call api lấy thông tin rạp
@@ -49,7 +46,6 @@ export default function ViewShowTime(props) {
   };
 
   useEffect(() => {
-    // get data from url
     console.log("ok");
     handleChangeHeThongRap(state);
   }, [state]);
@@ -58,6 +54,7 @@ export default function ViewShowTime(props) {
 
   return (
     <div className="film-detail">
+      <h1 style={{ color: "#fff", textAlign: "center" }}>{filmDetail.title}</h1>
       <Grid container spacing={6}>
         <Grid lichChieu xs={12} className="schedule-padding">
           <h4 className="film-content">LỊCH CHIẾU</h4>
@@ -101,30 +98,32 @@ export default function ViewShowTime(props) {
                             >
                               {cumRap.address}
                             </p>
-                            {cumRap.lichChieuPhim.map((lichChieu, index) => {
-                              return (
-                                <button
-                                  className="btn-view-showtime"
-                                  onClick={() => {
-                                    if (
-                                      window.confirm(
-                                        "Bạn có chắc muốn xoá lịch chiếu " +
-                                          lichChieu.showtime +
-                                          "không?"
-                                      )
-                                    ) {
-                                      dispatch(
-                                        xoaLichChieuAction(lichChieu.showID)
-                                      );
-                                    }
-                                  }}
-                                  key={index}
-                                >
-                                  <DeleteOutlined />
-                                  {lichChieu.showtime}
-                                </button>
-                              );
-                            })}
+                            {_.sortBy(cumRap.lichChieuPhim, ["showtime"]).map(
+                              (lichChieu, index) => {
+                                return (
+                                  <button
+                                    className="btn-view-showtime"
+                                    onClick={() => {
+                                      if (
+                                        window.confirm(
+                                          "Bạn có chắc muốn xoá lịch chiếu " +
+                                            lichChieu.showtime +
+                                            "không?"
+                                        )
+                                      ) {
+                                        dispatch(
+                                          xoaLichChieuAction(lichChieu.showID)
+                                        );
+                                      }
+                                    }}
+                                    key={index}
+                                  >
+                                    <DeleteOutlined />
+                                    {lichChieu.showtime}
+                                  </button>
+                                );
+                              }
+                            )}
                           </div>
                         </div>
                       </div>

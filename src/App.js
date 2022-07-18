@@ -45,9 +45,10 @@ function App() {
     <Router history={history}>
       <Loading />
       <HomeTemplate exact path="/" component={Home} />
+      <HomeTemplate exact path="/home" component={Home} />
       <Route exact path="/detailticket/:id" component={DetailTicket} />
       <HomeTemplate exact path='/schedule' component={Schedule} />
-      <Route exact path='/qr/:id' component={QR} />
+      <HomeTemplate exact path='/qr/:id' component={QR} />
       <HomeTemplate exact path='/event' component={Promotion} />
       <HomeTemplate exact path='/member' component={Member} />
       <HomeTemplate exact path='/history' component={History} />

@@ -21,7 +21,7 @@ const AddNew = () => {
       country: "",
       genre: "",
       nowShowing: false,
-      comingSoon: true,
+      comingSoon: false,
       image: {},
     },
     validationSchema: Yup.object({
@@ -112,7 +112,6 @@ const AddNew = () => {
         <Form.Item label="Trailer">
           <Input name="trailer" onChange={formik.handleChange} />
         </Form.Item>
-
         <Form.Item label="Thời gian">
           <Input name="duration" onChange={formik.handleChange} />
         </Form.Item>
@@ -124,7 +123,12 @@ const AddNew = () => {
         </Form.Item>
 
         <Form.Item label="Mô tả">
-          <Input name="description" onChange={formik.handleChange} />
+          <textarea
+            style={{ width: "100%" }}
+            rows={5}
+            name="description"
+            onChange={formik.handleChange}
+          />
         </Form.Item>
 
         <Form.Item
@@ -134,11 +138,9 @@ const AddNew = () => {
           rules={[
             {
               required: true,
-          
             },
           ]}
           hasFeedback
-
         >
           <DatePicker format={"DD/MM/YYYY"} onChange={handleChangeDatePicker} />
           {formik.touched.releaseDate && formik.errors.releaseDate ? (

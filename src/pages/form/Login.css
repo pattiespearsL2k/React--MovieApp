@@ -8,6 +8,9 @@
 	text-align: center;
 }
 
+.ant-modal {
+	width: 300px;
+}
 .login-form p {
 	font-size: 14px;
 	font-weight: 100;
@@ -129,16 +132,14 @@ form .inp:focus {
 }
 
 .form-container-login {
-	/* position: absolute; */
 	top: 20px;
 	transition: all 0.6s ease-in-out;
-	width: 400px;
-	background-color: rgba(255, 255, 255, 0.2);
+	background-color: #666;
+	opacity: 0.9;
 	position: absolute;
 	border-radius: 10px;
 	backdrop-filter: blur(10px);
 	border: 2px solid rgba(255, 255, 255, 0.1);
-	box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
 	padding: 35px;
 }
 
@@ -309,7 +310,7 @@ form .inp:focus {
 }
 
 .ant-modal-root .ant-modal-content {
-	background-color: #444;
+	background-color: #666;
 	opacity: 0.9;
 }
 
@@ -384,7 +385,7 @@ button.ant-btn.ant-btn-default {
 	position: relative;
 }
 .form-container-login h3 {
-	font-size: 25px;
+	font-size: 30px;
 	font-weight: 500;
 	line-height: 42px;
 	text-align: center;

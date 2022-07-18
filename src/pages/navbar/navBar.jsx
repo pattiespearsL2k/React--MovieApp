@@ -164,7 +164,7 @@ function Navbar(props) {
             ) : (
               <nav>
                 <li>
-                  <NavLink className="nav-scroll none-pad" to="/">
+                  <NavLink className="nav-scroll" to="/home">
                     TRANG CHỦ
                   </NavLink>
                 </li>

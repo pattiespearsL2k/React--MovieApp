@@ -88,17 +88,10 @@ export default function FilmDetail(props) {
             <label>Quốc gia: </label>
             <div className="std">{filmDetail.country}</div>
           </div>
-          <div className="movie-info">
-            <label>Rated: </label>
-            <div className="std">{filmDetail.rating}</div>
-          </div>
+
           <div className="movie-info-trailer">
             <label>Trailer: </label>
-            <iframe
-              width="420"
-              height="205"
-              src={filmDetail.trailer}
-            ></iframe>
+            <iframe width="420" height="205" src={filmDetail.trailer}></iframe>
           </div>
         </Grid>
         <Grid item xs={12}>

@@ -72,7 +72,7 @@ export const xoaLichChieuAction = (showID) => {
       console.log("result", result.data);
       message.success("Xóa lịch chiếu thành công");
       //Sau khi xoá load lại danh sách phim mới;
-      // dispatch(layDanhSachPhimAction())
+      // dispatch(layThongTinLichChieuPhim())
     } catch (errors) {
       message.success("Xóa lịch chiếu không thành công");
       console.log("errors", errors.response?.data);

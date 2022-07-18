@@ -11,7 +11,7 @@ import * as Yup from "yup";
 
 const EditCinema = (props) => {
   const { thongTinRap } = useSelector((state) => state.QuanLyRapReducer);
-  console.log(thongTinRap);
+  // console.log(thongTinRap);
   const [imgSrc, setImgSrc] = useState("");
   const dispatch = useDispatch();
 
@@ -39,7 +39,6 @@ const EditCinema = (props) => {
 
     onSubmit: (values) => {
       console.log("values", values);
-      values.releaseDate = moment(values.releaseDate).format("DD/MM/YYYY");
       //Tạo đối tượng formdata => Đưa giá trị values từ formik vào formdata
       let formData = new FormData();
       for (let key in values) {
@@ -47,6 +46,7 @@ const EditCinema = (props) => {
           formData.append(key, values[key]);
         } else {
           if (values.logo !== null) {
+            console.log(values.logo.name);
             formData.append("File", values.logo, values.logo.name);
           }
         }
@@ -86,6 +86,27 @@ const EditCinema = (props) => {
         wrapperCol={{ span: 8 }}
       >
         <h3 style={{ textAlign: "center" }}>Cập nhật hệ thống rạp </h3>
+        <Form.Item
+          label="Mã rạp"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+          hasFeedback
+          name="cinemaID"
+          onChange={formik.handleChange}
+        >
+          <Input
+            disabled
+            name="cinemaID"
+            onChange={formik.handleChange}
+            value={formik.values.cinemaID}
+          />
+          {formik.touched.cinemaID && formik.errors.cinemaID ? (
+            <div className="alert alert-danger">{formik.errors.cinemaID}</div>
+          ) : null}
+        </Form.Item>
         <Form.Item
           label="Tên rạp"
           rules={[

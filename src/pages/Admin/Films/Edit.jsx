@@ -32,7 +32,6 @@ const Edit = (props) => {
       releaseDate: thongTinPhim.releaseDate,
       image: null,
       duration: thongTinPhim.duration,
-      // language: thongTinPhim.language,
       country: thongTinPhim.country,
       genre: thongTinPhim.genre,
     },
@@ -164,7 +163,9 @@ const Edit = (props) => {
         </Form.Item>
 
         <Form.Item label="Mô tả">
-          <Input
+          <textarea
+            style={{ width: "100%" }}
+            rows={5}
             name="description"
             onChange={formik.handleChange}
             value={formik.values.description}

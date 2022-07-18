@@ -11,6 +11,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
+import { NavLink } from "react-router-dom";
 
 const History = () => {
   useEffect(() => {
@@ -51,14 +52,16 @@ const History = () => {
           <TableHead>
             <TableRow>
               <StyledTableCell align="center">Số thứ tự </StyledTableCell>
-              <StyledTableCell align="center">Giờ đặt vé</StyledTableCell>
-              <StyledTableCell align="center">Ngày đặt vé</StyledTableCell>
+              <StyledTableCell align="center">Mã vé </StyledTableCell>
+              {/* <StyledTableCell align="center">Giờ đặt vé</StyledTableCell>
+              <StyledTableCell align="center">Ngày đặt vé</StyledTableCell> */}
               <StyledTableCell align="center">Phim</StyledTableCell>
               <StyledTableCell align="center">Giá</StyledTableCell>
-              <StyledTableCell align="center">Hệ thống rạp</StyledTableCell>
+              {/* <StyledTableCell align="center">Hệ thống rạp</StyledTableCell> */}
               <StyledTableCell align="center">Cụm rạp</StyledTableCell>
-              <StyledTableCell align="center">Rạp</StyledTableCell>
+              <StyledTableCell align="center">Phòng chiếu</StyledTableCell>
               <StyledTableCell align="center">Ghế</StyledTableCell>
+              <StyledTableCell align="center">Chi tiết</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -68,11 +71,14 @@ const History = () => {
                 <StyledTableRow key={index}>
                   <StyledTableCell align="center">{index + 1}</StyledTableCell>
                   <StyledTableCell align="center">
+                    {ticket.couponID}
+                  </StyledTableCell>
+                  {/* <StyledTableCell align="center">
                     {moment(ticket.bookingDate).format(" hh:mm:ss")}
                   </StyledTableCell>
                   <StyledTableCell align="center">
                     {moment(ticket.bookingDate).format("DD-MM-YYYY ")}
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                   <StyledTableCell align="center">
                     {" "}
                     {ticket.titleMovie}
@@ -80,9 +86,9 @@ const History = () => {
                   <StyledTableCell align="center">
                     {ticket.price}
                   </StyledTableCell>
-                  <StyledTableCell align="center">
+                  {/* <StyledTableCell align="center">
                     {ticket.listChair[0].cinemaID}
-                  </StyledTableCell>
+                  </StyledTableCell> */}
                   <StyledTableCell align="center">
                     {ticket.listChair[0].cinemaChildName}
                   </StyledTableCell>
@@ -97,6 +103,11 @@ const History = () => {
                         </span>
                       );
                     })}
+                  </StyledTableCell>
+                  <StyledTableCell align="center">
+                    <NavLink to={`/qr/${ticket.couponID}`} href="#">
+                     Chi tiết
+                    </NavLink>
                   </StyledTableCell>
                 </StyledTableRow>
               );

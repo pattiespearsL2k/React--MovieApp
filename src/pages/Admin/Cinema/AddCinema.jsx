@@ -28,13 +28,12 @@ const AddCinema = () => {
         .trim("Mã rạp không được để trống")
         .required("Mã rạp không được để trống")
         .notOneOf(cinemaid, "Mã rạp trùng "),
-        name: Yup.string()
+      name: Yup.string()
         .trim("Tên rạp không được để trống")
         .required("Tên rạp không được để trống"),
-        aliases: Yup.string()
+      aliases: Yup.string()
         .trim("Bí danh không được để trống")
-        .required("Bí không được để trống")
-    
+        .required("Bí không được để trống"),
     }),
     onSubmit: (values) => {
       console.log("values", values);
@@ -79,7 +78,8 @@ const AddCinema = () => {
       >
         <h3 style={{ textAlign: "center" }}>Thêm mới hệ thống rạp </h3>
         <div className="form-flex-display">
-          <Form.Item label="Mã rạp" 
+          <Form.Item
+            label="Mã rạp"
             rules={[
               {
                 required: true,
@@ -87,7 +87,8 @@ const AddCinema = () => {
             ]}
             hasFeedback
             name="cinemaID"
-            onChange={formik.handleChange}>
+            onChange={formik.handleChange}
+          >
             <Input name="cinemaID" onChange={formik.handleChange} />
             {formik.touched.cinemaID && formik.errors.cinemaID ? (
               <div className="alert alert-danger">{formik.errors.cinemaID}</div>
@@ -105,8 +106,8 @@ const AddCinema = () => {
             onChange={formik.handleChange}
           >
             <Input name="name" onChange={formik.handleChange} />
-            {formik.touched.cinemaID && formik.errors.cinemaID ? (
-              <div className="alert alert-danger">{formik.errors.cinemaID}</div>
+            {formik.touched.name && formik.errors.name ? (
+              <div className="alert alert-danger">{formik.errors.name}</div>
             ) : null}
           </Form.Item>
         </div>
@@ -123,8 +124,8 @@ const AddCinema = () => {
             onChange={formik.handleChange}
           >
             <Input name="aliases" onChange={formik.handleChange} />
-            {formik.touched.cinemaID && formik.errors.cinemaID ? (
-              <div className="alert alert-danger">{formik.errors.cinemaID}</div>
+            {formik.touched.aliases && formik.errors.aliases ? (
+              <div className="alert alert-danger">{formik.errors.aliases}</div>
             ) : null}
           </Form.Item>
         </div>
